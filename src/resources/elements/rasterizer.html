@@ -1,7 +1,13 @@
 <template>
 	<require from="./rasterizer.css"></require>
-	<div class="lined xraster xesger gradient"></div>
-	<select value.bind="value">
-		<option repeat.for="raster of rasters" value="raster.value">${raster.name}</option>
-	</select>
+	<header>
+		<h1>Halftone Rasters</h1>
+		<select value.bind="value">
+			<option repeat.for="raster of rasters" 
+				change.delegate="rasterChanged(raster.value)"
+				value="raster.value">${raster.name}</option>
+		</select>
+	</header>
+
+	<div class="target xlined xraster xesger xgradient"></div>
 </template>

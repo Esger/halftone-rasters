@@ -14,12 +14,20 @@
     --movingCircles: repeating-radial-gradient(circle at var(--x, 50%) var(--y, 50%), #777, #fff, #777 2em);
 } */
 
-html,
-body,
-div {
-	height               : 100%;
-	background           : var(--gradientH), var(--linedH);
-	background-blend-mode: multiply;
+rasterizer {
+	header {
+		display        : flex;
+		justify-content: space-between;
+
+		h1 {
+			font-size: 2rem;
+		}
+	}
+
+	div {
+		background           : var(--gradientH), var(--linedH);
+		background-blend-mode: multiply;
+	}
 }
 
 .gradient {
