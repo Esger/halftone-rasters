@@ -7,6 +7,7 @@ export class RasterizerCustomElement {
 			{ name: 'Dotted', value: 'dotted' },
 			{ name: 'Lined', value: 'lined' }
 		];
+		this.selectedRaster = 'dotted';
 	}
 
 	attached() {

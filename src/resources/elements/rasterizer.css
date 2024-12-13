@@ -15,18 +15,18 @@
 } */
 
 rasterizer {
+	display              : block;
+	background           : var(--gradientH), var(--raster);
+	background-blend-mode: multiply;
+	height               : 100%;
+
 	header {
-		display        : flex;
-		justify-content: space-between;
+		/* display           : flex;
+		justify-content      : space-between; */
 
 		h1 {
 			font-size: 2rem;
 		}
-	}
-
-	div {
-		background           : var(--gradientH), var(--linedH);
-		background-blend-mode: multiply;
 	}
 }
 
@@ -38,6 +38,7 @@ rasterizer {
 	--size  : 2em;
 	--dot   : radial-gradient(closest-corner, #777, #fff);
 	--raster: var(--dot) 0 0/var(--size) var(--size);
+	filter  : contrast(80) blur(2px) contrast(5);
 }
 
 .lined {
@@ -48,22 +49,16 @@ rasterizer {
 	filter           : contrast(80) blur(.5px) contrast(2);
 }
 
-/* div {
-    background-repeat    : var(--repeat);
-    background           : var(--raster), var(--image);
-}
-
 .dotted {
-    --size           : 2em;   
-    --print          : var(--dot) calc(var(--size) / 2) calc(var(--size) / 2);
-    --raster         : var(--print);
-    background-repeat: space, no-repeat;
+	--size           : 2em;
+	--print          : var(--dot) calc(var(--size) / 2) calc(var(--size) / 2);
+	--raster         : var(--print);
+	background-repeat: space, no-repeat;
 }
-npm
 
 .esger {
-    --image            : url(https://ashware.nl/assets/img/Esger.jpg);
-    background-position: center;
-    background-size    : var(--size) var(--size), cover;
-    background-repeat  : space, no-repeat;
-} */
+	--image            : url(https://ashware.nl/assets/img/Esger.jpg);
+	background-position: center;
+	background-size    : var(--size) var(--size), cover;
+	background-repeat  : space, no-repeat;
+}
