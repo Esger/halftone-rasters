@@ -1,0 +1,18 @@
+controls {
+	isolation            : isolate;
+	grid-area            : 1/1;
+	/* display           : flex;
+	justify-content      : space-between; */
+
+	h1 {
+		color    : white;
+		font-size: 4rem;
+		margin   : .5rem 1rem;
+	}
+
+	select option {
+		padding  : 2px 4px;
+		font-size: 16px;
+		width    : 100%;
+	}
+}

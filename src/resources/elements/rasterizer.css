@@ -16,18 +16,10 @@
 
 rasterizer {
 	display              : block;
+	grid-area            : 1/1;
 	background           : var(--gradientH), var(--raster);
 	background-blend-mode: multiply;
 	height               : 100%;
-
-	header {
-		/* display           : flex;
-		justify-content      : space-between; */
-
-		h1 {
-			font-size: 2rem;
-		}
-	}
 }
 
 .gradient {
