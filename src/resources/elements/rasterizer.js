@@ -1,16 +1,10 @@
+import { bindable } from 'aurelia-framework';
 import { inject } from 'aurelia-dependency-injection';
-import { EventAggregator } from 'aurelia-event-aggregator';
-@inject(Element, EventAggregator)
+@inject(Element)
 export class RasterizerCustomElement {
-	constructor(element, eventAggregator) {
+	@bindable raster;
+	@bindable angle;
+	constructor(element) {
 		this._element = element;
-		this._eventAggregator = eventAggregator;
-	}
-
-	attached() {
-		this._rasterSubscription = this._eventAggregator.subscribe('raster-changed', raster => this.raster = raster);
-	}
-	detached() {
-		this._rasterSubscription.dispose();
 	}
 }

@@ -10,4 +10,12 @@
 	  </option>
 	</select>
 
+	<input xif.bind="['lined', 'dotted'].includes(selectedValue)"
+			type="range"
+			step="15"
+			min="-180"
+			max="180"
+			value.bind="angle"
+			change.trigger="angleChanged(angle)">
+
 </template>

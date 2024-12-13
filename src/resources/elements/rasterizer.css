@@ -35,7 +35,7 @@ rasterizer {
 
 .lined {
 	--size           : 2em;
-	--line           : repeating-linear-gradient(-45deg, #777 var(--size), #fff calc(2 * var(--size)));
+	--line           : repeating-linear-gradient(var(--angle, 0deg), #777 var(--size), #fff calc(2 * var(--size)));
 	--raster         : var(--line);
 	background-repeat: no-repeat;
 	filter           : contrast(80) blur(.5px) contrast(2);
