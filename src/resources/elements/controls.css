@@ -1,8 +1,15 @@
 controls {
-	isolation            : isolate;
-	grid-area            : 1/1;
-	/* display           : flex;
-	justify-content      : space-between; */
+	/* container-type   : inline-size; */
+	isolation        : isolate;
+	grid-area        : 1/1;
+	width            : fit-content;
+	height           : fit-content;
+	padding          : 2rem;
+	background       : #00000088;
+	border-radius    : 0 0 4rem;
+	/* display       : flex;
+	flex-direction   : column-reverse;
+	position         : relative; */
 
 	h1 {
 		color      : white;
@@ -13,9 +20,21 @@ controls {
 		font-weight: bold;
 	}
 
+	fieldset {
+		margin     : 1rem;
+		display    : flex;
+		align-items: center;
+	}
+
+	label {
+		flex       : 0 0 12rem;
+		color      : white;
+		font-size  : 1.4rem;
+		font-family: monospace;
+	}
+
 	select {
-		padding    : .5rem 1rem;
-		margin     : .5rem 1rem;
+		padding    : .1rem .9rem;
 		font-size  : 1.4rem;
 		font-family: monospace;
 	}

@@ -3,19 +3,26 @@
 
 	<h1>CSS Halftone Rasters</h1>
 
-	<select value.bind="selectedValue"
-			change.trigger="rasterChanged(selectedValue)">
-	  <option repeat.for="raster of rasters"
-	          model.bind="raster">${raster.value}
-	  </option>
-	</select>
+	<fieldset>
+		<label for="raster">Raster</label>
+		<select value.bind="selectedValue"
+				id="raster"
+				change.trigger="rasterChanged(selectedValue)">
+			<option repeat.for="raster of rasters"
+					model.bind="raster">${raster.value}
+			</option>
+		</select>
+	</fieldset>
 
-	<input xif.bind="['lined', 'dotted'].includes(selectedValue)"
-			type="range"
-			step="15"
-			min="-180"
-			max="180"
-			value.bind="angle"
-			change.trigger="angleChanged(angle)">
+	<fieldset xif.bind="['lined', 'dotted'].includes(selectedValue)">
+		<label for="angle">Angle: ${angle}°</label>
+		<input type="range"
+				step="15"
+				min="-180"
+				max="180"
+				value.bind="angle"
+				id="angle"
+				change.trigger="angleChanged(angle)">
+	</fieldset>
 
 </template>
