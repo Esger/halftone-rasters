@@ -5,9 +5,11 @@ controls {
 	justify-content      : space-between; */
 
 	h1 {
-		color    : white;
-		font-size: 4rem;
-		margin   : .5rem 1rem;
+		color      : white;
+		font-size  : 4rem;
+		margin     : .5rem 1rem;
+		text-shadow: 2px 4px 2px black;
+		font-family: fantasy, sans-serif;
 	}
 
 	select {
