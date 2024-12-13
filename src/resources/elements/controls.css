@@ -1,0 +1,22 @@
+controls {
+	isolation            : isolate;
+	grid-area            : 1/1;
+	/* display           : flex;
+	justify-content      : space-between; */
+
+	h1 {
+		color      : white;
+		font-size  : 3rem;
+		margin     : .5rem 1rem;
+		text-shadow: 3px 6px 2px black;
+		font-family: fantasy, sans-serif;
+		font-weight: bold;
+	}
+
+	select {
+		padding    : .5rem 1rem;
+		margin     : .5rem 1rem;
+		font-size  : 1.4rem;
+		font-family: monospace;
+	}
+}

@@ -1,0 +1,13 @@
+<template>
+	<require from="./controls.css"></require>
+
+	<h1>CSS Halftone Rasters</h1>
+
+	<select value.bind="selectedValue"
+			change.trigger="rasterChanged(selectedValue)">
+	  <option repeat.for="raster of rasters"
+	          model.bind="raster">${raster.value}
+	  </option>
+	</select>
+
+</template>

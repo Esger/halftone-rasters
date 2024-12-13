@@ -1,0 +1,56 @@
+/* @property --x {
+    syntax       : '<length-percentage>';
+    initial-value: 50vw;
+    inherits     : false
+}
+
+@property --y {
+    syntax       : '<length-percentage>';
+    initial-value: 50vh;
+    inherits     : false
+} */
+
+/* html {
+    --movingCircles: repeating-radial-gradient(circle at var(--x, 50%) var(--y, 50%), #777, #fff, #777 2em);
+} */
+
+rasterizer {
+	display              : block;
+	grid-area            : 1/1;
+	background           : var(--gradientH), var(--raster);
+	background-blend-mode: multiply;
+	height               : 100%;
+}
+
+.gradient {
+	--gradientH: linear-gradient(90deg, #888, #fff);
+}
+
+.dotted {
+	--size  : 2em;
+	--dot   : radial-gradient(closest-corner, #777, #fff);
+	--raster: var(--dot) 0 0/var(--size) var(--size);
+	filter  : contrast(80) blur(2px) contrast(5);
+}
+
+.lined {
+	--size           : 2em;
+	--line           : repeating-linear-gradient(-45deg, #777 var(--size), #fff calc(2 * var(--size)));
+	--raster         : var(--line);
+	background-repeat: no-repeat;
+	filter           : contrast(80) blur(.5px) contrast(2);
+}
+
+/* .dotted {
+	--size           : 2em;
+	--print          : var(--dot) calc(var(--size) / 2) calc(var(--size) / 2);
+	--raster         : var(--print);
+	background-repeat: space, no-repeat;
+} */
+
+.esger {
+	--image            : url(https://ashware.nl/assets/img/Esger.jpg);
+	background-position: center;
+	background-size    : var(--size) var(--size), cover;
+	background-repeat  : space, no-repeat;
+}
