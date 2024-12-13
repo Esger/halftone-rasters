@@ -10,9 +10,9 @@ controls {
 		margin   : .5rem 1rem;
 	}
 
-	select option {
-		padding  : 2px 4px;
-		font-size: 16px;
-		width    : 100%;
+	select {
+		padding  : .5rem 1rem;
+		margin   : .5rem 1rem;
+		font-size: 2rem;
 	}
 }
