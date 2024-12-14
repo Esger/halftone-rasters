@@ -17,7 +17,7 @@
 rasterizer {
 	display              : block;
 	grid-area            : 1/1;
-	background           : var(--gradientH), var(--raster);
+	background           : var(--gradientH), var(--pattern);
 	background-blend-mode: multiply;
 	height               : 100%;
 }
@@ -27,26 +27,25 @@ rasterizer {
 }
 
 .dotted {
-	--size  : 2em;
-	--dot   : radial-gradient(closest-corner, #777, #fff);
-	--raster: var(--dot) 0 0/var(--size) var(--size);
-	filter  : contrast(80) blur(2px) contrast(5);
+	--size   : 2em;
+	--dot    : radial-gradient(closest-corner, #777, #fff);
+	--pattern: var(--dot) 0 0/var(--size) var(--size);
+	filter   : contrast(80) blur(2px) contrast(5);
 }
 
 .lined {
 	--size           : 2em;
 	--line           : repeating-linear-gradient(var(--angle, 0deg), #777 var(--size), #fff calc(2 * var(--size)));
-	--raster         : var(--line);
+	--pattern        : var(--line);
 	background-repeat: no-repeat;
 	filter           : contrast(80) blur(.5px) contrast(2);
 }
 
-/* .dotted {
-	--size           : 2em;
-	--print          : var(--dot) calc(var(--size) / 2) calc(var(--size) / 2);
-	--raster         : var(--print);
-	background-repeat: space, no-repeat;
-} */
+.radial {
+	--size   : 2em;
+	--pattern: repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
+	filter   : contrast(80) blur(2px) contrast(5);
+}
 
 .esger {
 	--image            : url(https://ashware.nl/assets/img/Esger.jpg);

@@ -14,11 +14,22 @@
 		</select>
 	</fieldset>
 
-	<fieldset xif.bind="['lined', 'dotted'].includes(selectedValue)">
+	<fieldset>
+		<label for="size">Size: ${size}px</label>
+		<input type="range"
+				step="4"
+				min="4"
+				max="100"
+				value.bind="size"
+				id="size"
+				change.trigger="sizeChanged(size)">
+	</fieldset>
+
+	<fieldset if.bind="selectedValue.value == 'lined'">
 		<label for="angle">Angle: ${angle}°</label>
 		<input type="range"
 				step="15"
-				min="-180"
+				min="0"
 				max="180"
 				value.bind="angle"
 				id="angle"
