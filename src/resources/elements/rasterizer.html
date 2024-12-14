@@ -1,3 +1,6 @@
-<template class="${raster} xesger gradient">
+<template class="${raster} ${sharpenEdges ? 'sharpened' : ''} xesger gradient"
+		  style="--size: ${size}px; 
+		  		--contrast: ${contrast}; 
+				--angle: ${angle}deg;">
 	<require from="./rasterizer.css"></require>
 </template>
