@@ -35,21 +35,28 @@ rasterizer {
 	}
 }
 
-.linear {
+.map--linear {
 	--mapRepeat  : no-repeat;
 	--mapPosition: top;
 	--mapSize    : cover;
 	--map        : linear-gradient(90deg, #888, #fff);
 }
 
-.image {
+.map--radial {
+	--mapRepeat  : no-repeat;
+	--mapPosition: center;
+	--mapSize    : cover;
+	--map        : radial-gradient(circle, #888, #fff);
+}
+
+.map--image {
 	--mapRepeat  : no-repeat;
 	--mapPosition: center;
 	--mapSize    : cover;
 	--map        : url(https://ashware.nl/assets/img/Esger.jpg);
 }
 
-.dotted {
+.raster--dotted {
 	--patternRepeat  : space;
 	--patternPosition: 0;
 	--patternSize    : var(--size) var(--size);
@@ -60,7 +67,7 @@ rasterizer {
 	}
 }
 
-.lined {
+.raster--lined {
 	--patternRepeat  : repeat-y;
 	--patternPosition: 0;
 	--patternSize    : 100% calc(2 * var(--size));
@@ -71,7 +78,7 @@ rasterizer {
 	}
 }
 
-.radial {
+.raster--radial {
 	--patternRepeat  : no-repeat;
 	--patternPosition: center;
 	--patternSize    : 100%;
