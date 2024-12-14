@@ -4,14 +4,33 @@
 	<h1>CSS Halftone Rasters</h1>
 
 	<fieldset>
+		<label for="map">Map</label>
+		<select value.bind="selectedMap"
+				id="map"
+				change.trigger="mapChanged(selectedMap)">
+			<option repeat.for="map of maps"
+					model.bind="map">${map.value}
+			</option>
+		</select>
+	</fieldset>
+
+	<fieldset>
 		<label for="raster">Raster</label>
-		<select value.bind="selectedValue"
+		<select value.bind="selectedRaster"
 				id="raster"
-				change.trigger="rasterChanged(selectedValue)">
+				change.trigger="rasterChanged(selectedRaster)">
 			<option repeat.for="raster of rasters"
 					model.bind="raster">${raster.value}
 			</option>
 		</select>
+	</fieldset>
+
+	<fieldset>
+		<label for="grayScale">Grayscale</label>
+		<input type="checkbox"
+				checked.bind="grayScale"
+				change.trigger="grayScaleChanged(grayScale)"
+				id="grayScale">
 	</fieldset>
 
 	<fieldset>

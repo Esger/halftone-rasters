@@ -5,26 +5,40 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 export class Controls {
 	constructor(eventAggregator) {
 		this._eventAggregator = eventAggregator;
-		this.rasters = [
-			{ id: 1, value: 'dotted' },
-			{ id: 2, value: 'lined' },
-			{ id: 3, value: 'radial' }
+		this.maps = [
+			{ id: 0, value: 'linear' },
+			{ id: 1, value: 'image' }
 		];
-		this.selectedRaster = 'dotted';
+		this.selectedMap = this.maps[0];
+		this.rasters = [
+			{ id: 0, value: 'dotted' },
+			{ id: 1, value: 'lined' },
+			{ id: 2, value: 'radial' }
+		];
+		this.selectedRaster = this.rasters[0];
 		this.size = 32;
 		this.angle = 0;
 	}
 
 	attached() {
-		this._eventAggregator.publish('raster-changed', this.selectedRaster);
+		this._eventAggregator.publish('map-changed', this.maps[this.selectedMap.id].value);
+		this._eventAggregator.publish('raster-changed', this.rasters[this.selectedRaster.id].value);
 		this._eventAggregator.publish('size-changed', this.size);
 		this._eventAggregator.publish('angle-changed', this.angle);
 	}
 
 	rasterChanged(raster) {
-		console.log(raster);
 		this.selectedRaster = raster;
 		this._eventAggregator.publish('raster-changed', raster.value);
+	}
+
+	mapChanged(map) {
+		this.selectedMap = map;
+		this._eventAggregator.publish('map-changed', map.value);
+	}
+
+	grayScaleChanged(grayScale) {
+		this._eventAggregator.publish('grayscale-changed', grayScale);
 	}
 
 	sizeChanged(size) {

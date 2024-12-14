@@ -17,53 +17,67 @@
 rasterizer {
 	display              : block;
 	grid-area            : 1/1;
-	background           : var(--gradientH), var(--pattern);
-	background-blend-mode: multiply;
 	height               : 100%;
+	background-blend-mode: multiply;
+	background-image     : var(--map), var(--pattern);
+	background-repeat    : var(--mapRepeat), var(--patternRepeat);
+	background-size      : var(--mapSize), var(--patternSize);
+	background-position  : var(--mapPosition), var(--patternPosition);
 	--contrast           : 80;
 	--size               : 2em;
+	--grayscale          : grayscale(0);
+	--sharpen            : blur(0);
+	--filter             : var(--grayscale) contrast(var(--contrast)) var(--sharpen);
+	filter               : var(--filter);
+
+	&.grayscale {
+		--grayscale: grayscale(1);
+	}
 }
 
-.gradient {
-	--gradientH: linear-gradient(90deg, #888, #fff);
+.linear {
+	--mapRepeat  : no-repeat;
+	--mapPosition: top;
+	--mapSize    : cover;
+	--map        : linear-gradient(90deg, #888, #fff);
+}
+
+.image {
+	--mapRepeat  : no-repeat;
+	--mapPosition: center;
+	--mapSize    : cover;
+	--map        : url(https://ashware.nl/assets/img/Esger.jpg);
 }
 
 .dotted {
-	--dot    : radial-gradient(closest-corner, #777, #fff);
-	--pattern: var(--dot) 0 0/var(--size) var(--size);
-	--filter : contrast(var(--contrast));
-	filter   : var(--filter);
+	--patternRepeat  : space;
+	--patternPosition: 0;
+	--patternSize    : var(--size) var(--size);
+	--pattern        : radial-gradient(closest-corner, #777, #fff);
 
 	&.sharpened {
-		--filter: contrast(80) blur(2px) contrast(5);
+		--sharpen: blur(2px) contrast(5);
 	}
 }
 
 .lined {
-	background-repeat: no-repeat;
-	--line           : repeating-linear-gradient(var(--angle, 0deg), #777 var(--size), #fff calc(2 * var(--size)));
-	--pattern        : var(--line);
-	--filter         : contrast(var(--contrast));
-	filter           : var(--filter);
+	--patternRepeat  : repeat-y;
+	--patternPosition: 0;
+	--patternSize    : 100% calc(2 * var(--size));
+	--pattern        : linear-gradient(var(--angle, 0deg), #777, #fff);
 
 	&.sharpened {
-		--filter: contrast(var(--contrast)) blur(.5px) contrast(2);
+		--sharpen: blur(.5px) contrast(2);
 	}
 }
 
 .radial {
-	--pattern: repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
-	--filter : contrast(var(--contrast));
-	filter   : var(--filter);
+	--patternRepeat  : no-repeat;
+	--patternPosition: center;
+	--patternSize    : 100%;
+	--pattern        : repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
 
 	&.sharpened {
-		--filter: contrast(var(--contrast)) blur(2px) contrast(5);
+		--sharpen: blur(2px) contrast(5);
 	}
-}
-
-.esger {
-	--image            : url(https://ashware.nl/assets/img/Esger.jpg);
-	background-position: center;
-	background-size    : var(--size) var(--size), cover;
-	background-repeat  : space, no-repeat;
 }
