@@ -7,12 +7,14 @@ export class App {
 	}
 	attached() {
 		this._mapSubscription = this._eventAggregator.subscribe('map-changed', map => this.map = map);
+		this._grayscaleSubscription = this._eventAggregator.subscribe('grayscale-changed', grayscale => this.grayscale = grayscale);
 		this._rasterSubscription = this._eventAggregator.subscribe('raster-changed', raster => this.raster = raster);
 		this._sizeSubscription = this._eventAggregator.subscribe('size-changed', size => this.size = size);
 		this._angleSubscription = this._eventAggregator.subscribe('angle-changed', angle => this.angle = angle);
 	}
 	detached() {
 		this._mapSubscription.dispose();
+		this._grayscaleSubscription.dispose();
 		this._rasterSubscription.dispose();
 		this._sizeSubscription.dispose();
 		this._angleSubscription.dispose();

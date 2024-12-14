@@ -25,6 +25,14 @@ rasterizer {
 	background-position  : var(--mapPosition), var(--patternPosition);
 	--contrast           : 80;
 	--size               : 2em;
+	--grayscale          : grayscale(0);
+	--sharpen            : blur(0);
+	--filter             : var(--grayscale) contrast(var(--contrast)) var(--sharpen);
+	filter               : var(--filter);
+
+	&.grayscale {
+		--grayscale: grayscale(1);
+	}
 }
 
 .linear {
@@ -46,11 +54,9 @@ rasterizer {
 	--patternPosition: 0;
 	--patternSize    : var(--size) var(--size);
 	--pattern        : radial-gradient(closest-corner, #777, #fff);
-	--filter         : contrast(var(--contrast));
-	filter           : var(--filter);
 
 	&.sharpened {
-		--filter: contrast(80) blur(2px) contrast(5);
+		--sharpen: blur(2px) contrast(5);
 	}
 }
 
@@ -59,11 +65,9 @@ rasterizer {
 	--patternPosition: 0;
 	--patternSize    : 100% calc(2 * var(--size));
 	--pattern        : linear-gradient(var(--angle, 0deg), #777, #fff);
-	--filter         : contrast(var(--contrast));
-	filter           : var(--filter);
 
 	&.sharpened {
-		--filter: contrast(var(--contrast)) blur(.5px) contrast(2);
+		--sharpen: blur(.5px) contrast(2);
 	}
 }
 
@@ -72,10 +76,8 @@ rasterizer {
 	--patternPosition: center;
 	--patternSize    : 100%;
 	--pattern        : repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
-	--filter         : contrast(var(--contrast));
-	filter           : var(--filter);
 
 	&.sharpened {
-		--filter: contrast(var(--contrast)) blur(2px) contrast(5);
+		--sharpen: blur(2px) contrast(5);
 	}
 }

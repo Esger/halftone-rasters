@@ -26,6 +26,14 @@
 	</fieldset>
 
 	<fieldset>
+		<label for="grayScale">Grayscale</label>
+		<input type="checkbox"
+				checked.bind="grayScale"
+				change.trigger="grayScaleChanged(grayScale)"
+				id="grayScale">
+	</fieldset>
+
+	<fieldset>
 		<label for="size">Size: ${size}px</label>
 		<input type="range"
 				step="4"

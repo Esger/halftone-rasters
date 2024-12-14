@@ -37,6 +37,10 @@ export class Controls {
 		this._eventAggregator.publish('map-changed', map.value);
 	}
 
+	grayScaleChanged(grayScale) {
+		this._eventAggregator.publish('grayscale-changed', grayScale);
+	}
+
 	sizeChanged(size) {
 		this._eventAggregator.publish('size-changed', size);
 	}

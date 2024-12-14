@@ -1,6 +1,7 @@
 import { bindable } from 'aurelia-framework';
 export class RasterizerCustomElement {
 	@bindable map;
+	@bindable grayscale;
 	@bindable raster;
 	@bindable size;
 	@bindable angle;
