@@ -1,11 +1,11 @@
 import { bindable } from 'aurelia-framework';
-import { inject } from 'aurelia-dependency-injection';
-@inject(Element)
 export class RasterizerCustomElement {
 	@bindable raster;
 	@bindable size;
 	@bindable angle;
-	constructor(element) {
-		this._element = element;
+	sizeChanged(newSize) {
+		const size = parseInt(newSize, 10);
+		this.sharpenEdges = size > 20;
+		this.contrast = 2 * size;
 	}
 }

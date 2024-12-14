@@ -20,6 +20,8 @@ rasterizer {
 	background           : var(--gradientH), var(--pattern);
 	background-blend-mode: multiply;
 	height               : 100%;
+	--contrast           : 80;
+	--size               : 2em;
 }
 
 .gradient {
@@ -27,24 +29,36 @@ rasterizer {
 }
 
 .dotted {
-	--size   : 2em;
 	--dot    : radial-gradient(closest-corner, #777, #fff);
 	--pattern: var(--dot) 0 0/var(--size) var(--size);
-	filter   : contrast(80) blur(2px) contrast(5);
+	--filter : contrast(var(--contrast));
+	filter   : var(--filter);
+
+	&.sharpened {
+		--filter: contrast(80) blur(2px) contrast(5);
+	}
 }
 
 .lined {
-	--size           : 2em;
+	background-repeat: no-repeat;
 	--line           : repeating-linear-gradient(var(--angle, 0deg), #777 var(--size), #fff calc(2 * var(--size)));
 	--pattern        : var(--line);
-	background-repeat: no-repeat;
-	filter           : contrast(80) blur(.5px) contrast(2);
+	--filter         : contrast(var(--contrast));
+	filter           : var(--filter);
+
+	&.sharpened {
+		--filter: contrast(var(--contrast)) blur(.5px) contrast(2);
+	}
 }
 
 .radial {
-	--size   : 2em;
 	--pattern: repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
-	filter   : contrast(80) blur(2px) contrast(5);
+	--filter : contrast(var(--contrast));
+	filter   : var(--filter);
+
+	&.sharpened {
+		--filter: contrast(var(--contrast)) blur(2px) contrast(5);
+	}
 }
 
 .esger {
