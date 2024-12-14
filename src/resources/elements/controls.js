@@ -7,7 +7,9 @@ export class Controls {
 		this._eventAggregator = eventAggregator;
 		this.maps = [
 			{ id: 0, value: 'linear' },
-			{ id: 1, value: 'image' }
+			{ id: 1, value: 'radial' },
+			{ id: 2, value: 'conical' },
+			{ id: 3, value: 'image' }
 		];
 		this.selectedMap = this.maps[0];
 		this.rasters = [
