@@ -1,8 +1,10 @@
 import { bindable } from 'aurelia-framework';
 export class RasterizerCustomElement {
+	@bindable map;
 	@bindable raster;
 	@bindable size;
 	@bindable angle;
+
 	sizeChanged(newSize) {
 		const size = parseInt(newSize, 10);
 		this.sharpenEdges = size > 20;
