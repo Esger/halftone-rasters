@@ -49,6 +49,13 @@ rasterizer {
 	--map        : radial-gradient(circle, #888, #fff);
 }
 
+.map--conical {
+	--mapRepeat  : no-repeat;
+	--mapPosition: center;
+	--mapSize    : cover;
+	--map        : conic-gradient(#fff, #888, #fff);
+}
+
 .map--image {
 	--mapRepeat  : no-repeat;
 	--mapPosition: center;
