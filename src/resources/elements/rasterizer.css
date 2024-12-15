@@ -1,14 +1,14 @@
-/* @property --x {
-    syntax       : '<length-percentage>';
-    initial-value: 50vw;
-    inherits     : false
+@property --x {
+	syntax       : '<length-percentage>';
+	initial-value: 50vw;
+	inherits     : false
 }
 
 @property --y {
-    syntax       : '<length-percentage>';
-    initial-value: 50vh;
-    inherits     : false
-} */
+	syntax       : '<length-percentage>';
+	initial-value: 50vh;
+	inherits     : false
+}
 
 /* html {
     --movingCircles: repeating-radial-gradient(circle at var(--x, 50%) var(--y, 50%), #777, #fff, #777 2em);
@@ -23,6 +23,7 @@ rasterizer {
 	background-repeat    : var(--mapRepeat), var(--patternRepeat);
 	background-size      : var(--mapSize), var(--patternSize);
 	background-position  : var(--mapPosition), var(--patternPosition);
+	--mapCenter          : calc(var(--mouseX, 100vw) - 100vw) calc(var(--mouseY, 100vw) - 100vh);
 	--contrast           : 80;
 	--size               : 2em;
 	--grayscale          : grayscale(0);
@@ -36,37 +37,37 @@ rasterizer {
 }
 
 .map--linear {
-	--mapRepeat  : no-repeat;
-	--mapPosition: top;
+	--mapPosition: 200% 200%;
 	--mapSize    : cover;
-	--map        : linear-gradient(90deg, #888, #fff);
+	--mapRepeat  : no-repeat;
+	--map        : linear-gradient(90deg, #888 calc(var(--mouseX) - 100%), #fff);
 }
 
 .map--radial {
+	--mapSize    : 200% 200%;
+	--mapPosition: var(--mapCenter);
 	--mapRepeat  : no-repeat;
-	--mapPosition: center;
-	--mapSize    : cover;
 	--map        : radial-gradient(circle, #888, #fff);
 }
 
 .map--conical {
+	--mapSize    : 200% 200%;
 	--mapRepeat  : no-repeat;
-	--mapPosition: center;
-	--mapSize    : cover;
+	--mapPosition: var(--mapCenter);
 	--map        : conic-gradient(#fff, #888, #fff);
 }
 
 .map--image {
-	--mapRepeat  : no-repeat;
+	--mapSize    : 100%;
 	--mapPosition: center;
-	--mapSize    : cover;
+	--mapRepeat  : no-repeat;
 	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
 }
 
 .map--other {
-	--mapRepeat  : no-repeat;
-	--mapPosition: center;
 	--mapSize    : cover;
+	--mapPosition: center;
+	--mapRepeat  : no-repeat;
 	--map        : var(--image);
 }
 
@@ -74,9 +75,10 @@ rasterizer {
 	--factor          : sqrt(2);
 	--halfSize        : calc(.5 * var(--size));
 	--factorSize      : calc(var(--size) / var(--factor));
+	--gradientSize    : calc(2 * var(--size));
 	--halfFactoredSize: calc(var(--factor) * var(--halfSize));
 	--patternRepeat   : repeat, repeat;
-	--patternPosition : 0 0, var(--halfFactoredSize) var(--halfFactoredSize);
+	--patternPosition : 0 0, var(--factorSize) var(--factorSize);
 	--patternSize     : calc(var(--factor) * var(--size)) calc(var(--factor) * var(--size)), calc(var(--factor) * var(--size)) calc(var(--factor) * var(--size));
 	--dot             : radial-gradient(closest-side, #777, #fff var(--factorSize));
 	--dot2            : radial-gradient(closest-side, #777, #fff var(--factorSize));
