@@ -14,6 +14,14 @@
 		</select>
 	</fieldset>
 
+	<fieldset if.bind="selectedMap.value == 'other'">
+		<label for="file">File</label>
+		<input type="file"
+				id="file"
+				change.trigger="fileChanged($event)"
+				accept="image/*"></label>
+	</fieldset>
+
 	<fieldset>
 		<label for="raster">Raster</label>
 		<select value.bind="selectedRaster"
@@ -25,7 +33,7 @@
 		</select>
 	</fieldset>
 
-	<fieldset>
+	<fieldset if.bind="['image', 'other'].includes(selectedMap.value)">
 		<label for="grayScale">Grayscale</label>
 		<input type="checkbox"
 				checked.bind="grayScale"
@@ -54,5 +62,7 @@
 				id="angle"
 				change.trigger="angleChanged(angle)">
 	</fieldset>
+
+	<p class="credits">Credits to Ana Tudor for the CSS Halftone Rasters technique ideas.</p>
 
 </template>

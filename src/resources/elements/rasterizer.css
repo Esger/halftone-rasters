@@ -60,7 +60,31 @@ rasterizer {
 	--mapRepeat  : no-repeat;
 	--mapPosition: center;
 	--mapSize    : cover;
-	--map        : url(https://ashware.nl/assets/img/Esger.jpg);
+	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
+}
+
+.map--other {
+	--mapRepeat  : no-repeat;
+	--mapPosition: center;
+	--mapSize    : cover;
+	--map        : var(--image);
+}
+
+.raster--dotted-x {
+	--factor          : sqrt(2);
+	--halfSize        : calc(.5 * var(--size));
+	--factorSize      : calc(var(--size) / var(--factor));
+	--halfFactoredSize: calc(var(--factor) * var(--halfSize));
+	--patternRepeat   : repeat, repeat;
+	--patternPosition : 0 0, var(--halfFactoredSize) var(--halfFactoredSize);
+	--patternSize     : calc(var(--factor) * var(--size)) calc(var(--factor) * var(--size)), calc(var(--factor) * var(--size)) calc(var(--factor) * var(--size));
+	--dot             : radial-gradient(closest-side, #777, #fff var(--factorSize));
+	--dot2            : radial-gradient(closest-side, #777, #fff var(--factorSize));
+	--pattern         : var(--dot), var(--dot2);
+
+	&.sharpened {
+		--sharpen: blur(2px) contrast(5);
+	}
 }
 
 .raster--dotted {

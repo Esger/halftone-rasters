@@ -1,5 +1,6 @@
 <template class="raster--${raster} map--${map} ${grayscale ? 'grayscale' : ''} ${sharpenEdges ? 'sharpened' : ''}"
-		  style="--size: ${size}px; 
+		  style="--size: ${size}px;
+		  		--image: url(${fileUrl});
 		  		--contrast: ${contrast}; 
 				--angle: ${angle}deg;">
 	<require from="./rasterizer.css"></require>

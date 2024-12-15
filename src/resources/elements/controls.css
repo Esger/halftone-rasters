@@ -1,4 +1,6 @@
 controls {
+	font-size       : 1.4rem;
+	font-family     : monospace;
 	isolation       : isolate;
 	grid-area       : 1/1;
 	width           : fit-content;
@@ -11,7 +13,8 @@ controls {
 	background-color: #00000044;
 	transition      : all .2s ease-in-out;
 
-	&:hover {
+	&:hover,
+	&:focus-within {
 		translate     : 0;
 		background    : #00000088;
 		flex-direction: column;
@@ -35,24 +38,36 @@ controls {
 		margin     : 1.1rem 1rem;
 		display    : flex;
 		align-items: center;
+
+		>* {
+			flex     : 0 0 12rem;
+			font-size: inherit;
+		}
 	}
 
-	label {
-		flex       : 0 0 12rem;
-		color      : white;
-		font-size  : 1.4rem;
-		font-family: monospace;
+	label,
+	p {
+		color: white;
+	}
+
+	input[type=file] {
+		height: 2rem;
 	}
 
 	select {
-		padding    : .1rem .9rem;
-		font-size  : 1.4rem;
-		font-family: monospace;
+		padding: .1rem .9rem;
 	}
 
 	input[type=checkbox] {
 		margin: 0;
 		width : 2rem;
 		height: 2rem;
+	}
+
+	.credits {
+		font-size  : 1rem;
+		line-height: 1.4rem;
+		margin     : 1rem;
+		max-width  : 40ch;
 	}
 }

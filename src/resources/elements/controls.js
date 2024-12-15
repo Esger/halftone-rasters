@@ -9,13 +9,15 @@ export class Controls {
 			{ id: 0, value: 'linear' },
 			{ id: 1, value: 'radial' },
 			{ id: 2, value: 'conical' },
-			{ id: 3, value: 'image' }
+			{ id: 3, value: 'image' },
+			{ id: 4, value: 'other' }
 		];
 		this.selectedMap = this.maps[0];
 		this.rasters = [
-			{ id: 0, value: 'dotted' },
-			{ id: 1, value: 'lined' },
-			{ id: 2, value: 'radial' }
+			{ id: 0, value: 'dotted-x' },
+			{ id: 1, value: 'dotted' },
+			{ id: 2, value: 'lined' },
+			{ id: 3, value: 'radial' }
 		];
 		this.selectedRaster = this.rasters[0];
 		this.size = 32;
@@ -37,6 +39,10 @@ export class Controls {
 	mapChanged(map) {
 		this.selectedMap = map;
 		this._eventAggregator.publish('map-changed', map.value);
+	}
+
+	fileChanged(event) {
+		this._eventAggregator.publish('file-changed', event.target.files[0]);
 	}
 
 	grayScaleChanged(grayScale) {
