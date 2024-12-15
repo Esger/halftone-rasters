@@ -13,7 +13,8 @@ controls {
 	background-color: #00000044;
 	transition      : all .2s ease-in-out;
 
-	&:hover {
+	&:hover,
+	&:focus-within {
 		translate     : 0;
 		background    : #00000088;
 		flex-direction: column;
@@ -67,6 +68,6 @@ controls {
 		font-size  : 1rem;
 		line-height: 1.4rem;
 		margin     : 1rem;
-		max-width  : 30ch;
+		max-width  : 40ch;
 	}
 }
