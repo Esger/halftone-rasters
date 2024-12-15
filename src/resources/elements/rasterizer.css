@@ -60,7 +60,14 @@ rasterizer {
 	--mapRepeat  : no-repeat;
 	--mapPosition: center;
 	--mapSize    : cover;
-	--map        : url(https://ashware.nl/assets/img/Esger.jpg);
+	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
+}
+
+.map--other {
+	--mapRepeat  : no-repeat;
+	--mapPosition: center;
+	--mapSize    : cover;
+	--map        : var(--image);
 }
 
 .raster--dotted-x {

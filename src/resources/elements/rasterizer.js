@@ -5,6 +5,7 @@ export class RasterizerCustomElement {
 	@bindable raster;
 	@bindable size;
 	@bindable angle;
+	@bindable fileUrl;
 
 	sizeChanged(newSize) {
 		const size = parseInt(newSize, 10);
