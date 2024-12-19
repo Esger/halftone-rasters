@@ -44,12 +44,13 @@
 	<fieldset>
 		<label for="size">Size: ${size}px</label>
 		<input type="range"
-				step="4"
-				min="4"
-				max="100"
-				value.bind="size"
-				id="size"
-				change.trigger="sizeChanged(size)">
+			autofocus
+			step="4"
+			min="4"
+			max="100"
+			value.bind="size"
+			id="size"
+			change.trigger="sizeChanged(size)">
 	</fieldset>
 
 	<fieldset if.bind="selectedValue.value == 'lined'">
