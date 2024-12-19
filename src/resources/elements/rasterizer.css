@@ -86,11 +86,11 @@ rasterizer {
 	margin       : 0;
 }
 
-.map--other {
+.map--other::after {
 	--mapRepeat  : no-repeat;
 	--mapPosition: center;
 	--mapSize    : cover;
-	--map        : var(--image);
+	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
 	margin       : 0;
 }
 
