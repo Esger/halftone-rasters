@@ -41,6 +41,7 @@ export class Controls {
 	}
 
 	fileChanged(event) {
+		this.selectedFile = event.target.files[0].name;
 		this._eventAggregator.publish('file-changed', event.target.files[0]);
 	}
 

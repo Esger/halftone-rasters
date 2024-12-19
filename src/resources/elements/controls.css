@@ -39,7 +39,7 @@ controls {
 		display    : flex;
 		align-items: center;
 
-		>* {
+		* {
 			flex     : 0 0 12rem;
 			font-size: inherit;
 		}
@@ -50,18 +50,39 @@ controls {
 		color: white;
 	}
 
+	input {
+		border-radius: 5px;
+	}
+
 	input[type=file] {
 		height: 2rem;
 	}
 
 	select {
 		padding: .1rem .9rem;
+		font   : inherit;
 	}
 
 	input[type=checkbox] {
 		margin: 0;
 		width : 2rem;
 		height: 2rem;
+	}
+
+	/* Hide the default file input button and hint */
+	input[type="file"] {
+		display: none;
+
+		&+label {
+			display         : inline-block;
+			padding-inline  : .9rem;
+			height          : 2rem;
+			flex            : 0 0 10rem;
+			background-color: white;
+			color           : black;
+			cursor          : pointer;
+			line-height     : 2rem;
+		}
 	}
 
 	.credits {
