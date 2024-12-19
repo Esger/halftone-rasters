@@ -15,14 +15,11 @@
 } */
 
 rasterizer {
-	display              : block;
+	overflow             : hidden;
+	display              : grid;
 	grid-area            : 1/1;
 	height               : 100%;
 	background-blend-mode: multiply;
-	background-image     : var(--map), var(--pattern);
-	background-repeat    : var(--mapRepeat), var(--patternRepeat);
-	background-size      : var(--mapSize), var(--patternSize);
-	background-position  : var(--mapPosition), var(--patternPosition);
 	--contrast           : 80;
 	--size               : 2em;
 	--grayscale          : grayscale(0);
@@ -30,26 +27,49 @@ rasterizer {
 	--filter             : var(--grayscale) contrast(var(--contrast)) var(--sharpen);
 	filter               : var(--filter);
 
+	&::before,
+	&::after {
+		content       : '';
+		display       : block;
+		grid-area     : 1/1;
+		margin        : -50vh -50vw;
+		mix-blend-mode: multiply;
+	}
+
+	&::after {
+		background-image   : var(--map);
+		background-repeat  : var(--mapRepeat);
+		background-size    : var(--mapSize);
+		background-position: var(--mapPosition);
+	}
+
+	&::before {
+		background-image   : var(--pattern);
+		background-repeat  : var(--patternRepeat);
+		background-size    : var(--patternSize);
+		background-position: var(--patternPosition);
+	}
+
 	&.grayscale {
 		--grayscale: grayscale(1);
 	}
 }
 
-.map--linear {
+.map--linear::after {
 	--mapRepeat  : no-repeat;
 	--mapPosition: top;
 	--mapSize    : cover;
 	--map        : linear-gradient(90deg, #888, #fff);
 }
 
-.map--radial {
+.map--radial::after {
 	--mapRepeat  : no-repeat;
 	--mapPosition: center;
 	--mapSize    : cover;
 	--map        : radial-gradient(circle, #888, #fff);
 }
 
-.map--conical {
+.map--conical::after {
 	--mapRepeat  : no-repeat;
 	--mapPosition: center;
 	--mapSize    : cover;
@@ -70,24 +90,7 @@ rasterizer {
 	--map        : var(--image);
 }
 
-.raster--dotted-x {
-	--factor          : sqrt(2);
-	--halfSize        : calc(.5 * var(--size));
-	--factorSize      : calc(var(--size) / var(--factor));
-	--halfFactoredSize: calc(var(--factor) * var(--halfSize));
-	--patternRepeat   : repeat, repeat;
-	--patternPosition : 0 0, var(--halfFactoredSize) var(--halfFactoredSize);
-	--patternSize     : calc(var(--factor) * var(--size)) calc(var(--factor) * var(--size)), calc(var(--factor) * var(--size)) calc(var(--factor) * var(--size));
-	--dot             : radial-gradient(closest-side, #777, #fff var(--factorSize));
-	--dot2            : radial-gradient(closest-side, #777, #fff var(--factorSize));
-	--pattern         : var(--dot), var(--dot2);
-
-	&.sharpened {
-		--sharpen: blur(2px) contrast(5);
-	}
-}
-
-.raster--dotted {
+[class*="raster--dotted"]::before {
 	--patternRepeat  : space;
 	--patternPosition: 0;
 	--patternSize    : var(--size) var(--size);
@@ -98,7 +101,11 @@ rasterizer {
 	}
 }
 
-.raster--lined {
+.raster--dotted-x::before {
+	rotate: 45deg;
+}
+
+.raster--lined::before {
 	--patternRepeat  : repeat-y;
 	--patternPosition: 0;
 	--patternSize    : 100% calc(2 * var(--size));
@@ -109,7 +116,7 @@ rasterizer {
 	}
 }
 
-.raster--radial {
+.raster--radial::before {
 	--patternRepeat  : no-repeat;
 	--patternPosition: center;
 	--patternSize    : 100%;
