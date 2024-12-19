@@ -44,20 +44,22 @@
 	<fieldset>
 		<label for="size">Size: ${size}px</label>
 		<input type="range"
-				step="4"
-				min="4"
-				max="100"
-				value.bind="size"
-				id="size"
-				change.trigger="sizeChanged(size)">
+			autofocus
+			step="4"
+			min="4"
+			max="100"
+			value.bind="size"
+			id="size"
+			change.trigger="sizeChanged(size)">
 	</fieldset>
 
-	<fieldset if.bind="selectedValue.value == 'lined'">
+	<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
+			  data-value="${selectedRaster.value.toLowerCase()}">
 		<label for="angle">Angle: ${angle}°</label>
 		<input type="range"
 				step="15"
-				min="0"
-				max="180"
+				min="-90"
+				max="90"
 				value.bind="angle"
 				id="angle"
 				change.trigger="angleChanged(angle)">
