@@ -64,9 +64,11 @@ controls {
 	}
 
 	input[type=checkbox] {
-		margin: 0;
-		width : 2rem;
-		height: 2rem;
+		margin    : 0;
+		height    : 2rem;
+		margin    : 0;
+		flex      : 0 0 2rem;
+		align-self: flex-start;
 	}
 
 	/* Hide the default file input button and hint */
