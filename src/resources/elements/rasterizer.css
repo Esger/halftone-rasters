@@ -1,14 +1,14 @@
-/* @property --x {
-    syntax       : '<length-percentage>';
-    initial-value: 50vw;
-    inherits     : false
+@property --x {
+	syntax       : '<length-percentage>';
+	initial-value: 50vw;
+	inherits     : false
 }
 
 @property --y {
-    syntax       : '<length-percentage>';
-    initial-value: 50vh;
-    inherits     : false
-} */
+	syntax       : '<length-percentage>';
+	initial-value: 50vh;
+	inherits     : false
+}
 
 /* html {
     --movingCircles: repeating-radial-gradient(circle at var(--x, 50%) var(--y, 50%), #777, #fff, #777 2em);
@@ -66,22 +66,17 @@ rasterizer {
 
 .map--radial::after {
 	--mapRepeat  : no-repeat;
-	--mapPosition: center;
-	--mapSize    : cover;
 	--map        : radial-gradient(circle, #888, #fff);
 }
 
 .map--conical::after {
 	--mapRepeat  : no-repeat;
-	--mapPosition: center;
-	--mapSize    : cover;
+	--mapPosition: var(--mapCenter);
 	--map        : conic-gradient(#fff, #888, #fff);
 }
 
 .map--image::after {
 	--mapRepeat  : no-repeat;
-	--mapPosition: center;
-	--mapSize    : cover;
 	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
 	margin       : 0;
 }
