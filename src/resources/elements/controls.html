@@ -42,29 +42,31 @@
 				id="grayScale">
 	</fieldset>
 
-	<fieldset>
-		<label for="size">Size: ${size}px</label>
-		<input type="range"
-			autofocus
-			step="4"
-			min="4"
-			max="100"
-			value.bind="size"
-			id="size"
-			change.trigger="sizeChanged(size)">
-	</fieldset>
+	<template if.bind="!['image', 'other'].includes(selectedMap.value)">
+		<fieldset>
+			<label for="size">Size: ${size}px</label>
+			<input type="range"
+				autofocus
+				step="4"
+				min="4"
+				max="100"
+				value.bind="size"
+				id="size"
+				change.trigger="sizeChanged(size)">
+		</fieldset>
 
-	<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
-			  data-value="${selectedRaster.value.toLowerCase()}">
-		<label for="angle">Angle: ${angle}°</label>
-		<input type="range"
-				step="15"
-				min="-90"
-				max="90"
-				value.bind="angle"
-				id="angle"
-				change.trigger="angleChanged(angle)">
-	</fieldset>
+		<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
+				  data-value="${selectedRaster.value.toLowerCase()}">
+			<label for="angle">Angle: ${angle}°</label>
+			<input type="range"
+					step="15"
+					min="-90"
+					max="90"
+					value.bind="angle"
+					id="angle"
+					change.trigger="angleChanged(angle)">
+		</fieldset>
+	</template>
 
 	<p class="credits">Credits to Ana Tudor for the CSS Halftone Rasters technique ideas.</p>
 
