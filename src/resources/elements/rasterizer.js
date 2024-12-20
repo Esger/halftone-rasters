@@ -11,13 +11,14 @@ export class RasterizerCustomElement {
 	constructor(element) {
 		this._element = element;
 	}
+	mouseMoved(event) {
+		this.mouseX = event.clientX;
+		this.mouseY = event.clientY;
+	}
 
-	attached() {
-		addEventListener('mousemove', e => {
-			this.mouseX = e.clientX;
-			this.mouseY = e.clientY;
-		})
-
+	touchMoved(event) {
+		this.mouseX = event.touches[0].clientX;
+		this.mouseY = event.touches[0].clientY;
 	}
 	sizeChanged(newSize) {
 		const size = parseInt(newSize, 10);

@@ -93,3 +93,23 @@ controls {
 		max-width  : 40ch;
 	}
 }
+
+@media screen and (max-width: 470px) {
+	controls {
+		translate: 0 calc(-100% + 10rem);
+	}
+}
+
+@media screen and (max-width: 600px) {
+	controls {
+		font-size: 1.2rem;
+
+		h1 {
+			font-size: 2.4rem;
+		}
+
+		fieldset * {
+			flex: 0 0 9rem;
+		}
+	}
+}
