@@ -42,7 +42,7 @@
 				id="grayScale">
 	</fieldset>
 
-	<fieldset>
+	<fieldset if.bind="!['image', 'other'].includes(selectedMap.value)">
 		<label for="size">Size: ${size}px</label>
 		<input type="range"
 			autofocus
