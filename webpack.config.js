@@ -54,7 +54,6 @@ module.exports = ({ production }, { analyze, hmr, port, host }) => ({
 	mode: production ? 'production' : 'development',
 	output: {
 		path: outDir,
-		publicPath: baseUrl,
 		filename: production ? '[name].[chunkhash].bundle.js' : '[name].[fullhash].bundle.js',
 		chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[fullhash].chunk.js'
 	},
@@ -241,10 +240,9 @@ module.exports = ({ production }, { analyze, hmr, port, host }) => ({
 		new AureliaPlugin(),
 		new HtmlWebpackPlugin({
 			template: 'index.ejs',
-			publicPath: production ? './' : '/',
 			metadata: {
 				// available in index.ejs //
-				baseUrl
+				baseUrl: production ? './' : '/',
 			}
 		}),
 		// ref: https://webpack.js.org/plugins/mini-css-extract-plugin/
