@@ -107,6 +107,7 @@ rasterizer {
 		&::before {
 			--sz         : calc(var(--mouseX) / 10);
 			--patternSize: var(--sz) var(--sz);
+			--angle      : var(--angleMouseY);
 		}
 	}
 
@@ -131,6 +132,7 @@ rasterizer {
 	&.map--other {
 		&::before {
 			--patternSize: 100% max(4px, var(--mouseX) / 10);
+			--angle      : var(--angleMouseY);
 		}
 	}
 
@@ -151,6 +153,7 @@ rasterizer {
 	&.map--other {
 		&::before {
 			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+			--angle  : 0;
 		}
 	}
 
