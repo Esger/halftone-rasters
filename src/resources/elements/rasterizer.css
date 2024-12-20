@@ -62,21 +62,26 @@ rasterizer {
 	--mapPosition: top;
 	--mapSize    : cover;
 	--map        : linear-gradient(90deg, #888 25%, #fff 75%);
+	translate    : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 }
 
 .map--radial::after {
-	--mapRepeat  : no-repeat;
-	--map        : radial-gradient(circle, #888, #fff);
+	--mapRepeat: no-repeat;
+	--map      : radial-gradient(circle, #888, #fff);
+	translate  : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 }
 
 .map--conical::after {
 	--mapRepeat  : no-repeat;
 	--mapPosition: var(--mapCenter);
 	--map        : conic-gradient(#fff, #888, #fff);
+	translate    : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 }
 
 .map--image::after {
 	--mapRepeat  : no-repeat;
+	--mapPosition: 50% 50%;
+	--mapSize    : cover;
 	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
 	margin       : 0;
 }
@@ -89,11 +94,18 @@ rasterizer {
 	margin       : 0;
 }
 
-[class*="raster--dotted"]::before {
-	--patternRepeat  : space;
-	--patternPosition: 0;
-	--patternSize    : var(--size) var(--size);
-	--pattern        : radial-gradient(closest-corner, #777, #fff);
+.raster--dotted {
+	&::before {
+		--patternRepeat  : space;
+		--patternPosition: 0;
+		--patternSize    : var(--size) var(--size);
+		--pattern        : radial-gradient(closest-corner, #777, #fff);
+	}
+
+	&.map--image::before {
+		--sz         : calc(var(--mouseX) / 10);
+		--patternSize: var(--sz) var(--sz);
+	}
 
 	&.sharpened {
 		--sharpen: blur(2px) contrast(5);
@@ -104,11 +116,17 @@ rasterizer {
 	}
 }
 
-.raster--lined::before {
-	--patternRepeat  : repeat-y;
-	--patternPosition: 0;
-	--patternSize    : 100% calc(2 * var(--size));
-	--pattern        : linear-gradient(#fff, #777, #fff);
+.raster--lined {
+	&::before {
+		--patternRepeat  : repeat-y;
+		--patternPosition: 0;
+		--patternSize    : 100% calc(2 * var(--size));
+		--pattern        : linear-gradient(#fff, #777, #fff);
+	}
+
+	&.map--image::before {
+		--patternSize: 100% max(4px, var(--mouseX) / 10);
+	}
 
 	&.sharpened {
 		--sharpen: blur(.5px) contrast(2);
