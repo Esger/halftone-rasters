@@ -42,19 +42,19 @@
 				id="grayScale">
 	</fieldset>
 
-	<template if.bind="selectedMap.value !== 'image'">
-		<fieldset>
-			<label for="size">Size: ${size}px</label>
-			<input type="range"
-				autofocus
-				step="4"
-				min="4"
-				max="100"
-				value.bind="size"
-				id="size"
-				change.trigger="sizeChanged(size)">
-		</fieldset>
+	<fieldset if.bind="selectedMap.value !== 'image' || selectedRaster.value == 'radial'">
+		<label for="size">Size: ${size}px</label>
+		<input type="range"
+			autofocus
+			step="4"
+			min="4"
+			max="100"
+			value.bind="size"
+			id="size"
+			change.trigger="sizeChanged(size)">
+	</fieldset>
 
+	<template if.bind="selectedMap.value !== 'image'">
 		<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
 				  data-value="${selectedRaster.value.toLowerCase()}">
 			<label for="angle">Angle: ${angle}°</label>
