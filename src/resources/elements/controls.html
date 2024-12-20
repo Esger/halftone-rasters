@@ -14,7 +14,7 @@
 		</select>
 	</fieldset>
 
-	<fieldset if.bind="selectedMap.value == 'other'">
+	<fieldset if.bind="selectedMap.value == 'image'">
 		<label for="file">File</label>
 		<input type="file"
 				id="file"
@@ -34,7 +34,7 @@
 		</select>
 	</fieldset>
 
-	<fieldset if.bind="['image', 'other'].includes(selectedMap.value)">
+	<fieldset if.bind="selectedMap.value == 'image'">
 		<label for="grayScale">Grayscale</label>
 		<input type="checkbox"
 				checked.bind="grayScale"
@@ -42,7 +42,7 @@
 				id="grayScale">
 	</fieldset>
 
-	<template if.bind="!['image', 'other'].includes(selectedMap.value)">
+	<template if.bind="selectedMap.value !== 'image'">
 		<fieldset>
 			<label for="size">Size: ${size}px</label>
 			<input type="range"
