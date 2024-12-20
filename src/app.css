@@ -1,5 +1,6 @@
 html,
 body {
-	height : 100dvh;
-	display: grid;
+	height  : 100dvh;
+	display : grid;
+	overflow: hidden;
 }
