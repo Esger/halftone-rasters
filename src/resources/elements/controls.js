@@ -9,8 +9,7 @@ export class Controls {
 			{ id: 0, value: 'linear' },
 			{ id: 1, value: 'radial' },
 			{ id: 2, value: 'conical' },
-			{ id: 3, value: 'image' },
-			{ id: 4, value: 'other' }
+			{ id: 3, value: 'image' }
 		];
 		this.selectedMap = this.maps[0];
 		this.rasters = [
@@ -37,6 +36,7 @@ export class Controls {
 
 	mapChanged(map) {
 		this.selectedMap = map;
+		this.selectedFile = undefined;
 		this._eventAggregator.publish('map-changed', map.value);
 	}
 

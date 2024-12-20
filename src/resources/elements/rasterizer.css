@@ -10,10 +10,6 @@
 	inherits     : false
 }
 
-/* html {
-    --movingCircles: repeating-radial-gradient(circle at var(--x, 50%) var(--y, 50%), #777, #fff, #777 2em);
-} */
-
 rasterizer {
 	overflow             : hidden;
 	display              : grid;
@@ -93,21 +89,6 @@ rasterizer {
 	}
 }
 
-.map--other {
-	&::after {
-		--mapRepeat  : no-repeat;
-		--mapPosition: center;
-		--mapSize    : cover;
-		--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
-		margin       : 0;
-		filter       : blur(min(var(--size), .1vmin));
-	}
-
-	&.grayscale::after {
-		filter: brightness(1.1) blur(min(var(--size), .1vmin));
-	}
-}
-
 .raster--dotted {
 	&::before {
 		--patternRepeat  : space;
@@ -116,13 +97,10 @@ rasterizer {
 		--pattern        : radial-gradient(closest-corner, #777, #fff);
 	}
 
-	&.map--image,
-	&.map--other {
-		&::before {
-			--sz         : max(4px, var(--mouseX) / 10);
-			--patternSize: var(--sz) var(--sz);
-			--angle      : var(--angleMouseY);
-		}
+	&.map--image::before {
+		--sz         : max(4px, var(--mouseX) / 10);
+		--patternSize: var(--sz) var(--sz);
+		--angle      : var(--angleMouseY);
 	}
 
 	&.sharpened {
@@ -142,12 +120,9 @@ rasterizer {
 		--pattern        : linear-gradient(#fff, #777, #fff);
 	}
 
-	&.map--image,
-	&.map--other {
-		&::before {
-			--patternSize: 100% max(4px, var(--mouseX) / 10);
-			--angle      : var(--angleMouseY);
-		}
+	&.map--image::before {
+		--patternSize: 100% max(4px, var(--mouseX) / 10);
+		--angle      : var(--angleMouseY);
 	}
 
 	&.sharpened {
@@ -163,12 +138,9 @@ rasterizer {
 		--pattern        : repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
 	}
 
-	&.map--image,
-	&.map--other {
-		&::before {
-			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-			--angle  : 0;
-		}
+	&.map--image::before {
+		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		--angle  : 0;
 	}
 
 	&.sharpened {
