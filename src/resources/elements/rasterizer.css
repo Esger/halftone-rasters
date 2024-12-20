@@ -102,9 +102,12 @@ rasterizer {
 		--pattern        : radial-gradient(closest-corner, #777, #fff);
 	}
 
-	&.map--image::before {
-		--sz         : calc(var(--mouseX) / 10);
-		--patternSize: var(--sz) var(--sz);
+	&.map--image,
+	&.map--other {
+		&::before {
+			--sz         : calc(var(--mouseX) / 10);
+			--patternSize: var(--sz) var(--sz);
+		}
 	}
 
 	&.sharpened {
@@ -124,8 +127,11 @@ rasterizer {
 		--pattern        : linear-gradient(#fff, #777, #fff);
 	}
 
-	&.map--image::before {
-		--patternSize: 100% max(4px, var(--mouseX) / 10);
+	&.map--image,
+	&.map--other {
+		&::before {
+			--patternSize: 100% max(4px, var(--mouseX) / 10);
+		}
 	}
 
 	&.sharpened {
@@ -141,8 +147,11 @@ rasterizer {
 		--pattern        : repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
 	}
 
-	&.map--image::before {
-		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+	&.map--image,
+	&.map--other {
+		&::before {
+			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		}
 	}
 
 	&.sharpened {
