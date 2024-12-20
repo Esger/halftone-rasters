@@ -78,20 +78,34 @@ rasterizer {
 	translate    : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 }
 
-.map--image::after {
-	--mapRepeat  : no-repeat;
-	--mapPosition: 50% 50%;
-	--mapSize    : cover;
-	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
-	margin       : 0;
+.map--image {
+	&::after {
+		--mapRepeat  : no-repeat;
+		--mapPosition: 50% 50%;
+		--mapSize    : cover;
+		--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
+		margin       : 0;
+		filter       : blur(min(var(--size), .1vmin));
+	}
+
+	&.grayscale::after {
+		filter: brightness(1.1) blur(min(var(--size), .1vmin));
+	}
 }
 
-.map--other::after {
-	--mapRepeat  : no-repeat;
-	--mapPosition: center;
-	--mapSize    : cover;
-	--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
-	margin       : 0;
+.map--other {
+	&::after {
+		--mapRepeat  : no-repeat;
+		--mapPosition: center;
+		--mapSize    : cover;
+		--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
+		margin       : 0;
+		filter       : blur(min(var(--size), .1vmin));
+	}
+
+	&.grayscale::after {
+		filter: brightness(1.1) blur(min(var(--size), .1vmin));
+	}
 }
 
 .raster--dotted {
@@ -105,7 +119,7 @@ rasterizer {
 	&.map--image,
 	&.map--other {
 		&::before {
-			--sz         : calc(var(--mouseX) / 10);
+			--sz         : max(4px, var(--mouseX) / 10);
 			--patternSize: var(--sz) var(--sz);
 			--angle      : var(--angleMouseY);
 		}
