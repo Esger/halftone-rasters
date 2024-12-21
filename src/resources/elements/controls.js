@@ -28,6 +28,7 @@ export class Controls {
 		this._eventAggregator.publish('map-changed', this.maps[this.selectedMap.id].value);
 		this._eventAggregator.publish('raster-changed', this.rasters[this.selectedRaster.id].value);
 		this._eventAggregator.publish('size-changed', this.size);
+		this._eventAggregator.publish('slices-changed', this.size);
 		this._eventAggregator.publish('angle-changed', this.angle);
 		this._element.addEventListener('transitionend', _ => setTimeout(_ => {
 			this.dimmed = true, 5000;
@@ -58,6 +59,10 @@ export class Controls {
 
 	sizeChanged(size) {
 		this._eventAggregator.publish('size-changed', size);
+	}
+
+	slicesChanged(slices) {
+		this._eventAggregator.publish('slices-changed', slices);
 	}
 
 	angleChanged(angle) {

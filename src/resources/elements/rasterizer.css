@@ -153,7 +153,7 @@ rasterizer {
 		--patternRepeat  : no-repeat;
 		--patternPosition: center;
 		--patternSize    : 100%;
-		--pattern        : repeating-conic-gradient(#777 0, #fff 5deg, #777 10deg);
+		--pattern        : repeating-conic-gradient(#777 0, #fff var(--halfSliceAngle), #777 var(--sliceAngle));
 	}
 
 	&.map--image::before {

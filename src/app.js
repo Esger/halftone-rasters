@@ -14,6 +14,7 @@ export class App {
 		this._grayscaleSubscription = this._eventAggregator.subscribe('grayscale-changed', grayscale => this.grayscale = grayscale);
 		this._rasterSubscription = this._eventAggregator.subscribe('raster-changed', raster => this.raster = raster);
 		this._sizeSubscription = this._eventAggregator.subscribe('size-changed', size => this.size = size);
+		this._slicesSubscription = this._eventAggregator.subscribe('slices-changed', slices => this.slices = slices);
 		this._angleSubscription = this._eventAggregator.subscribe('angle-changed', angle => this.angle = angle);
 		this._fileChangedSubscription = this._eventAggregator.subscribe('file-changed', file => {
 			const fileUrl = URL.createObjectURL(file);
