@@ -16,7 +16,8 @@ export class Controls {
 		this.rasters = [
 			{ id: 0, value: 'dotted' },
 			{ id: 1, value: 'lined' },
-			{ id: 2, value: 'radial' }
+			{ id: 2, value: 'radial' },
+			{ id: 3, value: 'conical' }
 		];
 		this.selectedRaster = this.rasters[0];
 		this.size = 32;

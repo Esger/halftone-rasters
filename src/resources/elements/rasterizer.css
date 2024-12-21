@@ -147,3 +147,21 @@ rasterizer {
 		--sharpen: blur(2px) contrast(5);
 	}
 }
+
+.raster--conical {
+	&::before {
+		--patternRepeat  : no-repeat;
+		--patternPosition: center;
+		--patternSize    : 100%;
+		--pattern        : repeating-conic-gradient(#777 0, #fff 5deg, #777 10deg);
+	}
+
+	&.map--image::before {
+		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		--angle  : 0;
+	}
+
+	&.sharpened {
+		--sharpen: blur(2px) contrast(5);
+	}
+}
