@@ -1,0 +1,17 @@
+<template>
+	<require from="./app.css"></require>
+	<require from="./reset.css"></require>
+	<require from="./resources/elements/rasterizer"></require>
+	<require from="./resources/elements/controls"></require>
+
+	<rasterizer map.bind="map"
+				raster.bind="raster"
+				file-url.bind="fileUrl"
+				grayscale.bind="grayscale"
+				size.bind="size"
+				slices.bind="slices"
+				angle.bind="angle">
+	</rasterizer>
+	<controls></controls>
+
+</template>

@@ -1,0 +1,84 @@
+<template class="${dimmed ? 'dimmed' : ''}">
+	<require from="./controls.css"></require>
+
+	<h1>CSS Halftone Rasters</h1>
+
+	<fieldset>
+		<label for="map">Map</label>
+		<select value.bind="selectedMap"
+				id="map"
+				change.trigger="mapChanged(selectedMap)">
+			<option repeat.for="map of maps"
+					model.bind="map">${map.value}
+			</option>
+		</select>
+	</fieldset>
+
+	<fieldset if.bind="selectedMap.value == 'image'">
+		<label for="file">File</label>
+		<input type="file"
+				id="file"
+				change.trigger="fileChanged($event)"
+				accept="image/*"></label>
+		<label for="file">${selectedFile || 'choose file'}</label>
+	</fieldset>
+
+	<fieldset>
+		<label for="raster">Raster</label>
+		<select value.bind="selectedRaster"
+				id="raster"
+				change.trigger="rasterChanged(selectedRaster)">
+			<option repeat.for="raster of rasters"
+					model.bind="raster">${raster.value}
+			</option>
+		</select>
+	</fieldset>
+
+	<fieldset if.bind="selectedMap.value == 'image'">
+		<label for="grayScale">Grayscale</label>
+		<input type="checkbox"
+				checked.bind="grayScale"
+				change.trigger="grayScaleChanged(grayScale)"
+				id="grayScale">
+	</fieldset>
+
+	<fieldset if.bind="selectedMap.value !== 'image' && !['radial', 'conical'].includes(selectedRaster.value.toLowerCase())">
+		<label for="size">Size: ${size}px</label>
+		<input type="range"
+			autofocus
+			step="4"
+			min="4"
+			max="100"
+			value.bind="size"
+			id="size"
+			change.trigger="sizeChanged(size)">
+	</fieldset>
+
+	<fieldset if.bind="selectedRaster.value == 'conical'">
+		<label for="slices">Slices: ${slices}</label>
+		<input type="range"
+			step="1"
+			min="1"
+			max="100"
+			value.bind="slices"
+			id="slices"
+			change.trigger="slicesChanged(slices)">
+	</fieldset>
+
+	<template if.bind="selectedMap.value !== 'image'">
+		<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
+				  data-value="${selectedRaster.value.toLowerCase()}">
+			<label for="angle">Angle: ${angle}°</label>
+			<input type="range"
+					step="15"
+					min="-90"
+					max="90"
+					value.bind="angle"
+					id="angle"
+					change.trigger="angleChanged(angle)">
+		</fieldset>
+	</template>
+
+	<p class="credits">Credits to Ana Tudor for the CSS Halftone Rasters technique ideas.</p>
+
+</template>

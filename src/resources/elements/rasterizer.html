@@ -1,0 +1,16 @@
+<template class="raster--${raster} map--${map} ${grayscale ? 'grayscale' : ''} ${sharpenEdges ? 'sharpened' : ''}"
+		  style="--size: ${size}px;
+		  		--sliceAngle: ${360 / slices}deg;
+				--halfSliceAngle: ${180 / slices}deg;
+		  		--image: url(${fileUrl});
+		  		--contrast: ${contrast}; 
+				--angle: ${angle}deg;
+				--angleMouseY: ${mouseY}deg;
+				--mouseX: ${mouseX}px;
+				--mouseY: ${mouseY}px;
+				--x: ${mouseX};
+				--y: ${mouseY};"
+		  touchmove.trigger="touchMoved($event)"
+		  mousemove.trigger="mouseMoved($event)">
+	<require from="./rasterizer.css"></require>
+</template>

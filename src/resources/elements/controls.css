@@ -1,0 +1,120 @@
+controls {
+	font-size       : 1.4rem;
+	font-family     : monospace;
+	isolation       : isolate;
+	grid-area       : 1/1;
+	width           : fit-content;
+	height          : fit-content;
+	padding         : 2rem;
+	border-radius   : 0 0 4rem;
+	display         : flex;
+	flex-direction  : column-reverse;
+	translate       : 0 calc(-100% + 7rem);
+	background-color: #00000044;
+	transition      : all .2s ease-in-out;
+
+	&.dimmed {
+		opacity: .5;
+	}
+
+	&:hover,
+	&:focus-within {
+		opacity       : 1;
+		translate     : 0;
+		background    : #00000088;
+		flex-direction: column;
+
+		h1 {
+			margin-block: 0 1rem;
+		}
+	}
+
+	h1 {
+		color      : white;
+		font-size  : 3rem;
+		line-height: 3rem;
+		margin     : 1rem 1rem 0;
+		text-shadow: 3px 6px 2px black;
+		font-family: fantasy, sans-serif;
+		font-weight: bold;
+	}
+
+	fieldset {
+		margin     : 1.1rem 1rem;
+		display    : flex;
+		align-items: center;
+
+		* {
+			flex     : 0 0 12rem;
+			font-size: inherit;
+		}
+	}
+
+	label,
+	p {
+		color: white;
+	}
+
+	input {
+		border-radius: 5px;
+	}
+
+	select {
+		padding: .1rem .9rem;
+		font   : inherit;
+	}
+
+	input[type=checkbox] {
+		margin    : 0;
+		height    : 2rem;
+		margin    : 0;
+		flex      : 0 0 2rem;
+		align-self: flex-start;
+	}
+
+	/* Hide the default file input button and hint */
+	input[type="file"] {
+		display: none;
+
+		&+label {
+			display         : inline-block;
+			padding-inline  : .9rem;
+			height          : 2rem;
+			flex            : 0 0 10rem;
+			max-width       : 10rem;
+			background-color: white;
+			color           : black;
+			cursor          : pointer;
+			line-height     : 2rem;
+			white-space     : nowrap;
+			overflow        : hidden;
+		}
+	}
+
+	.credits {
+		font-size  : 1rem;
+		line-height: 1.4rem;
+		margin     : 1rem;
+		max-width  : 40ch;
+	}
+}
+
+@media screen and (max-width: 470px) {
+	controls {
+		translate: 0 calc(-100% + 10rem);
+	}
+}
+
+@media screen and (max-width: 600px) {
+	controls {
+		font-size: 1.2rem;
+
+		h1 {
+			font-size: 2.4rem;
+		}
+
+		fieldset * {
+			flex: 0 0 9rem;
+		}
+	}
+}
