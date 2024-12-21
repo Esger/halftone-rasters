@@ -1,6 +1,6 @@
 export class MySettingsService {
 	_settingsName = 'halftone-rasters';
-	_version = 'v1.0'; // increase when settings object changes
+	_version = 'v1.1'; // increase when settings object changes
 	_settings = undefined;
 
 	constructor() {
