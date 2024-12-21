@@ -13,8 +13,13 @@ controls {
 	background-color: #00000044;
 	transition      : all .2s ease-in-out;
 
+	&.dimmed {
+		opacity: .5;
+	}
+
 	&:hover,
 	&:focus-within {
+		opacity       : 1;
 		translate     : 0;
 		background    : #00000088;
 		flex-direction: column;
