@@ -1,9 +1,10 @@
 import { inject } from 'aurelia-dependency-injection';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
-@inject(EventAggregator)
+@inject(Element, EventAggregator)
 export class Controls {
-	constructor(eventAggregator) {
+	constructor(element, eventAggregator) {
+		this._element = element;
 		this._eventAggregator = eventAggregator;
 		this.maps = [
 			{ id: 0, value: 'linear' },
@@ -15,7 +16,8 @@ export class Controls {
 		this.rasters = [
 			{ id: 0, value: 'dotted' },
 			{ id: 1, value: 'lined' },
-			{ id: 2, value: 'radial' }
+			{ id: 2, value: 'radial' },
+			{ id: 3, value: 'conical' }
 		];
 		this.selectedRaster = this.rasters[0];
 		this.size = 32;
@@ -26,7 +28,13 @@ export class Controls {
 		this._eventAggregator.publish('map-changed', this.maps[this.selectedMap.id].value);
 		this._eventAggregator.publish('raster-changed', this.rasters[this.selectedRaster.id].value);
 		this._eventAggregator.publish('size-changed', this.size);
+		this._eventAggregator.publish('slices-changed', this.size);
 		this._eventAggregator.publish('angle-changed', this.angle);
+		this._element.addEventListener('transitionend', _ => setTimeout(_ => {
+			this.dimmed = true, 5000;
+			this._element.addEventListener('mouseenter', _ => this.dimmed = false);
+			this._element.addEventListener('mouseleave', _ => setTimeout(_ => this.dimmed = true, 5000));
+		}, 5000, { once: true }));
 	}
 
 	rasterChanged(raster) {
@@ -51,6 +59,10 @@ export class Controls {
 
 	sizeChanged(size) {
 		this._eventAggregator.publish('size-changed', size);
+	}
+
+	slicesChanged(slices) {
+		this._eventAggregator.publish('slices-changed', slices);
 	}
 
 	angleChanged(angle) {

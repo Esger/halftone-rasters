@@ -1,4 +1,4 @@
-<template>
+<template class="${dimmed ? 'dimmed' : ''}">
 	<require from="./controls.css"></require>
 
 	<h1>CSS Halftone Rasters</h1>
@@ -42,7 +42,7 @@
 				id="grayScale">
 	</fieldset>
 
-	<fieldset if.bind="selectedMap.value !== 'image' || selectedRaster.value == 'radial'">
+	<fieldset if.bind="selectedMap.value !== 'image' && !['radial', 'conical'].includes(selectedRaster.value.toLowerCase())">
 		<label for="size">Size: ${size}px</label>
 		<input type="range"
 			autofocus
@@ -52,6 +52,17 @@
 			value.bind="size"
 			id="size"
 			change.trigger="sizeChanged(size)">
+	</fieldset>
+
+	<fieldset if.bind="selectedRaster.value == 'conical'">
+		<label for="slices">Slices: ${slices}</label>
+		<input type="range"
+			step="1"
+			min="1"
+			max="100"
+			value.bind="slices"
+			id="slices"
+			change.trigger="slicesChanged(slices)">
 	</fieldset>
 
 	<template if.bind="selectedMap.value !== 'image'">

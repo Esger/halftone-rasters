@@ -5,6 +5,7 @@ export class RasterizerCustomElement {
 	@bindable grayscale;
 	@bindable raster;
 	@bindable size;
+	@bindable slices;
 	@bindable angle;
 	@bindable fileUrl;
 
