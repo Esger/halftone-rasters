@@ -35,14 +35,15 @@
 	</fieldset>
 
 	<fieldset if.bind="selectedMap.value == 'image'">
-		<label for="grayScale">Grayscale</label>
+		<label for="grayscale">Grayscale</label>
 		<input type="checkbox"
-				checked.bind="grayScale"
-				change.trigger="grayScaleChanged(grayScale)"
-				id="grayScale">
+				data-grayscale.bind="grayscale"
+				checked.bind="grayscale"
+				change.trigger="grayscaleChanged(grayscale)"
+				id="grayscale">
 	</fieldset>
 
-	<fieldset if.bind="selectedMap.value !== 'image' && !['radial', 'conical'].includes(selectedRaster.value.toLowerCase())">
+	<fieldset if.bind="!['conical'].includes(selectedRaster.value.toLowerCase())">
 		<label for="size">Size: ${size}px</label>
 		<input type="range"
 			autofocus
