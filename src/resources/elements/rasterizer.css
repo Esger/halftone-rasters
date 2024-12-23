@@ -91,8 +91,8 @@ rasterizer {
 
 .raster--dotted {
 	&::before {
-		--patternRepeat  : space;
-		--patternPosition: 0;
+		--patternRepeat  : repeat;
+		--patternPosition: center;
 		--patternSize    : var(--size) var(--size);
 		--pattern        : radial-gradient(closest-corner, #777, #fff);
 	}
