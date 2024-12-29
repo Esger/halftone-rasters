@@ -12,9 +12,37 @@ export class RasterizerCustomElement {
 	constructor(element) {
 		this._element = element;
 	}
+
+	attached() {
+		document.addEventListener('keydown', event => {
+			this._constrain = event.shiftKey;
+		});
+		document.addEventListener('keyup', event => {
+			this._constrain = false;
+		});
+	}
+
+	detached() {
+		document.removeEventListener('keydown');
+		document.removeEventListener('keyup');
+	}
+
+	keyPressed(event) {
+		this._constrain = event.shiftKey;
+		setTimeout(_ => this._constrain = false);
+	}
+
 	mouseMoved(event) {
-		this.mouseX = event.clientX;
-		this.mouseY = event.clientY;
+		console.log(this._constrain)
+		if (this._constrain) {
+			if (Math.abs(event.movementX) > Math.abs(event.movementY))
+				this.mouseX += event.movementX;
+			else
+				this.mouseY += event.movementY;
+		} else {
+			this.mouseX = event.clientX;
+			this.mouseY = event.clientY;
+		}
 	}
 
 	touchMoved(event) {
