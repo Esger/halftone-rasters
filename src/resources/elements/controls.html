@@ -34,12 +34,12 @@
 		</fieldset>
 
 		<fieldset if.bind="!['conical'].includes(selectedMap.value.toLowerCase())">
-			<label for="mapSize">Size: ${mapSize}px</label>
+			<label for="mapSize">Size: ${mapSize}vmax</label>
 			<input type="range"
 				id="mapSize"
 				autofocus
-				step="1"
-				min="4"
+				step=".5"
+				min=".5"
 				max="100"
 				value.bind="mapSize"
 				input.trigger="mapSizeChanged(mapSize)">
@@ -70,12 +70,12 @@
 			</select>
 		</fieldset>
 
-		<fieldset Xif.bind="!['conical'].includes(selectedRaster.value.toLowerCase())">
-			<label for="rasterSize">Size: ${rasterSize}px</label>
+		<fieldset>
+			<label for="rasterSize">Size: ${rasterSize}vmax</label>
 			<input type="range"
 					id="rasterSize"
-					step="1"
-					min="4"
+					step=".5"
+					min=".5"
 					max="100"
 					value.bind="rasterSize"
 					input.trigger="rasterSizeChanged(rasterSize)">
@@ -92,7 +92,7 @@
 					input.trigger="slicesChanged(slices)">
 		</fieldset>
 
-		<fieldset Xif.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
+		<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
 				  data-value="${selectedRaster.value.toLowerCase()}">
 			<label for="rasterAngle">Angle: ${rasterAngle}°</label>
 			<input type="range"

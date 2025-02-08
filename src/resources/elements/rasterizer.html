@@ -2,18 +2,18 @@
 				map--${map} 
 				${grayscale ? 'grayscale' : ''} 
 				${sharpenEdges ? 'sharpened' : ''}"
-		  style="--mapSize: ${mapSize}px;
+		  style="--mapSize: ${mapSize}vmax;
 		  		--image: url(${fileUrl});
-		  		--rasterSize: ${rasterSize}px;
+		  		--rasterSize: ${rasterSize}vmax;
 		  		--sliceAngle: ${360 / slices}deg;
 				--halfSliceAngle: ${180 / slices}deg;
 				--rasterAngle: ${rasterAngle}deg;
 		  		--contrast: ${contrast}; 
-				--angleMouseY: ${XmouseY}deg;
-				--mouseX: ${XmouseX}px;
-				--mouseY: ${XmouseY}px;
-				--x: ${XmouseX};
-				--y: ${XmouseY};"
+				--angleMouseY: ${mouseY}deg;
+				--mouseX: ${mouseX}px;
+				--mouseY: ${mouseY}px;
+				--x: ${mouseX};
+				--y: ${mouseY};"
 		  touchmove.trigger="touchMoved($event)"
 		  mousemove.trigger="mouseMoved($event)">
 	<require from="./rasterizer.css"></require>

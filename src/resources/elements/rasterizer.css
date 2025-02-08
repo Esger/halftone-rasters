@@ -46,7 +46,6 @@ rasterizer {
 		background-repeat  : var(--rasterRepeat);
 		background-size    : var(--rasterSize);
 		background-position: var(--rasterPosition, 0);
-		rotate             : var(--rasterAngle);
 	}
 
 	&.grayscale {
@@ -78,10 +77,13 @@ rasterizer {
 	} */
 }
 
-.map--radial::before {
+.map--radial {
 	--mapRepeat: no-repeat;
-	--map      : radial-gradient(circle, #888, #fff);
-	translate  : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+	--map      : repeating-radial-gradient(circle, #777, #fff, #777 var(--mapSize));
+
+	&::before {
+		background-size: 100% 100% !important;
+	}
 }
 
 .map--conical::before {
@@ -113,21 +115,22 @@ rasterizer {
 
 	&::after {
 		background-size: var(--rasterSize) var(--rasterSize);
+		rotate         : var(--rasterAngle);
 	}
 
-	&.map--image::after {
+	/* &.map--image::after {
 		--sz         : max(4px, var(--mouseX) / 10);
 		--rasterSize : var(--sz) var(--sz);
 		--rasterAngle: var(--angleMouseY);
-	}
+	} */
 
 	&.sharpened {
 		--sharpen: blur(2px) contrast(5);
 	}
 
-	&.raster--dotted-x::after {
+	/* &.raster--dotted-x::after {
 		rotate: 45deg;
-	}
+	} */
 }
 
 .raster--lined {
@@ -137,12 +140,8 @@ rasterizer {
 
 	&::after {
 		background-size: 100% calc(2 * var(--rasterSize));
+		rotate         : var(--rasterAngle);
 	}
-
-	/* &.map--image::after {
-		--rasterSize : 100% max(4px, var(--mouseX) / 10);
-		--rasterAngle: var(--angleMouseY);
-	} */
 
 	&.sharpened {
 		--sharpen: blur(.5px) contrast(2);
@@ -150,15 +149,13 @@ rasterizer {
 }
 
 .raster--radial {
-	&::after {
-		--rasterRepeat  : no-repeat;
-		--rasterPosition: center;
-		--rasterSize    : 100%;
-		--raster        : repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
-	}
+	--rasterRepeat  : no-repeat;
+	--rasterPosition: center;
+	--raster        : repeating-radial-gradient(circle, #777, #fff, #777 var(--rasterSize));
 
-	&.map--image::after {
-		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+	&::after {
+		background-size: 200% 200% !important;
+		translate      : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 	}
 
 	&.sharpened {
