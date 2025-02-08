@@ -3,82 +3,122 @@
 
 	<h1>CSS Halftone Rasters</h1>
 
-	<fieldset>
-		<label for="map">Map</label>
-		<select value.bind="selectedMap"
-				id="map"
-				change.trigger="mapChanged(selectedMap)">
-			<option repeat.for="map of maps"
-					model.bind="map">${map.value}
-			</option>
-		</select>
-	</fieldset>
+	<section>
+		<fieldset>
+			<label for="map">Map</label>
+			<select value.bind="selectedMap"
+					id="map"
+					change.trigger="mapChanged(selectedMap)">
+				<option repeat.for="map of maps"
+						model.bind="map">${map.value}
+				</option>
+			</select>
+		</fieldset>
 
-	<fieldset if.bind="selectedMap.value == 'image'">
-		<label for="file">Image</label>
-		<input type="file"
-				id="file"
-				change.trigger="fileChanged($event)"
-				accept="image/*"></label>
-		<label for="file">${selectedFile || 'choose file'}</label>
-	</fieldset>
+		<fieldset if.bind="selectedMap.value == 'image'">
+			<label for="file">Image</label>
+			<input type="file"
+					id="file"
+					change.trigger="fileChanged($event)"
+					accept="image/*"></label>
+			<label for="file">${selectedFile || 'choose file'}</label>
+		</fieldset>
 
-	<fieldset>
-		<label for="raster">Raster</label>
-		<select value.bind="selectedRaster"
-				id="raster"
-				change.trigger="rasterChanged(selectedRaster)">
-			<option repeat.for="raster of rasters"
-					model.bind="raster">${raster.value}
-			</option>
-		</select>
-	</fieldset>
-
-	<fieldset if.bind="selectedMap.value == 'image'">
-		<label for="grayscale">Grayscale</label>
-		<input type="checkbox"
+		<fieldset if.bind="selectedMap.value == 'image'">
+			<label for="grayscale">Grayscale</label>
+			<input type="checkbox"
 				data-grayscale.bind="grayscale"
 				checked.bind="grayscale"
 				change.trigger="grayscaleChanged(grayscale)"
 				id="grayscale">
-	</fieldset>
+		</fieldset>
 
-	<fieldset if.bind="!['conical'].includes(selectedRaster.value.toLowerCase())">
-		<label for="size">Size: ${size}px</label>
-		<input type="range"
-			autofocus
-			step="4"
-			min="4"
-			max="100"
-			value.bind="size"
-			id="size"
-			change.trigger="sizeChanged(size)">
-	</fieldset>
+		<fieldset if.bind="!['conical'].includes(selectedMap.value.toLowerCase())">
+			<label for="mapSize">Size: ${mapSize}px</label>
+			<input type="range"
+				id="mapSize"
+				autofocus
+				step="1"
+				min="4"
+				max="100"
+				value.bind="mapSize"
+				change.trigger="mapSizeChanged(mapSize)">
+		</fieldset>
 
-	<fieldset if.bind="selectedRaster.value == 'conical'">
-		<label for="slices">Slices: ${slices}</label>
-		<input type="range"
-			step="1"
-			min="1"
-			max="100"
-			value.bind="slices"
-			id="slices"
-			change.trigger="slicesChanged(slices)">
-	</fieldset>
+		<fieldset Xif.bind="selectedRaster.value == 'conical'">
+			<label for="slices">Slices: ${slices}</label>
+			<input type="range"
+				step="1"
+				min="1"
+				max="100"
+				value.bind="slices"
+				id="slices"
+				change.trigger="slicesChanged(slices)">
+		</fieldset>
 
-	<template if.bind="selectedMap.value !== 'image'">
-		<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
+		<fieldset Xif.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
 				  data-value="${selectedRaster.value.toLowerCase()}">
 			<label for="angle">Angle: ${angle}°</label>
 			<input type="range"
-					step="15"
-					min="-90"
-					max="90"
-					value.bind="angle"
-					id="angle"
-					change.trigger="angleChanged(angle)">
+				step="15"
+				min="-90"
+				max="90"
+				value.bind="angle"
+				id="angle"
+				change.trigger="angleChanged(angle)">
 		</fieldset>
-	</template>
+
+	</section>
+
+	<section>
+		<fieldset>
+			<label for="raster">Raster</label>
+			<select value.bind="selectedRaster"
+					id="raster"
+					change.trigger="rasterChanged(selectedRaster)">
+				<option repeat.for="raster of rasters"
+						model.bind="raster">${raster.value}
+				</option>
+			</select>
+		</fieldset>
+
+		<fieldset Xif.bind="!['conical'].includes(selectedRaster.value.toLowerCase())">
+			<label for="rasterSize">Size: ${rasterSize}px</label>
+			<input type="range"
+					id="rasterSize"
+					step="1"
+					min="4"
+					max="100"
+					value.bind="rasterSize"
+					change.trigger="rasterSizeChanged(rasterSize)">
+		</fieldset>
+
+		<fieldset Xif.bind="selectedRaster.value == 'conical'">
+			<label for="slices">Slices: ${slices}</label>
+			<input type="range"
+					step="1"
+					min="1"
+					max="100"
+					value.bind="slices"
+					id="slices"
+					change.trigger="slicesChanged(slices)">
+		</fieldset>
+
+		<template if.bind="selectedMap.value !== 'image'">
+		</template>
+		<fieldset Xif.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
+				  data-value="${selectedRaster.value.toLowerCase()}">
+			<label for="angle">Angle: ${angle}°</label>
+			<input type="range"
+						step="15"
+						min="-90"
+						max="90"
+						value.bind="angle"
+						id="angle"
+						change.trigger="angleChanged(angle)">
+		</fieldset>
+
+	</section>
 
 	<p class="credits">Credits to Ana Tudor for the CSS Halftone Rasters technique ideas.</p>
 

@@ -2,12 +2,13 @@ import { inject, bindable } from 'aurelia-framework';
 @inject(Element)
 export class RasterizerCustomElement {
 	@bindable map;
+	@bindable mapSize;
+	@bindable fileUrl;
 	@bindable grayscale;
 	@bindable raster;
-	@bindable size;
+	@bindable rasterSize;
 	@bindable slices;
 	@bindable angle;
-	@bindable fileUrl;
 
 	constructor(element) {
 		this._element = element;

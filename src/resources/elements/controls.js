@@ -9,10 +9,11 @@ export class Controls {
 		this._eventAggregator = eventAggregator;
 		this._mySettingsService = mySettingsService;
 		this.maps = [
-			{ id: 0, value: 'linear' },
-			{ id: 1, value: 'radial' },
-			{ id: 2, value: 'conical' },
-			{ id: 3, value: 'image' }
+			{ id: 0, value: 'dotted' },
+			{ id: 1, value: 'lined' },
+			{ id: 2, value: 'radial' },
+			{ id: 3, value: 'conical' },
+			{ id: 4, value: 'image' }
 		];
 		this.rasters = [
 			{ id: 0, value: 'dotted' },
@@ -25,8 +26,10 @@ export class Controls {
 
 	attached() {
 		this._eventAggregator.publish('map-changed', this.maps[this.selectedMap.id].value);
+		this._eventAggregator.publish('map-size-changed', this.mapSize);
+
 		this._eventAggregator.publish('raster-changed', this.rasters[this.selectedRaster.id].value);
-		this._eventAggregator.publish('size-changed', this.size);
+		this._eventAggregator.publish('raster-size-changed', this.rasterSize);
 		this._eventAggregator.publish('slices-changed', this.slices);
 		this._eventAggregator.publish('angle-changed', this.angle);
 		this._eventAggregator.publish('grayscale-changed', this.grayscale);
@@ -42,12 +45,15 @@ export class Controls {
 		this.selectedMap = this.maps[mapId];
 		this._mySettingsService.saveSettings('map', mapId);
 
+		this.mapSize = parseInt(this._mySettingsService.getSettings('map-size'), 10) || 32;
+		this._mySettingsService.saveSettings('map-size', this.mapSize);
+
 		const rasterId = parseInt(this._mySettingsService.getSettings('raster'), 10) || 0;
 		this.selectedRaster = this.rasters[rasterId];
 		this._mySettingsService.saveSettings('raster', rasterId);
 
-		this.size = parseInt(this._mySettingsService.getSettings('size'), 10) || 32;
-		this._mySettingsService.saveSettings('size', this.size);
+		this.rasterSize = parseInt(this._mySettingsService.getSettings('raster-size'), 10) || 32;
+		this._mySettingsService.saveSettings('raster-size', this.rasterSize);
 
 		this.angle = parseInt(this._mySettingsService.getSettings('angle'), 10) || -45;
 		this._mySettingsService.saveSettings('angle', this.angle);
@@ -83,9 +89,13 @@ export class Controls {
 		this._mySettingsService.saveSettings('grayscale', grayscale);
 	}
 
-	sizeChanged(size) {
-		this._eventAggregator.publish('size-changed', size);
-		this._mySettingsService.saveSettings('size', size);
+	mapSizeChanged(size) {
+		this._eventAggregator.publish('map-size-changed', size);
+		this._mySettingsService.saveSettings('map-size', size);
+	}
+	rasterSizeChanged(size) {
+		this._eventAggregator.publish('raster-size-changed', size);
+		this._mySettingsService.saveSettings('raster-size', size);
 	}
 
 	slicesChanged(slices) {
