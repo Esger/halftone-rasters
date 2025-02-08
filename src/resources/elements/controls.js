@@ -55,8 +55,8 @@ export class Controls {
 		this.rasterSize = parseInt(this._mySettingsService.getSettings('raster-size'), 10) || 32;
 		this._mySettingsService.saveSettings('raster-size', this.rasterSize);
 
-		this.angle = parseInt(this._mySettingsService.getSettings('angle'), 10) || -45;
-		this._mySettingsService.saveSettings('angle', this.angle);
+		this.rasterAngle = parseInt(this._mySettingsService.getSettings('raster-angle'), 10) || 45;
+		this._mySettingsService.saveSettings('raster-angle', this.rasterAngle);
 
 		this.slices = parseInt(this._mySettingsService.getSettings('slices'), 10) || 69;
 		this._mySettingsService.saveSettings('slices', this.slices);
@@ -103,7 +103,7 @@ export class Controls {
 		this._mySettingsService.saveSettings('slices', slices);
 	}
 
-	angleChanged(angle) {
+	rasterAngleChanged(angle) {
 		this._eventAggregator.publish('raster-angle-changed', angle);
 		this._mySettingsService.saveSettings('raster-angle', angle);
 	}

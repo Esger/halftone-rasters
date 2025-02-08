@@ -45,7 +45,7 @@
 				input.trigger="mapSizeChanged(mapSize)">
 		</fieldset>
 
-		<fieldset Xif.bind="selectedRaster.value == 'conical'">
+		<fieldset if.bind="selectedRaster.value == 'conical'">
 			<label for="slices">Slices: ${slices}</label>
 			<input type="range"
 				step="1"
@@ -81,7 +81,7 @@
 					input.trigger="rasterSizeChanged(rasterSize)">
 		</fieldset>
 
-		<fieldset Xif.bind="selectedRaster.value == 'conical'">
+		<fieldset if.bind="selectedRaster.value == 'conical'">
 			<label for="slices">Slices: ${slices}</label>
 			<input type="range"
 					step="1"
@@ -101,7 +101,7 @@
 					max="90"
 					value.bind="rasterAngle"
 					id="rasterAngle"
-					input.trigger="angleChanged(rasterAngle)">
+					input.trigger="rasterAngleChanged(rasterAngle)">
 		</fieldset>
 
 	</section>
