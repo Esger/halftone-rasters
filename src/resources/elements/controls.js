@@ -31,7 +31,7 @@ export class Controls {
 		this._eventAggregator.publish('raster-changed', this.rasters[this.selectedRaster.id].value);
 		this._eventAggregator.publish('raster-size-changed', this.rasterSize);
 		this._eventAggregator.publish('slices-changed', this.slices);
-		this._eventAggregator.publish('angle-changed', this.angle);
+		this._eventAggregator.publish('raster-angle-changed', this.rasterAngle);
 		this._eventAggregator.publish('grayscale-changed', this.grayscale);
 		this._element.addEventListener('transitionend', _ => setTimeout(_ => {
 			this.dimmed = true, 5000;
@@ -104,8 +104,8 @@ export class Controls {
 	}
 
 	angleChanged(angle) {
-		this._eventAggregator.publish('angle-changed', angle);
-		this._mySettingsService.saveSettings('angle', angle);
+		this._eventAggregator.publish('raster-angle-changed', angle);
+		this._mySettingsService.saveSettings('raster-angle', angle);
 	}
 
 }

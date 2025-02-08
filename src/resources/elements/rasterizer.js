@@ -8,7 +8,7 @@ export class RasterizerCustomElement {
 	@bindable raster;
 	@bindable rasterSize;
 	@bindable slices;
-	@bindable angle;
+	@bindable rasterAngle;
 
 	constructor(element) {
 		this._element = element;

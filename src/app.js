@@ -21,7 +21,7 @@ export class App {
 		this._rasterSubscription = this._eventAggregator.subscribe('raster-changed', raster => this.raster = raster);
 		this._rasterSizeSubscription = this._eventAggregator.subscribe('raster-size-changed', size => this.rasterSize = size);
 		this._slicesSubscription = this._eventAggregator.subscribe('slices-changed', slices => this.slices = slices);
-		this._angleSubscription = this._eventAggregator.subscribe('angle-changed', angle => this.angle = angle);
+		this._rasterAngleSubscription = this._eventAggregator.subscribe('raster-angle-changed', angle => this.rasterAngle = angle);
 	}
 	detached() {
 		this._mapSubscription.dispose();
@@ -34,6 +34,6 @@ export class App {
 		this._rasterSizeSubscription.dispose();
 		this._slicesSubscription.dispose();
 
-		this._angleSubscription.dispose();
+		this._rasterAngleSubscription.dispose();
 	}
 }

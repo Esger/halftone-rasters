@@ -42,7 +42,7 @@
 				min="4"
 				max="100"
 				value.bind="mapSize"
-				change.trigger="mapSizeChanged(mapSize)">
+				input.trigger="mapSizeChanged(mapSize)">
 		</fieldset>
 
 		<fieldset Xif.bind="selectedRaster.value == 'conical'">
@@ -53,19 +53,7 @@
 				max="100"
 				value.bind="slices"
 				id="slices"
-				change.trigger="slicesChanged(slices)">
-		</fieldset>
-
-		<fieldset Xif.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
-				  data-value="${selectedRaster.value.toLowerCase()}">
-			<label for="angle">Angle: ${angle}°</label>
-			<input type="range"
-				step="15"
-				min="-90"
-				max="90"
-				value.bind="angle"
-				id="angle"
-				change.trigger="angleChanged(angle)">
+				input.trigger="slicesChanged(slices)">
 		</fieldset>
 
 	</section>
@@ -90,7 +78,7 @@
 					min="4"
 					max="100"
 					value.bind="rasterSize"
-					change.trigger="rasterSizeChanged(rasterSize)">
+					input.trigger="rasterSizeChanged(rasterSize)">
 		</fieldset>
 
 		<fieldset Xif.bind="selectedRaster.value == 'conical'">
@@ -101,21 +89,19 @@
 					max="100"
 					value.bind="slices"
 					id="slices"
-					change.trigger="slicesChanged(slices)">
+					input.trigger="slicesChanged(slices)">
 		</fieldset>
 
-		<template if.bind="selectedMap.value !== 'image'">
-		</template>
 		<fieldset Xif.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
 				  data-value="${selectedRaster.value.toLowerCase()}">
-			<label for="angle">Angle: ${angle}°</label>
+			<label for="rasterAngle">Angle: ${rasterAngle}°</label>
 			<input type="range"
-						step="15"
-						min="-90"
-						max="90"
-						value.bind="angle"
-						id="angle"
-						change.trigger="angleChanged(angle)">
+					step=".1"
+					min="0"
+					max="90"
+					value.bind="rasterAngle"
+					id="rasterAngle"
+					input.trigger="angleChanged(rasterAngle)">
 		</fieldset>
 
 	</section>

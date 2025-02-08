@@ -46,7 +46,7 @@ rasterizer {
 		background-repeat  : var(--patternRepeat);
 		background-size    : var(--rasterSize);
 		background-position: var(--patternPosition);
-		rotate             : var(--angle);
+		rotate             : var(--rasterAngle);
 	}
 
 	&.grayscale {
@@ -110,9 +110,9 @@ rasterizer {
 	}
 
 	&.map--image::after {
-		--sz        : max(4px, var(--mouseX) / 10);
-		--rasterSize: var(--sz) var(--sz);
-		--angle     : var(--angleMouseY);
+		--sz         : max(4px, var(--mouseX) / 10);
+		--rasterSize : var(--sz) var(--sz);
+		--rasterAngle: var(--angleMouseY);
 	}
 
 	&.sharpened {
@@ -133,8 +133,8 @@ rasterizer {
 	}
 
 	&.map--image::after {
-		--rasterSize: 100% max(4px, var(--mouseX) / 10);
-		--angle     : var(--angleMouseY);
+		--rasterSize : 100% max(4px, var(--mouseX) / 10);
+		--rasterAngle: var(--angleMouseY);
 	}
 
 	&.sharpened {
@@ -152,7 +152,6 @@ rasterizer {
 
 	&.map--image::after {
 		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-		--angle  : 0;
 	}
 
 	&.sharpened {
@@ -168,10 +167,10 @@ rasterizer {
 		--pattern        : repeating-conic-gradient(#777 0, #fff var(--halfSliceAngle), #777 var(--sliceAngle));
 	}
 
-	&.map--image::after {
+	/* &.map--image::after {
 		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-		--angle  : 0;
-	}
+		--rasterAngle  : 0;
+	} */
 
 	&.sharpened {
 		--sharpen: blur(2px) contrast(5);
