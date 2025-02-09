@@ -29,14 +29,24 @@ controls {
 		}
 	}
 
-	h1 {
+	h1,
+	h2 {
 		color      : white;
+		font-family: fantasy, sans-serif;
+		font-weight: bold;
+		text-shadow: 3px 6px 2px black;
+	}
+
+	h1 {
 		font-size  : 3rem;
 		line-height: 3rem;
 		margin     : 1rem 1rem 0;
-		text-shadow: 3px 6px 2px black;
-		font-family: fantasy, sans-serif;
-		font-weight: bold;
+	}
+
+	h2 {
+		font-size  : 2rem;
+		line-height: 2rem;
+		margin     : 0 1rem 1rem;
 	}
 
 	fieldset {
@@ -96,6 +106,11 @@ controls {
 		line-height: 1.4rem;
 		margin     : 1rem;
 		max-width  : 40ch;
+
+		a {
+			color          : inherit;
+			text-decoration: wavy underline;
+		}
 	}
 }
 
