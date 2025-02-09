@@ -89,32 +89,9 @@ export class Controls {
 		this._mySettingsService.saveSettings('file', this.selectedFile);
 	}
 
-	grayscaleChanged(grayscale) {
-		this._eventAggregator.publish('grayscale-changed', grayscale);
-		this._mySettingsService.saveSettings('grayscale', grayscale);
-	}
-
-	mapSizeChanged(size) {
-		this._eventAggregator.publish('map-size-changed', size);
-		this._mySettingsService.saveSettings('map-size', size);
-	}
-	rasterSizeChanged(size) {
-		this._eventAggregator.publish('raster-size-changed', size);
-		this._mySettingsService.saveSettings('raster-size', size);
-	}
-
-	mapSlicesChanged(slices) {
-		this._eventAggregator.publish('map-slices-changed', slices);
-		this._mySettingsService.saveSettings('map-slices', slices);
-	}
-	rasterSlicesChanged(slices) {
-		this._eventAggregator.publish('raster-slices-changed', slices);
-		this._mySettingsService.saveSettings('raster-slices', slices);
-	}
-
-	rasterAngleChanged(angle) {
-		this._eventAggregator.publish('raster-angle-changed', angle);
-		this._mySettingsService.saveSettings('raster-angle', angle);
+	settingChanged(setting, value) {
+		this._eventAggregator.publish(setting + '-changed', value);
+		this._mySettingsService.saveSettings(setting, value);
 	}
 
 }

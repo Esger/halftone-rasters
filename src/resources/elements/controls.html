@@ -29,7 +29,7 @@
 			<input type="checkbox"
 				data-grayscale.bind="grayscale"
 				checked.bind="grayscale"
-				change.trigger="grayscaleChanged(grayscale)"
+				change.trigger="settingChanged('grayscale', grayscale)"
 				id="grayscale">
 		</fieldset>
 
@@ -42,7 +42,7 @@
 				min=".5"
 				max="100"
 				value.bind="mapSize"
-				input.trigger="mapSizeChanged(mapSize)">
+				input.trigger="settingChanged('map-size', mapSize)">
 		</fieldset>
 
 		<fieldset if.bind="selectedRaster.value == 'conical'">
@@ -53,7 +53,7 @@
 				max="100"
 				value.bind="mapSlices"
 				id="mapSlices"
-				input.trigger="mapSlicesChanged(mapSlices)">
+				input.trigger="settingChanged('map-slices', mapSlices)">
 		</fieldset>
 
 	</section>
@@ -78,7 +78,7 @@
 					min=".5"
 					max="100"
 					value.bind="rasterSize"
-					input.trigger="rasterSizeChanged(rasterSize)">
+					input.trigger="settingChanged( 'raster-size', rasterSize)">
 		</fieldset>
 
 		<fieldset if.bind="selectedRaster.value == 'conical'">
@@ -89,7 +89,7 @@
 					max="100"
 					value.bind="rasterSlices"
 					id="rasterSlices"
-					input.trigger="rasterSlicesChanged(rasterSlices)">
+					input.trigger="settingChanged( 'raster-slices', rasterSlices)">
 		</fieldset>
 
 		<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"
@@ -101,7 +101,7 @@
 					max="90"
 					value.bind="rasterAngle"
 					id="rasterAngle"
-					input.trigger="rasterAngleChanged(rasterAngle)">
+					input.trigger="settingChanged('raster-angle', rasterAngle)">
 		</fieldset>
 
 	</section>
