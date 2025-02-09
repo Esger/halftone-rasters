@@ -17,8 +17,8 @@ rasterizer {
 	height               : 100%;
 	background-blend-mode: multiply;
 	--contrast           : 80;
-	--rasterSize         : 2em;
-	--mapSize            : 2em;
+	--mapSize            : 100%;
+	--rasterSize         : 100%;
 	--grayscale          : grayscale(0);
 	--sharpen            : blur(0);
 	--filter             : var(--grayscale) contrast(var(--contrast)) var(--sharpen);
@@ -82,15 +82,18 @@ rasterizer {
 	--map      : repeating-radial-gradient(circle, #777, #fff, #777 var(--mapSize));
 
 	&::before {
-		background-size: 100% 100% !important;
+		background-size: 100% 100%;
 	}
 }
 
-.map--conical::before {
+.map--conical {
 	--mapRepeat  : no-repeat;
 	--mapPosition: var(--mapCenter);
-	--map        : conic-gradient(#fff, #888, #fff);
-	translate    : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+	--map        : repeating-conic-gradient(#777 0, #fff var(--mapHalfSliceAngle), #777 var(--mapSliceAngle));
+
+	&::before {
+		background-size: 100% 100%;
+	}
 }
 
 .map--image {
@@ -154,7 +157,7 @@ rasterizer {
 	--raster        : repeating-radial-gradient(circle, #777, #fff, #777 var(--rasterSize));
 
 	&::after {
-		background-size: 200% 200% !important;
+		background-size: 200% 200%;
 		translate      : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 	}
 
@@ -164,17 +167,14 @@ rasterizer {
 }
 
 .raster--conical {
-	&::after {
-		--rasterRepeat  : no-repeat;
-		--rasterPosition: center;
-		--rasterSize    : 100%;
-		--raster        : repeating-conic-gradient(#777 0, #fff var(--halfSliceAngle), #777 var(--sliceAngle));
-	}
+	--rasterRepeat  : no-repeat;
+	--rasterPosition: center;
+	--raster        : repeating-conic-gradient(#777 0, #fff var(--rasterHalfSliceAngle), #777 var(--rasterSliceAngle));
 
-	/* &.map--image::after {
-		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-		--rasterAngle  : 0;
-	} */
+	&::after {
+		background-size: 200% 200%;
+		translate      : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+	}
 
 	&.sharpened {
 		--sharpen: blur(2px) contrast(5);

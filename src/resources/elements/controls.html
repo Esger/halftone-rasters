@@ -46,14 +46,14 @@
 		</fieldset>
 
 		<fieldset if.bind="selectedRaster.value == 'conical'">
-			<label for="slices">Slices: ${slices}</label>
+			<label for="mapSlices">Slices: ${mapSlices}</label>
 			<input type="range"
 				step="1"
 				min="1"
 				max="100"
-				value.bind="slices"
-				id="slices"
-				input.trigger="slicesChanged(slices)">
+				value.bind="mapSlices"
+				id="mapSlices"
+				input.trigger="mapSlicesChanged(mapSlices)">
 		</fieldset>
 
 	</section>
@@ -70,7 +70,7 @@
 			</select>
 		</fieldset>
 
-		<fieldset>
+		<fieldset if.bind="!['conical'].includes(selectedRaster.value.toLowerCase())">
 			<label for="rasterSize">Size: ${rasterSize}vmax</label>
 			<input type="range"
 					id="rasterSize"
@@ -82,14 +82,14 @@
 		</fieldset>
 
 		<fieldset if.bind="selectedRaster.value == 'conical'">
-			<label for="slices">Slices: ${slices}</label>
+			<label for="rasterSlices">Slices: ${rasterSlices}</label>
 			<input type="range"
 					step="1"
 					min="1"
 					max="100"
-					value.bind="slices"
-					id="slices"
-					input.trigger="slicesChanged(slices)">
+					value.bind="rasterSlices"
+					id="rasterSlices"
+					input.trigger="rasterSlicesChanged(rasterSlices)">
 		</fieldset>
 
 		<fieldset if.bind="['lined','dotted'].includes(selectedRaster.value.toLowerCase())"

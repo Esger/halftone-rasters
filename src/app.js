@@ -16,24 +16,24 @@ export class App {
 			this.fileUrl = fileUrl;
 		});
 		this._mapSizeSubscription = this._eventAggregator.subscribe('map-size-changed', size => this.mapSize = size);
+		this._mapSlicesSubscription = this._eventAggregator.subscribe('map-slices-changed', slices => this.mapSlices = slices);
 		this._grayscaleSubscription = this._eventAggregator.subscribe('grayscale-changed', grayscale => this.grayscale = grayscale);
 
 		this._rasterSubscription = this._eventAggregator.subscribe('raster-changed', raster => this.raster = raster);
 		this._rasterSizeSubscription = this._eventAggregator.subscribe('raster-size-changed', size => this.rasterSize = size);
-		this._slicesSubscription = this._eventAggregator.subscribe('slices-changed', slices => this.slices = slices);
+		this._rasterSlicesSubscription = this._eventAggregator.subscribe('raster-slices-changed', slices => this.rasterSlices = slices);
 		this._rasterAngleSubscription = this._eventAggregator.subscribe('raster-angle-changed', angle => this.rasterAngle = angle);
 	}
 	detached() {
 		this._mapSubscription.dispose();
 		this._fileChangedSubscription.dispose();
 		this._mapSizeSubscription.dispose();
-
-
+		this._mapSlicesSubscription.dispose();
 		this._grayscaleSubscription.dispose();
+
 		this._rasterSubscription.dispose();
 		this._rasterSizeSubscription.dispose();
-		this._slicesSubscription.dispose();
-
+		this._rasterSlicesSubscription.dispose();
 		this._rasterAngleSubscription.dispose();
 	}
 }

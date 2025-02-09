@@ -5,8 +5,10 @@
 		  style="--mapSize: ${mapSize}vmax;
 		  		--image: url(${fileUrl});
 		  		--rasterSize: ${rasterSize}vmax;
-		  		--sliceAngle: ${360 / slices}deg;
-				--halfSliceAngle: ${180 / slices}deg;
+		  		--mapSliceAngle: ${360 / mapSlices}deg;
+				--mapHalfSliceAngle: ${180 / mapSlices}deg;
+		  		--rasterSliceAngle: ${360 / rasterSlices}deg;
+				--rasterHalfSliceAngle: ${180 / rasterSlices}deg;
 				--rasterAngle: ${rasterAngle}deg;
 		  		--contrast: ${contrast}; 
 				--angleMouseY: ${mouseY}deg;
@@ -15,6 +17,8 @@
 				--x: ${mouseX};
 				--y: ${mouseY};"
 		  touchmove.trigger="touchMoved($event)"
-		  mousemove.trigger="mouseMoved($event)">
+		  mousemove.trigger="mouseMoved($event)"
+		  data-raster-slices.bind="rasterSlices"
+		  data-map-slices.bind="mapSlices">
 	<require from="./rasterizer.css"></require>
 </template>
