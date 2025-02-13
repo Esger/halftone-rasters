@@ -1,17 +1,19 @@
 <template class="raster--${raster} 
+				${rasterInteractive ? 'raster--interactive' : ''}
 				map--${map} 
+				${mapInteractive ? 'map--interactive' : ''}
 				${grayscale ? 'grayscale' : ''} 
 				${sharpenEdges ? 'sharpened' : ''}"
 		  style="--mapSize: ${mapSize}vmax;
 		  		--image: url(${fileUrl});
-		  		--rasterSize: ${rasterSize}vmax;
+		  		--rasterSize: ${rasterInteractive ? mouseX + 'px' : rasterSize + 'vmax'};
 		  		--mapSliceAngle: ${360 / mapSlices}deg;
 				--mapHalfSliceAngle: ${180 / mapSlices}deg;
 		  		--rasterSliceAngle: ${360 / rasterSlices}deg;
 				--rasterHalfSliceAngle: ${180 / rasterSlices}deg;
 				--rasterAngle: ${rasterAngle}deg;
 		  		--contrast: ${contrast}; 
-				--angleMouseY: ${mouseY}deg;
+				--angleMouseY: ${mouseY | yToAngle};
 				--mouseX: ${mouseX}px;
 				--mouseY: ${mouseY}px;
 				--x: ${mouseX};
@@ -21,4 +23,5 @@
 		  data-raster-slices.bind="rasterSlices"
 		  data-map-slices.bind="mapSlices">
 	<require from="./rasterizer.css"></require>
+	<require from="../value-converters/y-to-angle"></require>
 </template>

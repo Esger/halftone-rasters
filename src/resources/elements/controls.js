@@ -29,11 +29,13 @@ export class Controls {
 		this._eventAggregator.publish('map-size-changed', this.mapSize);
 		this._eventAggregator.publish('map-slices-changed', this.mapSlices);
 		this._eventAggregator.publish('grayscale-changed', this.grayscale);
+		this._eventAggregator.publish('interactive-map-changed', this.interactiveMap);
 
 		this._eventAggregator.publish('raster-changed', this.rasters[this.selectedRaster.id].value);
 		this._eventAggregator.publish('raster-size-changed', this.rasterSize);
 		this._eventAggregator.publish('raster-slices-changed', this.rasterSlices);
 		this._eventAggregator.publish('raster-angle-changed', this.rasterAngle);
+		this._eventAggregator.publish('interactive-raster-changed', this.interactiveRaster);
 
 		this._element.addEventListener('transitionend', _ => setTimeout(_ => {
 			this.dimmed = true, 5000;
@@ -53,6 +55,9 @@ export class Controls {
 		this.mapSlices = parseInt(this._mySettingsService.getSettings('map-slices'), 10) || 69;
 		this._mySettingsService.saveSettings('map-slices', this.mapSlices);
 
+		this.interactiveMap = this._mySettingsService.getSettings('interactive-map') || false;
+		this._mySettingsService.saveSettings('interactive-map', this.interactiveMap);
+
 		const rasterId = parseInt(this._mySettingsService.getSettings('raster'), 10) || 0;
 		this.selectedRaster = this.rasters[rasterId];
 		this._mySettingsService.saveSettings('raster', rasterId);
@@ -68,6 +73,9 @@ export class Controls {
 
 		this.grayscale = this._mySettingsService.getSettings('grayscale') || false;
 		this._mySettingsService.saveSettings('grayscale', this.grayscale);
+
+		this.interactiveRaster = this._mySettingsService.getSettings('interactive-raster') || false;
+		this._mySettingsService.saveSettings('interactive-raster', this.interactiveRaster);
 	}
 
 	rasterChanged(raster) {
@@ -90,6 +98,18 @@ export class Controls {
 	}
 
 	settingChanged(setting, value) {
+		switch (setting) {
+			case 'interactive-map':
+				value && (this.interactiveRaster = false);
+				this._eventAggregator.publish('interactive-raster-changed', this.interactiveRaster);
+				this._mySettingsService.saveSettings('interactive-raster', this.interactiveRaster);
+				break;
+			case 'interactive-raster':
+				value && (this.interactiveMap = false);
+				this._eventAggregator.publish('interactive-map-changed', this.interactiveMap);
+				this._mySettingsService.saveSettings('interactive-map', this.interactiveMap);
+				break;
+		}
 		this._eventAggregator.publish(setting + '-changed', value);
 		this._mySettingsService.saveSettings(setting, value);
 	}

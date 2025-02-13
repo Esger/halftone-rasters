@@ -4,15 +4,20 @@ export class RasterizerCustomElement {
 	@bindable map;
 	@bindable mapSize;
 	@bindable mapSlices;
+	@bindable mapInteractive;
 	@bindable fileUrl;
 	@bindable grayscale;
 	@bindable raster;
 	@bindable rasterSize;
 	@bindable rasterSlices;
 	@bindable rasterAngle;
+	@bindable rasterInteractive;
 
 	constructor(element) {
 		this._element = element;
+		this._constrain = false;
+		this.mouseX = 0;
+		this.mouseY = 0;
 	}
 
 	attached() {
@@ -35,7 +40,6 @@ export class RasterizerCustomElement {
 	}
 
 	mouseMoved(event) {
-		console.log(this._constrain)
 		if (this._constrain) {
 			if (Math.abs(event.movementX) > Math.abs(event.movementY))
 				this.mouseX += event.movementX;

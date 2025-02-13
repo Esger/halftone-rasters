@@ -121,19 +121,13 @@ rasterizer {
 		rotate         : var(--rasterAngle);
 	}
 
-	/* &.map--image::after {
-		--sz         : max(4px, var(--mouseX) / 10);
-		--rasterSize : var(--sz) var(--sz);
-		--rasterAngle: var(--angleMouseY);
-	} */
+	&.raster--interactive {
+		--rasterAngle: var(--angleMouseY) !important;
+	}
 
 	&.sharpened {
 		--sharpen: blur(2px) contrast(5);
 	}
-
-	/* &.raster--dotted-x::after {
-		rotate: 45deg;
-	} */
 }
 
 .raster--lined {
@@ -144,6 +138,10 @@ rasterizer {
 	&::after {
 		background-size: 100% calc(2 * var(--rasterSize));
 		rotate         : var(--rasterAngle);
+	}
+
+	&.raster--interactive {
+		--rasterAngle: var(--angleMouseY) !important;
 	}
 
 	&.sharpened {
@@ -158,7 +156,10 @@ rasterizer {
 
 	&::after {
 		background-size: 200% 200%;
-		translate      : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+	}
+
+	&.raster--interactive::after {
+		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 	}
 
 	&.sharpened {
@@ -173,7 +174,10 @@ rasterizer {
 
 	&::after {
 		background-size: 200% 200%;
-		translate      : calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+	}
+
+	&.raster--interactive::after {
+		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 	}
 
 	&.sharpened {
