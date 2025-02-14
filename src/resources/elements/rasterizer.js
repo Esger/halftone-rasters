@@ -1,23 +1,21 @@
 import { inject, bindable } from 'aurelia-framework';
 @inject(Element)
 export class RasterizerCustomElement {
-	@bindable map;
-	@bindable mapSize;
-	@bindable mapSlices;
-	@bindable mapInteractive;
-	@bindable fileUrl;
-	@bindable grayscale;
-	@bindable raster;
-	@bindable rasterSize;
-	@bindable rasterSlices;
-	@bindable rasterAngle;
-	@bindable rasterInteractive;
 
 	constructor(element) {
 		this._element = element;
 		this._constrain = false;
 		this.mouseX = 0;
 		this.mouseY = 0;
+		this.sheets = [
+			{
+				id: 0,
+				name: 'map'
+			},
+			{
+				name: 'raster'
+			}
+		]
 	}
 
 	attached() {
@@ -55,6 +53,7 @@ export class RasterizerCustomElement {
 		this.mouseX = event.touches[0].clientX;
 		this.mouseY = event.touches[0].clientY;
 	}
+
 	sizeChanged(newSize) {
 		const size = parseInt(newSize, 10);
 		this.sharpenEdges = size > 20;

@@ -1,12 +1,14 @@
 controls {
+	position        : absolute;
+	top             : 0;
+	right           : 0;
 	font-size       : 1.4rem;
 	font-family     : monospace;
 	isolation       : isolate;
-	grid-area       : 1/1;
 	width           : fit-content;
 	height          : fit-content;
 	padding         : 2rem;
-	border-radius   : 0 0 4rem;
+	border-radius   : 0 0 0 4rem;
 	display         : flex;
 	flex-direction  : column-reverse;
 	translate       : 0 calc(-100% + 7rem);
@@ -55,7 +57,7 @@ controls {
 		align-items: center;
 
 		* {
-			flex     : 0 0 12rem;
+			flex     : 0 0 15ch;
 			font-size: inherit;
 		}
 	}

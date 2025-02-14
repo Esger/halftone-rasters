@@ -1,0 +1,94 @@
+<template class="${selectedMap.value.toLowerCase()}
+				${grayscale ? 'grayscale' : ''}
+				${interactive ? 'interactive' : ''}"
+		  style="--size: ${size}vmax;
+				--angle: ${angle}deg;
+		  		--image: url(${fileUrl});
+				--sliceAngle: ${360 / slices}deg;
+				--halfSliceAngle: ${180 / slices}deg;">
+	<require from="./raster.css"></require>
+	<require from="../value-converters/y-to-angle"></require>
+
+	<section portal=".controls">
+		<fieldset>
+			<let setting-name.bind="'map-' + model.name"></let>
+			<label for.one-time="settingName">Map</label>
+			<select value.bind="selectedMap"
+					id.one-time="settingName"
+					change.delegate="mapChanged(selectedMap)">
+				<option repeat.for="map of maps"
+						model.bind="map">${map.value}
+				</option>
+			</select>
+		</fieldset>
+
+		<fieldset if.bind="selectedMap.value == 'image'">
+			<let setting-name.bind="'file-' + model.name"></let>
+			<label for.one-time="settingName">Image</label>
+			<input type="file"
+					id.one-time="settingName"
+					change.delegate="fileChanged($event)"
+					accept="image/*"></label>
+			<label for.one-time="settingName">${selectedFile || 'choose file'}</label>
+		</fieldset>
+
+		<fieldset if.bind="selectedMap.value == 'image'">
+			<let setting-name.bind="'grayscale-' + model.name"></let>
+			<label for.one-time="settingName">Grayscale</label>
+			<input type="checkbox"
+					data-grayscale.bind="grayscale"
+					checked.bind="grayscale"
+					change.delegate="settingChanged('grayscale', grayscale)"
+					id.one-time="settingName">
+		</fieldset>
+
+		<fieldset>
+			<let setting-name.bind="'interactive-' + model.name"></let>
+			<label for.one-time="settingName">Interactive</label>
+			<input type="checkbox"
+					checked.bind="interactive"
+					change.delegate="settingChanged('interactive', interactive)"
+					id.one-time="settingName">
+		</fieldset>
+
+		<fieldset if.bind="!['conical'].includes(selectedMap.value.toLowerCase())">
+			<let setting-name.bind="'size-' + model.name"></let>
+			<label for.one-time="settingName">Size: ${size & throttle}%</label>
+			<input type="range"
+					id.one-time="settingName"
+					autofocus
+					step=".1"
+					min=".5"
+					max="100"
+					value.bind="size"
+					change.delegate="settingChanged('size', size)">
+		</fieldset>
+
+		<fieldset if.bind="selectedMap.value == 'conical'">
+			<let setting-name.bind="'slices-' + model.name"></let>
+			<label for.one-time="settingName">Slices: ${slices & throttle}</label>
+			<input type="range"
+					step="1"
+					min="1"
+					max="100"
+					value.bind="slices"
+					id.bind="settingName"
+					input.delegate="settingChanged('slices', slices)">
+		</fieldset>
+
+		<fieldset if.bind="['lined','dotted','image'].includes(selectedMap.value.toLowerCase())"
+				  data-value="${selectedMap.value.toLowerCase()}">
+			<let setting-name.bind="'angle-' + model.name"></let>
+			<label for.one-time="settingName">Angle: ${angle & throttle}°</label>
+			<input type="range"
+					step=".1"
+					min="0"
+					max="90"
+					value.bind="angle"
+					id.one-time="settingName"
+					change.delegate="settingChanged('angle', angle)">
+		</fieldset>
+
+	</section>
+
+</template>
