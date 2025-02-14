@@ -29,15 +29,6 @@ rasterizer {
 	}
 }
 
-.map--radial {
-	--mapRepeat: no-repeat;
-	--map      : repeating-radial-gradient(circle, #777, #fff, #777 var(--mapSize));
-
-	&::before {
-		background-size: 100% 100%;
-	}
-}
-
 .map--conical {
 	--mapRepeat  : no-repeat;
 	--mapPosition: var(--mapCenter);
@@ -60,24 +51,6 @@ rasterizer {
 
 	&.grayscale::before {
 		filter: brightness(1.1) blur(min(var(--rasterSize), .1vmin));
-	}
-}
-
-.raster--radial {
-	--rasterRepeat  : no-repeat;
-	--rasterPosition: center;
-	--raster        : repeating-radial-gradient(circle, #777, #fff, #777 var(--rasterSize));
-
-	&::after {
-		background-size: 200% 200%;
-	}
-
-	&.raster--interactive::after {
-		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-	}
-
-	&.sharpened {
-		--sharpen: blur(2px) contrast(5);
 	}
 }
 

@@ -51,7 +51,20 @@ raster {
 		} */
 	}
 
-	&.radial {}
+	&.radial {
+		background-image   : repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
+		background-repeat  : no-repeat;
+		background-position: center;
+		background-size    : 200% 200%;
+
+		/* &.raster--interactive::after {
+			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		}
+
+		&.sharpened {
+			--sharpen: blur(2px) contrast(5);
+		} */
+	}
 
 	&.conical {}
 
