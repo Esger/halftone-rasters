@@ -6,6 +6,9 @@ import { MySettingsService } from '../services/my-settings-service';
 
 export class RasterCustomElement {
 	@bindable model;
+	@bindable mouseX;
+	@bindable mouseY;
+
 	maps = [
 		{ id: 0, value: 'dotted' },
 		{ id: 1, value: 'lined' },
@@ -37,14 +40,11 @@ export class RasterCustomElement {
 		this.slices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10) || 69;
 		this._mySettingsService.saveSettings(this.model.name + '-slices', this.slices);
 
-		this.interactiveMap = this._mySettingsService.getSettings(this.model.name + '-interactive') || false;
-		this._mySettingsService.saveSettings(this.model.name + '-interactive', this.interactiveMap);
+		this.interactive = this._mySettingsService.getSettings(this.model.name + '-interactive') || false;
+		this.settingChanged('interactive', this.interactive);
 
 		this.grayscale = this._mySettingsService.getSettings(this.model.name + '-grayscale') || false;
 		this._mySettingsService.saveSettings(this.model.name + '-grayscale', this.grayscale);
-
-		this.interactiveRaster = this._mySettingsService.getSettings(this.model.name + '-interactive') || false;
-		this._mySettingsService.saveSettings(this.model.name + '-interactive', this.interactiveRaster);
 	}
 
 	mapChanged(map) {
@@ -62,14 +62,23 @@ export class RasterCustomElement {
 		if (typeof value !== 'boolean') {
 			value = parseInt(value, 10);
 		}
-		switch (setting) {
-			case 'interactive-map':
-				this._mySettingsService.saveSettings('interactive-raster', value);
-				break;
-			case 'interactive-raster':
-				this._mySettingsService.saveSettings('interactive-map', value);
-				break;
+		if (setting === 'interactive') {
+			if (!this.value) {
+				this.size = 100;
+				this.angle = 0;
+			}
 		}
 		this._mySettingsService.saveSettings(this.model.name + '-' + setting, value);
+	}
+
+	mouseXChanged(value) {
+		if (!this.interactive) return;
+		if (['radial', 'conical'].includes(this.selectedMap.value.toLowerCase())) return;
+		this.size = Math.round(10 * value / window.innerWidth * 100) / 10;
+	}
+
+	mouseYChanged(value) {
+		if (!this.interactive) return;
+		this.angle = Math.round(10 * value / window.innerHeight * 90) / 10;
 	}
 }

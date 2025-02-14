@@ -15,5 +15,7 @@
 	<require from="./raster"></require>
 
 	<raster repeat.for="sheet of sheets"
-			model.bind="sheet"></raster>
+			model.bind="sheet"
+			mouse-x.bind="mouseX"
+			mouse-y.bind="mouseY"></raster>
 </template>

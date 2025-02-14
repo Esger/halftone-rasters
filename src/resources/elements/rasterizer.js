@@ -53,6 +53,7 @@ export class RasterizerCustomElement {
 		this.mouseX = event.touches[0].clientX;
 		this.mouseY = event.touches[0].clientY;
 	}
+
 	sizeChanged(newSize) {
 		const size = parseInt(newSize, 10);
 		this.sharpenEdges = size > 20;

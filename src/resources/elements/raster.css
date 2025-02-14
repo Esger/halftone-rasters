@@ -20,10 +20,8 @@ raster {
 		background-position: center;
 		background-size    : var(--size) var(--size);
 		rotate             : var(--angle);
-		/* &.raster--interactive {
-			--rasterAngle     : var(--angleMouseY) !important;
-		}
-		&.sharpened {
+
+		/* &.sharpened {
 			--sharpen         : blur(2px) contrast(5);
 		} */
 	}
@@ -35,12 +33,7 @@ raster {
 		background-size    : 100% var(--size);
 		rotate             : var(--angle);
 
-		/* &.raster--interactive {
-			--rasterAngle: var(--angleMouseY) !important;
-			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-		}
-
-		&.sharpened {
+		/* &.sharpened {
 			--sharpen: blur(.5px) contrast(2);
 		} */
 	}
@@ -51,11 +44,11 @@ raster {
 		background-position: center;
 		background-size    : 200% 200%;
 
-		/* &.raster--interactive::after {
+		&.interactive {
 			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 		}
 
-		&.sharpened {
+		/* &.sharpened {
 			--sharpen: blur(2px) contrast(5);
 		} */
 	}
@@ -66,20 +59,20 @@ raster {
 		background-position: center;
 		background-size    : 200% 200%;
 
-		/* &.raster--interactive::after {
+		&.interactive {
 			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
 		}
 
-		&.sharpened {
+		/* &.sharpened {
 			--sharpen: blur(2px) contrast(5);
 		} */
 	}
 
 	&.image {
 		background-image   : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
-		background-repeat  : no-repeat;
 		background-position: center center;
-		background-size    : contain;
+		background-size    : var(--size, 100%);
+		rotate             : var(--angle);
 		filter             : blur(min(var(--size), .1vmin));
 
 		&.grayscale {
