@@ -16,7 +16,6 @@ export class RasterizerCustomElement {
 			// 	name: 'raster'
 			// }
 		]
-		console.log(this.sheets);
 	}
 
 	attached() {

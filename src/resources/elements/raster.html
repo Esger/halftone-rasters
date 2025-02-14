@@ -11,9 +11,10 @@
 
 	<section portal=".controls">
 		<fieldset>
-			<label for.one-time="'map-' + model.name">Map</label>
+			<let setting-name.bind="'map-' + model.name"></let>
+			<label for.one-time="settingName">Map</label>
 			<select value.bind="selectedMap"
-					id.one-time="'map-' + model.name"
+					id.one-time="settingName"
 					change.delegate="mapChanged(selectedMap)">
 				<option repeat.for="map of maps"
 						model.bind="map">${map.value}
@@ -22,64 +23,70 @@
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'image'">
-			<label for.one-time="'file-' + model.name">Image</label>
+			<let setting-name.bind="'file-' + model.name"></let>
+			<label for.one-time="settingName">Image</label>
 			<input type="file"
-					id.one-time="'file-' + model.name"
+					id.one-time="settingName"
 					change.delegate="fileChanged($event)"
 					accept="image/*"></label>
-			<label for.one-time="'file-' + model.name">${selectedFile || 'choose file'}</label>
+			<label for.one-time="settingName">${selectedFile || 'choose file'}</label>
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'image'">
-			<label for.one-time="'grayscale-' + model.name">Grayscale</label>
+			<let setting-name.bind="'grayscale-' + model.name"></let>
+			<label for.one-time="settingName">Grayscale</label>
 			<input type="checkbox"
-					data-grayscale.bind="grayscale"
-					checked.bind="grayscale"
-					change.delegate="settingChanged('grayscale', grayscale)"
-					id.one-time="'grayscale-' + model.name">
+			data-grayscale.bind="grayscale"
+			checked.bind="grayscale"
+			change.delegate="settingChanged('grayscale', grayscale)"
+			id.one-time="settingName">
 		</fieldset>
 
 		<fieldset>
-			<label for.one-time="'interactive-' + model.name">Interactive</label>
+			<let setting-name.bind="'interactive-' + model.name"></let>
+			<label for.one-time="settingName">Interactive</label>
 			<input type="checkbox"
-					checked.bind="interactive"
-					change.delegate="settingChanged('interactive', interactive)"
-					id.one-time="'interactive-' + model.name">
+			checked.bind="interactive"
+			change.delegate="settingChanged('interactive', interactive)"
+			id.one-time="settingName">
 		</fieldset>
 
-		<fieldset if.bind="!['conical', 'image'].includes(selectedMap.value.toLowerCase())">
-			<label for.one-time="'size-' + model.name">Size: ${size & throttle} vmax</label>
+		<fieldset if.bind="!['conical'].includes(selectedMap.value.toLowerCase())">
+			<let setting-name.bind="'size-' + model.name"></let>
+			<label for.one-time="settingName">Size: ${size & throttle}%</label>
 			<input type="range"
-					id.one-time="'size-' + model.name"
-					autofocus
-					step=".5"
-					min=".5"
-					max="100"
-					value.bind="size"
-					change.delegate="settingChanged('size', size)">
+			id.one-time="settingName"
+			autofocus
+			step=".5"
+			min=".5"
+			max="100"
+			value.bind="size"
+			change.delegate="settingChanged('size', size)">
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'conical'">
-			<label for.one-time="'slices-' + model.name">Slices: ${slices & throttle}</label>
+			<let setting-name.bind="'slices-' + model.name"></let>
+			<label for.one-time="settingName">Slices: ${slices & throttle}</label>
 			<input type="range"
-					step="1"
-					min="1"
-					max="100"
-					value.bind="slices"
-					id.bind="'slices-' + model.name"
-					input.delegate="settingChanged('slices', slices)">
+			step="1"
+			min="1"
+			max="100"
+			value.bind="slices"
+			id.bind="settingName"
+			input.delegate="settingChanged('slices', slices)">
 		</fieldset>
 
 		<fieldset if.bind="['lined','dotted'].includes(selectedMap.value.toLowerCase())"
 				  data-value="${selectedMap.value.toLowerCase()}">
-			<label for.one-time="'angle-' + model.name">Angle: ${angle & throttle}°</label>
+			<let setting-name.bind="'angle-' + model.name"></let>
+			<label for.one-time="settingName">Angle: ${angle & throttle}°</label>
 			<input type="range"
 					step=".1"
 					min="0"
 					max="90"
-					disabled.bind="interactiveMap"
+					disabled.bind="interactive"
 					value.bind="angle"
-					id.one-time="'angle-' + model.name"
+					id.one-time="settingName"
 					change.delegate="settingChanged('angle', angle)">
 		</fieldset>
 
