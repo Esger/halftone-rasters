@@ -1,4 +1,4 @@
-<template class="raster--dotted"
+<template class="${selectedMap.value.toLowerCase()}"
 		  style="--size: ${size}vmax;
 				--angle: ${angle}deg;
 		  		--image: url(${fileUrl});
@@ -57,7 +57,7 @@
 					min=".5"
 					max="100"
 					value.bind="size"
-					change.trigger="settingChanged('map-size', size)">
+					change.trigger="settingChanged('size', size)">
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'conical'">
@@ -81,7 +81,7 @@
 					disabled.bind="interactiveMap"
 					value.bind="angle"
 					id.one-time="'angle' + model.name"
-					change.trigger="settingChanged('map-angle', angle)">
+					change.trigger="settingChanged('angle', angle)">
 		</fieldset>
 
 	</section>

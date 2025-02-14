@@ -20,6 +20,7 @@ export class RasterizerCustomElement {
 		this.mouseY = 0;
 		this.sheets = [
 			{
+				id: 0,
 				name: 'map'
 			},
 			// {

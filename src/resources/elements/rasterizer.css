@@ -29,20 +29,6 @@ rasterizer {
 	}
 }
 
-.map--lined {
-	--mapRepeat  : repeat-x;
-	--mapPosition: top;
-	--map        : linear-gradient(90deg, #fff, #777, #fff);
-
-	&::after {
-		background-size: 100% calc(2 * var(--mapSize));
-	}
-
-	/* ::before {
-		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-	} */
-}
-
 .map--radial {
 	--mapRepeat: no-repeat;
 	--map      : repeating-radial-gradient(circle, #777, #fff, #777 var(--mapSize));
@@ -74,44 +60,6 @@ rasterizer {
 
 	&.grayscale::before {
 		filter: brightness(1.1) blur(min(var(--rasterSize), .1vmin));
-	}
-}
-
-.raster--dotted {
-	--rasterRepeat  : repeat;
-	--rasterPosition: center;
-	--raster        : radial-gradient(closest-corner, #777, #fff);
-
-	&::after {
-		background-size: var(--rasterSize) var(--rasterSize);
-		rotate         : var(--rasterAngle);
-	}
-
-	&.raster--interactive {
-		--rasterAngle: var(--angleMouseY) !important;
-	}
-
-	&.sharpened {
-		--sharpen: blur(2px) contrast(5);
-	}
-}
-
-.raster--lined {
-	--rasterRepeat  : repeat-y;
-	--rasterPosition: 0;
-	--raster        : linear-gradient(#fff, #777, #fff);
-
-	&::after {
-		background-size: 100% calc(2 * var(--rasterSize));
-		rotate         : var(--rasterAngle);
-	}
-
-	&.raster--interactive {
-		--rasterAngle: var(--angleMouseY) !important;
-	}
-
-	&.sharpened {
-		--sharpen: blur(.5px) contrast(2);
 	}
 }
 

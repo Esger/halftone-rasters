@@ -24,12 +24,15 @@ export class RasterCustomElement {
 	}
 
 	_getSettings() {
-		const mapId = parseInt(this._mySettingsService.getSettings('map-' + this.model.name), 10) || 0;
+		const mapId = parseInt(this._mySettingsService.getSettings(this.model.name), 10) || 0;
 		this.selectedMap = this.maps[mapId];
 		this._mySettingsService.saveSettings('map-' + this.model.name, mapId);
 
 		this.size = parseInt(this._mySettingsService.getSettings(this.model.name + '-size'), 10) || 32;
 		this._mySettingsService.saveSettings(this.model.name + '-size', this.size);
+
+		this.angle = parseInt(this._mySettingsService.getSettings(this.model.name + '-angle'), 10) || 45;
+		this._mySettingsService.saveSettings(this.model.name + '-angle', this.angle);
 
 		this.mapSlices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10) || 69;
 		this._mySettingsService.saveSettings(this.model.name + '-slices', this.mapSlices);
@@ -47,7 +50,7 @@ export class RasterCustomElement {
 	mapChanged(map) {
 		this.selectedMap = map;
 		this.selectedFile = undefined;
-		this._mySettingsService.saveSettings('map-' + this.model.name, map.id);
+		this._mySettingsService.saveSettings(this.model.name, map.id);
 	}
 
 	fileChanged(event) {
@@ -56,6 +59,7 @@ export class RasterCustomElement {
 	}
 
 	settingChanged(setting, value) {
+		value = parseInt(value, 10);
 		switch (setting) {
 			case 'interactive-map':
 				this._mySettingsService.saveSettings('interactive-raster', value);
@@ -64,6 +68,6 @@ export class RasterCustomElement {
 				this._mySettingsService.saveSettings('interactive-map', value);
 				break;
 		}
-		this._mySettingsService.saveSettings(setting, value);
+		this._mySettingsService.saveSettings(this.model.name + '-' + setting, value);
 	}
 }

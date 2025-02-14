@@ -20,15 +20,36 @@ raster {
 	mix-blend-mode : multiply;
 	background-size: var(--size, 100%);
 
-	&.raster--dotted {
+	&.dotted {
 		background-image   : radial-gradient(closest-corner, #777, #fff);
 		background-repeat  : repeat;
 		background-position: center;
 		background-size    : var(--size) var(--size);
 		rotate             : var(--angle);
+		/* &.raster--interactive {
+			--rasterAngle     : var(--angleMouseY) !important;
+		}
+		&.sharpened {
+			--sharpen         : blur(2px) contrast(5);
+		} */
 	}
 
-	&.lined {}
+	&.lined {
+		background-image   : linear-gradient(#fff, #777, #fff);
+		background-repeat  : repeat-y;
+		background-position: center;
+		background-size    : 100% var(--size);
+		rotate             : var(--angle);
+
+		/* &.raster--interactive {
+			--rasterAngle: var(--angleMouseY) !important;
+			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		}
+
+		&.sharpened {
+			--sharpen: blur(.5px) contrast(2);
+		} */
+	}
 
 	&.radial {}
 
