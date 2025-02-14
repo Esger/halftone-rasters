@@ -54,12 +54,14 @@ export class RasterCustomElement {
 	}
 
 	fileChanged(event) {
+		this.fileUrl = URL.createObjectURL(event.target.files[0]);
 		this.selectedFile = event.target.files[0].name;
-		this._mySettingsService.saveSettings(this.model.name + '-file', this.selectedFile);
 	}
 
 	settingChanged(setting, value) {
-		value = parseInt(value, 10);
+		if (typeof value !== 'boolean') {
+			value = parseInt(value, 10);
+		}
 		switch (setting) {
 			case 'interactive-map':
 				this._mySettingsService.saveSettings('interactive-raster', value);

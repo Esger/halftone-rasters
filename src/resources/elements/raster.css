@@ -1,15 +1,3 @@
-@property --x {
-	syntax       : '<length-percentage>';
-	initial-value: 50vw;
-	inherits     : false
-}
-
-@property --y {
-	syntax       : '<length-percentage>';
-	initial-value: 50vh;
-	inherits     : false
-}
-
 raster {
 	--size          : 100%;
 	--angle         : 0deg;
@@ -21,6 +9,10 @@ raster {
 	margin          : -50vh -50vw;
 	mix-blend-mode  : multiply;
 	background-size : var(--size, 100%);
+
+	&.grayscale {
+		filter: grayscale(1);
+	}
 
 	&.dotted {
 		background-image   : radial-gradient(closest-corner, #777, #fff);
@@ -83,5 +75,15 @@ raster {
 		} */
 	}
 
-	&.image {}
+	&.image {
+		background-image   : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
+		background-repeat  : no-repeat;
+		background-position: center center;
+		background-size    : contain;
+		filter             : blur(min(var(--size), .1vmin));
+
+		&.grayscale {
+			filter: grayscale(1) brightness(1.1) blur(min(var(--size), .1vmin));
+		}
+	}
 }

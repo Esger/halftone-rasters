@@ -17,29 +17,8 @@ rasterizer {
 	height               : 100%;
 	background-blend-mode: multiply;
 	--contrast           : 80;
-	--mapSize            : 100%;
-	--rasterSize         : 100%;
-	--grayscale          : grayscale(0);
 	--sharpen            : blur(0);
+	--grayscale          : grayscale(0);
 	--filter             : var(--grayscale) contrast(var(--contrast)) var(--sharpen);
 	filter               : var(--filter);
-
-	&.grayscale {
-		--grayscale: grayscale(1);
-	}
-}
-
-.map--image {
-	&::before {
-		--mapRepeat  : no-repeat;
-		--mapPosition: 50% 50%;
-		--mapSize    : cover;
-		--map        : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
-		margin       : 0;
-		filter       : blur(min(var(--rasterSize), .1vmin));
-	}
-
-	&.grayscale::before {
-		filter: brightness(1.1) blur(min(var(--rasterSize), .1vmin));
-	}
 }

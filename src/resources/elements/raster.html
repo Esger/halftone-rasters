@@ -1,4 +1,5 @@
-<template class="${selectedMap.value.toLowerCase()}"
+<template class="${selectedMap.value.toLowerCase()}
+				${grayscale ? 'grayscale' : ''}"
 		  style="--size: ${size}vmax;
 				--angle: ${angle}deg;
 		  		--image: url(${fileUrl});
@@ -10,7 +11,7 @@
 
 	<section portal=".controls">
 		<fieldset>
-			<label for="'map-' + model.name">Map</label>
+			<label for.one-time="'map-' + model.name">Map</label>
 			<select value.bind="selectedMap"
 					id.one-time="'map-' + model.name"
 					change.trigger="mapChanged(selectedMap)">
@@ -21,12 +22,12 @@
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'image'">
-			<label for="'file-' + model.name">Image</label>
+			<label for.one-time="'file-' + model.name">Image</label>
 			<input type="file"
 					id.one-time="'file-' + model.name"
 					change.trigger="fileChanged($event)"
 					accept="image/*"></label>
-			<label for="file">${selectedFile || 'choose file'}</label>
+			<label for.one-time="'file-' + model.name">${selectedFile || 'choose file'}</label>
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'image'">
@@ -34,15 +35,15 @@
 			<input type="checkbox"
 					data-grayscale.bind="grayscale"
 					checked.bind="grayscale"
-					change.trigger="settingChanged('grayscale', grayscale)"
+					change.delegate="settingChanged('grayscale', grayscale)"
 					id.one-time="'grayscale-' + model.name">
 		</fieldset>
 
 		<fieldset>
 			<label for.one-time="'interactive-' + model.name">Interactive</label>
 			<input type="checkbox"
-					checked.bind="interactiveRaster"
-					change.trigger="settingChanged('interactive-raster', interactiveRaster)"
+					checked.bind="interactive"
+					change.delegate="settingChanged('interactive', interactive)"
 					id.one-time="'interactive-' + model.name">
 		</fieldset>
 
