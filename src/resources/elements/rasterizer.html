@@ -2,7 +2,6 @@
 				${mapInteractive ? 'map--interactive' : ''}
 				${sharpenEdges ? 'sharpened' : ''}"
 		  style="--contrast: ${contrast}; 
-				--angleMouseY: ${mouseY | yToAngle};
 				--mouseX: ${mouseX}px;
 				--mouseY: ${mouseY}px;
 				--x: ${mouseX};
@@ -11,7 +10,6 @@
 		  mousemove.trigger="mouseMoved($event)"
 		  data-map-slices.bind="slices">
 	<require from="./rasterizer.css"></require>
-	<require from="../value-converters/y-to-angle"></require>
 	<require from="./raster"></require>
 
 	<raster repeat.for="sheet of sheets"
