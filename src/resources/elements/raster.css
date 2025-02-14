@@ -1,0 +1,37 @@
+@property --x {
+	syntax       : '<length-percentage>';
+	initial-value: 50vw;
+	inherits     : false
+}
+
+@property --y {
+	syntax       : '<length-percentage>';
+	initial-value: 50vh;
+	inherits     : false
+}
+
+raster {
+	--rasterSize   : 100%;
+	--rasterAngle  : 0deg;
+	position       : relative;
+	display        : block;
+	grid-area      : 1/1;
+	margin         : -50vh -50vw;
+	mix-blend-mode : multiply;
+	background-size: var(--size, 100%);
+
+	&.raster--dotted {
+		background-image   : radial-gradient(closest-corner, #777, #fff);
+		background-repeat  : repeat;
+		background-position: center;
+		background-size    : var(--size) var(--size);
+	}
+
+	&.lined {}
+
+	&.radial {}
+
+	&.conical {}
+
+	&.image {}
+}

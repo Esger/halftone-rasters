@@ -18,6 +18,15 @@ export class RasterizerCustomElement {
 		this._constrain = false;
 		this.mouseX = 0;
 		this.mouseY = 0;
+		this.sheets = [
+			{
+				name: 'map'
+			},
+			// {
+			// 	name: 'raster'
+			// }
+		]
+		console.log(this.sheets);
 	}
 
 	attached() {

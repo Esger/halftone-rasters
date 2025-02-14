@@ -1,0 +1,89 @@
+<template class="raster--dotted"
+		  style="--size: ${size}vmax;
+		  		--image: url(${fileUrl});
+		  		--rasterSize: ${interactive ? mouseX + 'px' : rasterSize + 'vmax'};
+		  		--mapSliceAngle: ${360 / slices}deg;
+				--mapHalfSliceAngle: ${180 / slices}deg;
+		  		--rasterSliceAngle: ${360 / slices}deg;
+				--rasterHalfSliceAngle: ${180 / slices}deg;
+				--rasterAngle: ${rasterAngle}deg;">
+	<require from="./raster.css"></require>
+	<require from="../value-converters/y-to-angle"></require>
+
+	<section portal=".controls">
+		<fieldset>
+			<label for="map">Map</label>
+			<select value.bind="selectedMap"
+					id="map"
+					change.trigger="mapChanged(selectedMap)">
+				<option repeat.for="map of maps"
+						model.bind="map">${map.value}
+				</option>
+			</select>
+		</fieldset>
+
+		<fieldset if.bind="selectedMap.value == 'image'">
+			<label for="file">Image</label>
+			<input type="file"
+					id="file"
+					change.trigger="fileChanged($event)"
+					accept="image/*"></label>
+			<label for="file">${selectedFile || 'choose file'}</label>
+		</fieldset>
+
+		<fieldset if.bind="selectedMap.value == 'image'">
+			<label for="grayscale">Grayscale</label>
+			<input type="checkbox"
+					data-grayscale.bind="grayscale"
+					checked.bind="grayscale"
+					change.trigger="settingChanged('grayscale', grayscale)"
+					id="grayscale">
+		</fieldset>
+
+		<fieldset>
+			<label for="interactiveRaster">Interactive</label>
+			<input type="checkbox"
+					checked.bind="interactiveRaster"
+					change.trigger="settingChanged('interactive-raster', interactiveRaster)"
+					id="interactiveRaster">
+		</fieldset>
+
+		<fieldset if.bind="!['conical', 'image'].includes(selectedMap.value.toLowerCase())">
+			<label for="size">Size: ${size}vmax</label>
+			<input type="range"
+					id="size"
+					autofocus
+					step=".5"
+					min=".5"
+					max="100"
+					value.bind="size"
+					input.trigger="settingChanged('map-size', size)">
+		</fieldset>
+
+		<fieldset if.bind="selectedMap.value == 'conical'">
+			<label for="mapSlices">Slices: ${mapSlices}</label>
+			<input type="range"
+					step="1"
+					min="1"
+					max="100"
+					value.bind="mapSlices"
+					id="mapSlices"
+					input.trigger="settingChanged('map-slices', mapSlices)">
+		</fieldset>
+
+		<fieldset if.bind="['lined','dotted'].includes(selectedMap.value.toLowerCase())"
+				  data-value="${selectedMap.value.toLowerCase()}">
+			<label for="mapAngle">Angle: ${mapAngle}°</label>
+			<input type="range"
+					step=".1"
+					min="0"
+					max="90"
+					disabled.bind="interactiveMap"
+					value.bind="mapAngle"
+					id="mapAngle"
+					input.trigger="settingChanged('map-angle', mapAngle)">
+		</fieldset>
+
+	</section>
+
+</template>

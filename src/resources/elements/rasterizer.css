@@ -24,42 +24,8 @@ rasterizer {
 	--filter             : var(--grayscale) contrast(var(--contrast)) var(--sharpen);
 	filter               : var(--filter);
 
-	&::before,
-	&::after {
-		position      : relative;
-		content       : '';
-		display       : block;
-		grid-area     : 1/1;
-		margin        : -50vh -50vw;
-		mix-blend-mode: multiply;
-	}
-
-	&::before {
-		background-image   : var(--map);
-		background-repeat  : var(--mapRepeat);
-		background-size    : var(--mapSize);
-		background-position: var(--mapPosition);
-	}
-
-	&::after {
-		background-image   : var(--raster);
-		background-repeat  : var(--rasterRepeat);
-		background-size    : var(--rasterSize);
-		background-position: var(--rasterPosition, 0);
-	}
-
 	&.grayscale {
 		--grayscale: grayscale(1);
-	}
-}
-
-.map--dotted {
-	--mapRepeat  : repeat;
-	--mapPosition: center;
-	--map        : radial-gradient(closest-corner, #777, #fff);
-
-	&::before {
-		background-size: var(--mapSize) var(--mapSize);
 	}
 }
 
