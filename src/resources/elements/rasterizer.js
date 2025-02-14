@@ -12,9 +12,9 @@ export class RasterizerCustomElement {
 				id: 0,
 				name: 'map'
 			},
-			// {
-			// 	name: 'raster'
-			// }
+			{
+				name: 'raster'
+			}
 		]
 	}
 
