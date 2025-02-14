@@ -11,8 +11,8 @@
 }
 
 raster {
-	--rasterSize   : 100%;
-	--rasterAngle  : 0deg;
+	--size         : 100%;
+	--angle        : 0deg;
 	position       : relative;
 	display        : block;
 	grid-area      : 1/1;
@@ -25,6 +25,7 @@ raster {
 		background-repeat  : repeat;
 		background-position: center;
 		background-size    : var(--size) var(--size);
+		rotate             : var(--angle);
 	}
 
 	&.lined {}

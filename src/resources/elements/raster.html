@@ -1,12 +1,12 @@
 <template class="raster--dotted"
 		  style="--size: ${size}vmax;
+				--angle: ${angle}deg;
 		  		--image: url(${fileUrl});
 		  		--rasterSize: ${interactive ? mouseX + 'px' : rasterSize + 'vmax'};
 		  		--mapSliceAngle: ${360 / slices}deg;
 				--mapHalfSliceAngle: ${180 / slices}deg;
 		  		--rasterSliceAngle: ${360 / slices}deg;
-				--rasterHalfSliceAngle: ${180 / slices}deg;
-				--rasterAngle: ${rasterAngle}deg;">
+				--rasterHalfSliceAngle: ${180 / slices}deg;">
 	<require from="./raster.css"></require>
 	<require from="../value-converters/y-to-angle"></require>
 
@@ -49,15 +49,15 @@
 		</fieldset>
 
 		<fieldset if.bind="!['conical', 'image'].includes(selectedMap.value.toLowerCase())">
-			<label for="size">Size: ${size}vmax</label>
+			<label for.one-time="'size' + model.name">Size: ${size}vmax</label>
 			<input type="range"
-					id="size"
+					id.one-time="'size' + model.name"
 					autofocus
 					step=".5"
 					min=".5"
 					max="100"
 					value.bind="size"
-					input.trigger="settingChanged('map-size', size)">
+					change.trigger="settingChanged('map-size', size)">
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'conical'">
@@ -73,15 +73,15 @@
 
 		<fieldset if.bind="['lined','dotted'].includes(selectedMap.value.toLowerCase())"
 				  data-value="${selectedMap.value.toLowerCase()}">
-			<label for="mapAngle">Angle: ${mapAngle}°</label>
+			<label for.one-time="'angle' + model.name">Angle: ${angle}°</label>
 			<input type="range"
 					step=".1"
 					min="0"
 					max="90"
 					disabled.bind="interactiveMap"
-					value.bind="mapAngle"
-					id="mapAngle"
-					input.trigger="settingChanged('map-angle', mapAngle)">
+					value.bind="angle"
+					id.one-time="'angle' + model.name"
+					change.trigger="settingChanged('map-angle', angle)">
 		</fieldset>
 
 	</section>

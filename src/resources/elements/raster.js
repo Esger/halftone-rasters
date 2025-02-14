@@ -58,12 +58,10 @@ export class RasterCustomElement {
 	settingChanged(setting, value) {
 		switch (setting) {
 			case 'interactive-map':
-				value && (this.interactiveRaster = false);
-				this._mySettingsService.saveSettings('interactive-raster', this.interactiveRaster);
+				this._mySettingsService.saveSettings('interactive-raster', value);
 				break;
 			case 'interactive-raster':
-				value && (this.interactiveMap = false);
-				this._mySettingsService.saveSettings('interactive-map', this.interactiveMap);
+				this._mySettingsService.saveSettings('interactive-map', value);
 				break;
 		}
 		this._mySettingsService.saveSettings(setting, value);
