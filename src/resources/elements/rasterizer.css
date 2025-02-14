@@ -29,16 +29,6 @@ rasterizer {
 	}
 }
 
-.map--conical {
-	--mapRepeat  : no-repeat;
-	--mapPosition: var(--mapCenter);
-	--map        : repeating-conic-gradient(#777 0, #fff var(--mapHalfSliceAngle), #777 var(--mapSliceAngle));
-
-	&::before {
-		background-size: 100% 100%;
-	}
-}
-
 .map--image {
 	&::before {
 		--mapRepeat  : no-repeat;
@@ -51,23 +41,5 @@ rasterizer {
 
 	&.grayscale::before {
 		filter: brightness(1.1) blur(min(var(--rasterSize), .1vmin));
-	}
-}
-
-.raster--conical {
-	--rasterRepeat  : no-repeat;
-	--rasterPosition: center;
-	--raster        : repeating-conic-gradient(#777 0, #fff var(--rasterHalfSliceAngle), #777 var(--rasterSliceAngle));
-
-	&::after {
-		background-size: 200% 200%;
-	}
-
-	&.raster--interactive::after {
-		translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
-	}
-
-	&.sharpened {
-		--sharpen: blur(2px) contrast(5);
 	}
 }

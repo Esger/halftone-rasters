@@ -11,14 +11,16 @@
 }
 
 raster {
-	--size         : 100%;
-	--angle        : 0deg;
-	position       : relative;
-	display        : block;
-	grid-area      : 1/1;
-	margin         : -50vh -50vw;
-	mix-blend-mode : multiply;
-	background-size: var(--size, 100%);
+	--size          : 100%;
+	--angle         : 0deg;
+	--sliceAngle    : 30deg;
+	--halfSliceAngle: 15deg;
+	position        : relative;
+	display         : block;
+	grid-area       : 1/1;
+	margin          : -50vh -50vw;
+	mix-blend-mode  : multiply;
+	background-size : var(--size, 100%);
 
 	&.dotted {
 		background-image   : radial-gradient(closest-corner, #777, #fff);
@@ -66,7 +68,20 @@ raster {
 		} */
 	}
 
-	&.conical {}
+	&.conical {
+		background-image   : repeating-conic-gradient(#777 0, #fff var(--halfSliceAngle), #777 var(--sliceAngle));
+		background-repeat  : no-repeat;
+		background-position: center;
+		background-size    : 200% 200%;
+
+		/* &.raster--interactive::after {
+			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		}
+
+		&.sharpened {
+			--sharpen: blur(2px) contrast(5);
+		} */
+	}
 
 	&.image {}
 }

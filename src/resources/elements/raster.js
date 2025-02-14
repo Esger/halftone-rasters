@@ -26,7 +26,7 @@ export class RasterCustomElement {
 	_getSettings() {
 		const mapId = parseInt(this._mySettingsService.getSettings(this.model.name), 10) || 0;
 		this.selectedMap = this.maps[mapId];
-		this._mySettingsService.saveSettings('map-' + this.model.name, mapId);
+		this._mySettingsService.saveSettings(this.model.name, mapId);
 
 		this.size = parseInt(this._mySettingsService.getSettings(this.model.name + '-size'), 10) || 32;
 		this._mySettingsService.saveSettings(this.model.name + '-size', this.size);
@@ -34,17 +34,17 @@ export class RasterCustomElement {
 		this.angle = parseInt(this._mySettingsService.getSettings(this.model.name + '-angle'), 10) || 45;
 		this._mySettingsService.saveSettings(this.model.name + '-angle', this.angle);
 
-		this.mapSlices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10) || 69;
-		this._mySettingsService.saveSettings(this.model.name + '-slices', this.mapSlices);
+		this.slices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10) || 69;
+		this._mySettingsService.saveSettings(this.model.name + '-slices', this.slices);
 
-		this.interactiveMap = this._mySettingsService.getSettings('interactive-' + this.model.name) || false;
-		this._mySettingsService.saveSettings('interactive-' + this.model.name, this.interactiveMap);
+		this.interactiveMap = this._mySettingsService.getSettings(this.model.name + '-interactive') || false;
+		this._mySettingsService.saveSettings(this.model.name + '-interactive', this.interactiveMap);
 
-		this.grayscale = this._mySettingsService.getSettings('grayscale-' + this.model.name) || false;
-		this._mySettingsService.saveSettings('grayscale-' + this.model.name, this.grayscale);
+		this.grayscale = this._mySettingsService.getSettings(this.model.name + '-grayscale') || false;
+		this._mySettingsService.saveSettings(this.model.name + '-grayscale', this.grayscale);
 
-		this.interactiveRaster = this._mySettingsService.getSettings('interactive-' + this.model.name) || false;
-		this._mySettingsService.saveSettings('interactive-' + this.model.name, this.interactiveRaster);
+		this.interactiveRaster = this._mySettingsService.getSettings(this.model.name + '-interactive') || false;
+		this._mySettingsService.saveSettings(this.model.name + '-interactive', this.interactiveRaster);
 	}
 
 	mapChanged(map) {
@@ -55,7 +55,7 @@ export class RasterCustomElement {
 
 	fileChanged(event) {
 		this.selectedFile = event.target.files[0].name;
-		this._mySettingsService.saveSettings('file' + this.model.name, this.selectedFile);
+		this._mySettingsService.saveSettings(this.model.name + '-file', this.selectedFile);
 	}
 
 	settingChanged(setting, value) {
