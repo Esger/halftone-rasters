@@ -13,6 +13,7 @@ export class RasterizerCustomElement {
 				name: 'map'
 			},
 			{
+				id: 1,
 				name: 'raster'
 			}
 		]
@@ -50,8 +51,15 @@ export class RasterizerCustomElement {
 	}
 
 	touchMoved(event) {
-		this.mouseX = event.touches[0].clientX;
-		this.mouseY = event.touches[0].clientY;
+		if (this._constrain) {
+			if (Math.abs(event.touches[0].movementX) > Math.abs(event.touches[0].movementY))
+				this.mouseX += event.touches[0].movementX;
+			else
+				this.mouseY += event.touches[0].movementY;
+		} else {
+			this.mouseX = event.touches[0].clientX;
+			this.mouseY = event.touches[0].clientY;
+		}
 	}
 
 	sizeChanged(newSize) {

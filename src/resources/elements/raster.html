@@ -12,7 +12,10 @@
 	<section portal=".controls">
 		<fieldset>
 			<let setting-name.bind="'map-' + model.name"></let>
-			<label for.one-time="settingName">Map</label>
+			<label repeat.for="map of maps"
+					if.bind="map.id == selectedMap.id"
+					class="sectionHeader"
+					for.one-time="settingName">${map.value}</label>
 			<select value.bind="selectedMap"
 					id.one-time="settingName"
 					change.delegate="mapChanged(selectedMap)">

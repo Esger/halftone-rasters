@@ -67,6 +67,22 @@ controls {
 		color: white;
 	}
 
+	label.sectionHeader {
+		position        : absolute;
+		text-transform  : uppercase;
+		font-size       : 200%;
+		line-height     : 0.8;
+		letter-spacing  : 10px;
+		opacity         : 0.2;
+		font-weight     : bold;
+		scale           : 1.3 4;
+		transform-origin: top left;
+
+		+select {
+			margin-left: auto;
+		}
+	}
+
 	input {
 		border-radius: 5px;
 	}
