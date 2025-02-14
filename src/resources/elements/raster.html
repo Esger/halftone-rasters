@@ -14,7 +14,7 @@
 			<label for.one-time="'map-' + model.name">Map</label>
 			<select value.bind="selectedMap"
 					id.one-time="'map-' + model.name"
-					change.trigger="mapChanged(selectedMap)">
+					change.delegate="mapChanged(selectedMap)">
 				<option repeat.for="map of maps"
 						model.bind="map">${map.value}
 				</option>
@@ -25,7 +25,7 @@
 			<label for.one-time="'file-' + model.name">Image</label>
 			<input type="file"
 					id.one-time="'file-' + model.name"
-					change.trigger="fileChanged($event)"
+					change.delegate="fileChanged($event)"
 					accept="image/*"></label>
 			<label for.one-time="'file-' + model.name">${selectedFile || 'choose file'}</label>
 		</fieldset>
@@ -48,7 +48,7 @@
 		</fieldset>
 
 		<fieldset if.bind="!['conical', 'image'].includes(selectedMap.value.toLowerCase())">
-			<label for.one-time="'size-' + model.name">Size: ${size}vmax</label>
+			<label for.one-time="'size-' + model.name">Size: ${size & throttle} vmax</label>
 			<input type="range"
 					id.one-time="'size-' + model.name"
 					autofocus
@@ -56,23 +56,23 @@
 					min=".5"
 					max="100"
 					value.bind="size"
-					change.trigger="settingChanged('size', size)">
+					change.delegate="settingChanged('size', size)">
 		</fieldset>
 
 		<fieldset if.bind="selectedMap.value == 'conical'">
-			<label for.one-time="'slices-' + model.name">Slices: ${slices}</label>
+			<label for.one-time="'slices-' + model.name">Slices: ${slices & throttle}</label>
 			<input type="range"
 					step="1"
 					min="1"
 					max="100"
 					value.bind="slices"
 					id.bind="'slices-' + model.name"
-					input.trigger="settingChanged('slices', slices)">
+					input.delegate="settingChanged('slices', slices)">
 		</fieldset>
 
 		<fieldset if.bind="['lined','dotted'].includes(selectedMap.value.toLowerCase())"
 				  data-value="${selectedMap.value.toLowerCase()}">
-			<label for.one-time="'angle-' + model.name">Angle: ${angle}°</label>
+			<label for.one-time="'angle-' + model.name">Angle: ${angle & throttle}°</label>
 			<input type="range"
 					step=".1"
 					min="0"
@@ -80,7 +80,7 @@
 					disabled.bind="interactiveMap"
 					value.bind="angle"
 					id.one-time="'angle-' + model.name"
-					change.trigger="settingChanged('angle', angle)">
+					change.delegate="settingChanged('angle', angle)">
 		</fieldset>
 
 	</section>
