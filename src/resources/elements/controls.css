@@ -46,9 +46,15 @@ controls {
 	}
 
 	h2 {
-		font-size  : 2rem;
-		line-height: 2rem;
-		margin     : 0 1rem 2rem;
+		font-size      : 2rem;
+		line-height    : 2rem;
+		margin         : 0 1rem 2rem;
+		display        : flex;
+		justify-content: space-between;
+
+		&>span {
+			padding-block: 0.7rem 0;
+		}
 	}
 
 	section {
@@ -68,7 +74,8 @@ controls {
 
 	label,
 	p {
-		color: white;
+		color        : white;
+		border-radius: 2px;
 	}
 
 	label.sectionHeader {
@@ -99,6 +106,20 @@ controls {
 		margin    : 0;
 		flex      : 0 0 2rem;
 		align-self: flex-start;
+	}
+
+	button {
+		display         : flex;
+		align-items     : center;
+		font            : inherit;
+		line-height     : 0;
+		padding         : .5rem .9rem 0 .9rem;
+		height          : 3rem;
+		max-width       : 10rem;
+		background-color: white;
+		color           : black;
+		cursor          : pointer;
+		white-space     : nowrap;
 	}
 
 	/* Hide the default file input button and hint */

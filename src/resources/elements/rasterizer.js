@@ -16,6 +16,11 @@ export class RasterizerCustomElement {
 				id: 1,
 				name: 'raster'
 			}
+			// ,
+			// {
+			// 	id: 2,
+			// 	name: 'raster2'
+			// }
 		]
 	}
 
