@@ -17,9 +17,8 @@
         "version": "legacy"
       }
     ],
-    "@babel/plugin-transform-class-static-block",
     [
-      "@babel/plugin-transform-class-properties",
+      "@babel/plugin-proposal-class-properties",
       {
         "loose": true
       }
