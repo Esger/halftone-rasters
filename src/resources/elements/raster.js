@@ -24,6 +24,24 @@ export class RasterCustomElement {
 
 	attached() {
 		this._getSettings();
+		this._showMoireSubscription = this._eventAggregator.subscribe('show-moire', settings => {
+			this._setup(settings);
+		})
+	}
+
+	_setup(settings) {
+		for (const setting in settings) {
+			if (setting.startsWith(this.model.name)) {
+				this.model[setting.split('-')[1] || setting] = settings[setting];
+			}
+		}
+		setTimeout(() => {
+			this.selectedMap = this.maps.find(map => map.id === this.model[this.model.name]);
+			this.size = this.model.size;
+			this.angle = this.model.angle;
+			this.slices = this.model.slices;
+			this.grayscale = this.model.grayscale;
+		});
 	}
 
 	_getSettings() {
