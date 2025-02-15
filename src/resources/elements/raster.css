@@ -1,0 +1,82 @@
+raster {
+	--size          : 100%;
+	--angle         : 0deg;
+	--sliceAngle    : 30deg;
+	--halfSliceAngle: 15deg;
+	position        : relative;
+	display         : block;
+	grid-area       : 1/1;
+	margin          : -50vh -50vw;
+	mix-blend-mode  : multiply;
+	background-size : var(--size, 100%);
+
+	&.grayscale {
+		filter: grayscale(1);
+	}
+
+	&.dotted {
+		background-image   : radial-gradient(closest-corner, #777, #fff);
+		background-repeat  : repeat;
+		background-position: center;
+		background-size    : var(--size) var(--size);
+		rotate             : var(--angle);
+
+		/* &.sharpened {
+			--sharpen         : blur(2px) contrast(5);
+		} */
+	}
+
+	&.lined {
+		background-image   : linear-gradient(#fff, #777, #fff);
+		background-repeat  : repeat-y;
+		background-position: center;
+		background-size    : 100% var(--size);
+		rotate             : var(--angle);
+
+		/* &.sharpened {
+			--sharpen: blur(.5px) contrast(2);
+		} */
+	}
+
+	&.radial {
+		background-image   : repeating-radial-gradient(circle, #777, #fff, #777 var(--size));
+		background-repeat  : no-repeat;
+		background-position: center;
+		background-size    : 200% 200%;
+
+		&.interactive {
+			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		}
+
+		/* &.sharpened {
+			--sharpen: blur(2px) contrast(5);
+		} */
+	}
+
+	&.conical {
+		background-image   : repeating-conic-gradient(#777 0, #fff var(--halfSliceAngle), #777 var(--sliceAngle));
+		background-repeat  : no-repeat;
+		background-position: center;
+		background-size    : 200% 200%;
+
+		&.interactive {
+			translate: calc(var(--mouseX) - 50vw) calc(var(--mouseY) - 50vh);
+		}
+
+		/* &.sharpened {
+			--sharpen: blur(2px) contrast(5);
+		} */
+	}
+
+	&.image {
+		background-image   : var(--image), url(https://ashware.nl/assets/img/Esger.jpg);
+		background-position: center center;
+		background-size    : var(--size, 100%);
+		rotate             : var(--angle);
+		filter             : blur(min(var(--size), .1vmin));
+
+		&.grayscale {
+			filter: grayscale(1) brightness(1.1) blur(min(var(--size), .1vmin));
+		}
+	}
+}

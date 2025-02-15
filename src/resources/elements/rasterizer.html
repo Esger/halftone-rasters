@@ -1,16 +1,19 @@
-<template class="raster--${raster} map--${map} ${grayscale ? 'grayscale' : ''} ${sharpenEdges ? 'sharpened' : ''}"
-		  style="--size: ${size}px;
-		  		--sliceAngle: ${360 / slices}deg;
-				--halfSliceAngle: ${180 / slices}deg;
-		  		--image: url(${fileUrl});
-		  		--contrast: ${contrast}; 
-				--angle: ${angle}deg;
-				--angleMouseY: ${mouseY}deg;
+<template class="${rasterInteractive ? 'raster--interactive' : ''}
+				${mapInteractive ? 'map--interactive' : ''}
+				${sharpenEdges ? 'sharpened' : ''}"
+		  style="--contrast: ${contrast}; 
 				--mouseX: ${mouseX}px;
 				--mouseY: ${mouseY}px;
 				--x: ${mouseX};
 				--y: ${mouseY};"
 		  touchmove.trigger="touchMoved($event)"
-		  mousemove.trigger="mouseMoved($event)">
+		  mousemove.trigger="mouseMoved($event)"
+		  data-map-slices.bind="slices">
 	<require from="./rasterizer.css"></require>
+	<require from="./raster"></require>
+
+	<raster repeat.for="sheet of sheets"
+			model.bind="sheet"
+			mouse-x.bind="mouseX"
+			mouse-y.bind="mouseY"></raster>
 </template>
