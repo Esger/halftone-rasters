@@ -1,12 +1,14 @@
 controls {
+	position        : absolute;
+	top             : 0;
+	right           : 0;
 	font-size       : 1.4rem;
 	font-family     : monospace;
 	isolation       : isolate;
-	grid-area       : 1/1;
 	width           : fit-content;
 	height          : fit-content;
 	padding         : 2rem;
-	border-radius   : 0 0 4rem;
+	border-radius   : 0 0 0 4rem;
 	display         : flex;
 	flex-direction  : column-reverse;
 	translate       : 0 calc(-100% + 7rem);
@@ -29,14 +31,34 @@ controls {
 		}
 	}
 
-	h1 {
+	h1,
+	h2 {
 		color      : white;
+		font-family: fantasy, sans-serif;
+		font-weight: bold;
+		text-shadow: 3px 6px 2px black;
+	}
+
+	h1 {
 		font-size  : 3rem;
 		line-height: 3rem;
 		margin     : 1rem 1rem 0;
-		text-shadow: 3px 6px 2px black;
-		font-family: fantasy, sans-serif;
-		font-weight: bold;
+	}
+
+	h2 {
+		font-size      : 2rem;
+		line-height    : 2rem;
+		margin         : 0 1rem 2rem;
+		display        : flex;
+		justify-content: space-between;
+
+		&>span {
+			padding-block: 0.7rem 0;
+		}
+	}
+
+	section {
+		margin-bottom: 3rem;
 	}
 
 	fieldset {
@@ -45,14 +67,28 @@ controls {
 		align-items: center;
 
 		* {
-			flex     : 0 0 12rem;
+			flex     : 0 0 15ch;
 			font-size: inherit;
 		}
 	}
 
 	label,
 	p {
-		color: white;
+		color        : white;
+		border-radius: 2px;
+	}
+
+	label.sectionHeader {
+		z-index         : -1;
+		position        : absolute;
+		text-transform  : uppercase;
+		font-size       : 200%;
+		line-height     : 0.8;
+		letter-spacing  : 10px;
+		opacity         : 0.2;
+		font-weight     : bold;
+		scale           : 1.3 4;
+		transform-origin: top left;
 	}
 
 	input {
@@ -70,6 +106,20 @@ controls {
 		margin    : 0;
 		flex      : 0 0 2rem;
 		align-self: flex-start;
+	}
+
+	button {
+		display         : flex;
+		align-items     : center;
+		font            : inherit;
+		line-height     : 0;
+		padding         : .5rem .9rem 0 .9rem;
+		height          : 3rem;
+		max-width       : 10rem;
+		background-color: white;
+		color           : black;
+		cursor          : pointer;
+		white-space     : nowrap;
 	}
 
 	/* Hide the default file input button and hint */
@@ -96,6 +146,11 @@ controls {
 		line-height: 1.4rem;
 		margin     : 1rem;
 		max-width  : 40ch;
+
+		a {
+			color          : inherit;
+			text-decoration: wavy underline;
+		}
 	}
 }
 

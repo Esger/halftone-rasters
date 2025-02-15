@@ -1,16 +1,27 @@
 import { inject, bindable } from 'aurelia-framework';
 @inject(Element)
 export class RasterizerCustomElement {
-	@bindable map;
-	@bindable grayscale;
-	@bindable raster;
-	@bindable size;
-	@bindable slices;
-	@bindable angle;
-	@bindable fileUrl;
 
 	constructor(element) {
 		this._element = element;
+		this._constrain = false;
+		this.mouseX = 0;
+		this.mouseY = 0;
+		this.sheets = [
+			{
+				id: 0,
+				name: 'map'
+			},
+			{
+				id: 1,
+				name: 'raster'
+			}
+			// ,
+			// {
+			// 	id: 2,
+			// 	name: 'raster2'
+			// }
+		]
 	}
 
 	attached() {
@@ -33,7 +44,6 @@ export class RasterizerCustomElement {
 	}
 
 	mouseMoved(event) {
-		console.log(this._constrain)
 		if (this._constrain) {
 			if (Math.abs(event.movementX) > Math.abs(event.movementY))
 				this.mouseX += event.movementX;
@@ -46,9 +56,17 @@ export class RasterizerCustomElement {
 	}
 
 	touchMoved(event) {
-		this.mouseX = event.touches[0].clientX;
-		this.mouseY = event.touches[0].clientY;
+		if (this._constrain) {
+			if (Math.abs(event.touches[0].movementX) > Math.abs(event.touches[0].movementY))
+				this.mouseX += event.touches[0].movementX;
+			else
+				this.mouseY += event.touches[0].movementY;
+		} else {
+			this.mouseX = event.touches[0].clientX;
+			this.mouseY = event.touches[0].clientY;
+		}
 	}
+
 	sizeChanged(newSize) {
 		const size = parseInt(newSize, 10);
 		this.sharpenEdges = size > 20;
