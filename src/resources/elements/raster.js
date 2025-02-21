@@ -24,9 +24,13 @@ export class RasterCustomElement {
 
 	attached() {
 		this._getSettings();
-		this._showMoireSubscription = this._eventAggregator.subscribe('show-moire', settings => {
+		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => {
 			this._setup(settings);
 		})
+	}
+
+	detached() {
+		this._showSettingSubscription.dispose();
 	}
 
 	_setup(settings) {
@@ -45,24 +49,13 @@ export class RasterCustomElement {
 	}
 
 	_getSettings() {
-		const mapId = parseInt(this._mySettingsService.getSettings(this.model.name), 10) || 0;
+		const mapId = parseInt(this._mySettingsService.getSettings(this.model.name), 10);
 		this.selectedMap = this.maps[mapId];
-		this._mySettingsService.saveSettings(this.model.name, mapId);
-
-		this.size = parseInt(this._mySettingsService.getSettings(this.model.name + '-size'), 10) || 32;
-		this._mySettingsService.saveSettings(this.model.name + '-size', this.size);
-
-		this.angle = parseInt(this._mySettingsService.getSettings(this.model.name + '-angle'), 10) || 45;
-		this._mySettingsService.saveSettings(this.model.name + '-angle', this.angle);
-
-		this.slices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10) || 69;
-		this._mySettingsService.saveSettings(this.model.name + '-slices', this.slices);
-
-		this.interactive = this._mySettingsService.getSettings(this.model.name + '-interactive') || false;
-		this.settingChanged('interactive', this.interactive);
-
-		this.grayscale = this._mySettingsService.getSettings(this.model.name + '-grayscale') || false;
-		this._mySettingsService.saveSettings(this.model.name + '-grayscale', this.grayscale);
+		this.size = parseInt(this._mySettingsService.getSettings(this.model.name + '-size'), 10);
+		this.angle = parseInt(this._mySettingsService.getSettings(this.model.name + '-angle'), 10);
+		this.slices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10);
+		this.interactive = this._mySettingsService.getSettings(this.model.name + '-interactive');
+		this.grayscale = this._mySettingsService.getSettings(this.model.name + '-grayscale');
 	}
 
 	mapChanged(map) {

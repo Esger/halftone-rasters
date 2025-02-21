@@ -86,7 +86,7 @@ export class Controls {
 			"raster-grayscale": false
 		}];
 		const randomIndex = Math.floor(Math.random() * settings.length);
-		this._eventAggregator.publish('show-moire', settings[randomIndex]);
+		this._eventAggregator.publish('show-setting', settings[randomIndex]);
 	}
 
 }
