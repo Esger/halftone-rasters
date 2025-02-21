@@ -24,13 +24,13 @@ export class RasterCustomElement {
 
 	attached() {
 		this._getSettings();
-		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => {
-			this._setup(settings);
-		})
+		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
+		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveAllSettings());
 	}
 
 	detached() {
 		this._showSettingSubscription.dispose();
+		this._saveSettingsSubscription.dispose();
 	}
 
 	_setup(settings) {
@@ -56,6 +56,15 @@ export class RasterCustomElement {
 		this.slices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10);
 		this.interactive = this._mySettingsService.getSettings(this.model.name + '-interactive');
 		this.grayscale = this._mySettingsService.getSettings(this.model.name + '-grayscale');
+	}
+
+	_saveAllSettings() {
+		this._mySettingsService.saveSettings(this.model.name, this.selectedMap.id);
+		this._mySettingsService.saveSettings(this.model.name + '-size', this.size);
+		this._mySettingsService.saveSettings(this.model.name + '-angle', this.angle);
+		this._mySettingsService.saveSettings(this.model.name + '-slices', this.slices);
+		this._mySettingsService.saveSettings(this.model.name + '-interactive', this.interactive);
+		this._mySettingsService.saveSettings(this.model.name + '-grayscale', this.grayscale);
 	}
 
 	mapChanged(map) {

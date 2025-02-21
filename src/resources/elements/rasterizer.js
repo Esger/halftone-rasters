@@ -1,9 +1,11 @@
 import { inject, bindable } from 'aurelia-framework';
-@inject(Element)
+import { EventAggregator } from 'aurelia-event-aggregator';
+@inject(Element, EventAggregator)
 export class RasterizerCustomElement {
 
-	constructor(element) {
+	constructor(element, eventAggregator) {
 		this._element = element;
+		this._eventAggregator = eventAggregator;
 		this._constrain = false;
 		this.mouseX = 0;
 		this.mouseY = 0;
@@ -45,6 +47,8 @@ export class RasterizerCustomElement {
 
 	lockRasters() {
 		this._lockRasters = !this._lockRasters;
+		this._eventAggregator.publish('save-settings');
+		this._eventAggregator.publish('show-share-control');
 	}
 
 	mouseMoved(event) {
