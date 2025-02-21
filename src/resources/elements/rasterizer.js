@@ -43,7 +43,12 @@ export class RasterizerCustomElement {
 		setTimeout(_ => this._constrain = false);
 	}
 
+	lockRasters() {
+		this._lockRasters = !this._lockRasters;
+	}
+
 	mouseMoved(event) {
+		if (this._lockRasters) return;
 		if (this._constrain) {
 			if (Math.abs(event.movementX) > Math.abs(event.movementY))
 				this.mouseX += event.movementX;
@@ -67,6 +72,7 @@ export class RasterizerCustomElement {
 		}
 	}
 
+	// todo: restore this
 	sizeChanged(newSize) {
 		const size = parseInt(newSize, 10);
 		this.sharpenEdges = size > 20;
