@@ -1,4 +1,7 @@
 <template>
 	<require from="./share-control.css"></require>
-	<h1>${value}</h1>
+	<div if.bind="visible"
+		 class="shareControl">
+		<p>Click image to toggle lock</p>
+	</div>
 </template>

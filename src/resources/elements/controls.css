@@ -1,9 +1,8 @@
 controls {
+	font            : inherit;
 	position        : absolute;
 	top             : 0;
 	right           : 0;
-	font-size       : 1.4rem;
-	font-family     : monospace;
 	isolation       : isolate;
 	width           : fit-content;
 	height          : fit-content;

@@ -1,6 +1,11 @@
-html,
-body {
-	height  : 100dvh;
-	display : grid;
-	overflow: hidden;
+html {
+
+	body,
+	& {
+		height     : 100dvh;
+		display    : grid;
+		overflow   : hidden;
+		font-size  : 1.4rem;
+		font-family: monospace;
+	}
 }

@@ -48,7 +48,7 @@ export class RasterizerCustomElement {
 	lockRasters() {
 		this._lockRasters = !this._lockRasters;
 		this._eventAggregator.publish('save-settings');
-		this._eventAggregator.publish('show-share-control');
+		this._eventAggregator.publish('show-share-control', this._lockRasters);
 	}
 
 	mouseMoved(event) {
