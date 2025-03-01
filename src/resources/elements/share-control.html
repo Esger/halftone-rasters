@@ -2,6 +2,7 @@
 	<require from="./share-control.css"></require>
 	<div if.bind="visible"
 		 class="shareControl">
-		<p>Click image to toggle lock</p>
+		<p class="clickHint">Click image to unlock</p>
+		<button click.trigger="copyUrl()">Copy image url</button>
 	</div>
 </template>

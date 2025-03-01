@@ -7,6 +7,8 @@ export class RasterizerCustomElement {
 		this._element = element;
 		this._eventAggregator = eventAggregator;
 		this._constrain = false;
+		this._rastersLocked = false;
+		this._isTouch = sessionStorage.getItem('touch-device') === 'true';
 		this.mouseX = 0;
 		this.mouseY = 0;
 		this.sheets = [
@@ -45,14 +47,15 @@ export class RasterizerCustomElement {
 		setTimeout(_ => this._constrain = false);
 	}
 
-	lockRasters() {
-		this._lockRasters = !this._lockRasters;
+	lockRasters(event) {
+		this._eventAggregator.publish('show-share-control', !this._rastersLocked);
+		if (this._isTouch) return;
+		this._rastersLocked = !this._rastersLocked;
 		this._eventAggregator.publish('save-settings');
-		this._eventAggregator.publish('show-share-control', this._lockRasters);
 	}
 
 	mouseMoved(event) {
-		if (this._lockRasters) return;
+		if (this._rastersLocked) return;
 		if (this._constrain) {
 			if (Math.abs(event.movementX) > Math.abs(event.movementY))
 				this.mouseX += event.movementX;
