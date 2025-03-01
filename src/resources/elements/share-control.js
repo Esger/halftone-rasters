@@ -1,7 +1,6 @@
 import { bindable, inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { MySettingsService } from '../services/my-settings-service';
-import html2canvas from 'html2canvas';
 
 @inject(EventAggregator, MySettingsService)
 export class ShareControl {
@@ -10,7 +9,7 @@ export class ShareControl {
 	constructor(eventAggregator, mySettingsService) {
 		this._eventAggregator = eventAggregator;
 		this._mySettingsService = mySettingsService;
-  }
+	}
 
 	attached() {
 		this._showSubscription = this._eventAggregator.subscribe('show-share-control', show => this._toggle(show));
@@ -21,6 +20,12 @@ export class ShareControl {
 	}
 
 	_toggle(show) {
+		$('.shareControl').removeClass('fading');
 		this.visible = show;
+		if (!show) return;
+
+		setTimeout(_ => {
+			$('.shareControl').addClass('fading');
+		}, 2000);
 	}
 }
