@@ -3,6 +3,9 @@
 	<div if.bind="visible"
 		 class="shareControl">
 		<p class="clickHint">Click image to unlock</p>
-		<button click.trigger="copyUrl()">Copy image url</button>
+		<button click.trigger="copyUrl()"
+			disabled.bind="copied">
+			${copied ? 'Copied!' : 'Copy image url'}
+		</button>
 	</div>
 </template>
