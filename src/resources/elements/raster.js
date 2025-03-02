@@ -63,7 +63,7 @@ export class RasterCustomElement {
 		this._mySettingsService.saveSettings(this.model.name + '-size', this.size);
 		this._mySettingsService.saveSettings(this.model.name + '-angle', this.angle);
 		this._mySettingsService.saveSettings(this.model.name + '-slices', this.slices);
-		this._mySettingsService.saveSettings(this.model.name + '-interactive', this.interactive);
+		this._mySettingsService.saveSettings(this.model.name + '-interactive', false);
 		this._mySettingsService.saveSettings(this.model.name + '-grayscale', this.grayscale);
 	}
 
