@@ -25,13 +25,7 @@ export class ShareControl {
 	copyUrl() {
 		this.copied = true;
 		setTimeout(_ => this.copied = false, 5000);
-		const url = window.location.href;
-		const input = document.createElement('input');
-		input.value = url;
-		document.body.appendChild(input);
-		input.select();
-		document.execCommand('copy');
-		document.body.removeChild(input);
+		navigator.clipboard.writeText(window.location.href);
 	}
 
 	_toggle(show) {
