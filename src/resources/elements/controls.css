@@ -151,6 +151,10 @@ controls {
 		a {
 			color          : inherit;
 			text-decoration: wavy underline;
+
+			span {
+				padding-right: 4px;
+			}
 		}
 	}
 }

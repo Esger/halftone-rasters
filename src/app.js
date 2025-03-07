@@ -9,7 +9,7 @@ export class App {
 		if ('ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0) {
 			this._setIsTouchDevice(true);
 		}
-		$('body').one('touchstart', event => {
+		$('body').one('touchstart', _ => {
 			this._setIsTouchDevice(true);
 		})
 	}
