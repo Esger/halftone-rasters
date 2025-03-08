@@ -33,7 +33,7 @@ export class RasterizerCustomElement {
 			this._constrain = event.shiftKey;
 		});
 		document.addEventListener('keyup', event => {
-			this._constrain = false;
+			this._constrain = event.key === 'Shift' ? false : this._constrain;
 		});
 	}
 
