@@ -6,9 +6,13 @@ export class MySettingsService {
 	constructor() {
 		this._loadSettings();
 	}
-
 	saveMySettings(setting, value) {
-		this._settings[setting] = value;
+		if (typeof setting === 'object') {
+			for (const key in setting) {
+				this._settings[key] = setting[key];
+			}
+		}
+		else this._settings[setting] = value;
 		localStorage.setItem(this._settingsName, JSON.stringify(this._settings));
 	}
 

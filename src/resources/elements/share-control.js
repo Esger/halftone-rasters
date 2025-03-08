@@ -10,8 +10,6 @@ export class ShareControl {
 		this._eventAggregator = eventAggregator;
 		this._mySettingsService = mySettingsService;
 		this._isTouch = sessionStorage.getItem('touch-device') === 'true';
-		this._copyText = 'Copy image url yo';
-		this.buttonText = this._copyText;
 	}
 
 	attached() {

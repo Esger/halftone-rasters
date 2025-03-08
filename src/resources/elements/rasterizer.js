@@ -1,16 +1,17 @@
 import { inject, bindable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-@inject(Element, EventAggregator)
+import { MySettingsService } from '../services/my-settings-service';
+
+@inject(Element, EventAggregator, MySettingsService)
 export class RasterizerCustomElement {
 
-	constructor(element, eventAggregator) {
+	constructor(element, eventAggregator, mySettingsService) {
 		this._element = element;
 		this._eventAggregator = eventAggregator;
+		this._mySettingsService = mySettingsService;
 		this._constrain = false;
 		this._rastersLocked = false;
 		this._isTouch = sessionStorage.getItem('touch-device') === 'true';
-		this.mouseX = 0;
-		this.mouseY = 0;
 		this.sheets = [
 			{
 				id: 0,
@@ -33,8 +34,10 @@ export class RasterizerCustomElement {
 			this._constrain = event.shiftKey;
 		});
 		document.addEventListener('keyup', event => {
-			this._constrain = event.key === 'Shift' ? false : this._constrain;
+			this._constrain = false;
 		});
+		this.mouseX = parseInt(this._mySettingsService.getMySettings('raster-mouseX'), 10);
+		this.mouseY = parseInt(this._mySettingsService.getMySettings('raster-mouseY'), 10);
 	}
 
 	detached() {
@@ -51,7 +54,10 @@ export class RasterizerCustomElement {
 		this._eventAggregator.publish('show-share-control', !this._rastersLocked);
 		if (this._isTouch) return;
 		this._rastersLocked = !this._rastersLocked;
-		this._eventAggregator.publish('save-settings');
+		this._eventAggregator.publish('save-settings', {
+			'mouseX': this.mouseX,
+			'mouseY': this.mouseY
+		});
 	}
 
 	mouseMoved(event) {

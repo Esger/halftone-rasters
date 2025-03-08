@@ -25,7 +25,7 @@ export class RasterCustomElement {
 	attached() {
 		this._getMySettings();
 		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
-		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveAllSettings());
+		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', data => this._saveAllSettings(data));
 	}
 
 	detached() {
@@ -58,13 +58,13 @@ export class RasterCustomElement {
 		this.grayscale = this._mySettingsService.getMySettings(this.model.name + '-grayscale');
 	}
 
-	_saveAllSettings() {
+	_saveAllSettings(data) {
+		for (const setting in data) {
+			this.model[this.model.name + '-' + setting] = data[setting];
+		}
+		this.model.interactive = false;
+		this._mySettingsService.saveMySettings(this.model);
 		this._mySettingsService.saveMySettings(this.model.name, this.selectedMap.id);
-		this._mySettingsService.saveMySettings(this.model.name + '-size', this.size);
-		this._mySettingsService.saveMySettings(this.model.name + '-angle', this.angle);
-		this._mySettingsService.saveMySettings(this.model.name + '-slices', this.slices);
-		this._mySettingsService.saveMySettings(this.model.name + '-interactive', false);
-		this._mySettingsService.saveMySettings(this.model.name + '-grayscale', this.grayscale);
 	}
 
 	mapChanged(map) {
