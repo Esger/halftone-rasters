@@ -7,12 +7,12 @@ export class MySettingsService {
 		this._loadSettings();
 	}
 
-	saveSettings(setting, value) {
+	saveMySettings(setting, value) {
 		this._settings[setting] = value;
 		localStorage.setItem(this._settingsName, JSON.stringify(this._settings));
 	}
 
-	getSettings(setting) {
+	getMySettings(setting) {
 		if (!setting) return this._settings;
 		return this._settings[setting];
 	}
@@ -39,7 +39,7 @@ export class MySettingsService {
 		let settings = JSON.parse(localStorage.getItem(this._settingsName));
 		if (!settings || settings === 'undefined' || settings.version !== this._version) {
 			this._settings = this._defaultSettings();
-			this.saveSettings(this._settings);
+			this.saveMySettings(this._settings);
 		}
 		else this._settings = settings;
 	}

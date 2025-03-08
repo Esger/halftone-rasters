@@ -25,7 +25,7 @@ export class ShareControl {
 	copyUrl() {
 		this.copied = true;
 		setTimeout(_ => this.copied = false, 5000);
-		const settings = this._mySettingsService.getSettings();
+		const settings = this._mySettingsService.getMySettings();
 		navigator.clipboard.writeText(window.location.href + '?settings=' + encodeURIComponent(JSON.stringify(settings)));
 	}
 

@@ -23,7 +23,7 @@ export class RasterCustomElement {
 	}
 
 	attached() {
-		this._getSettings();
+		this._getMySettings();
 		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
 		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveAllSettings());
 	}
@@ -48,29 +48,29 @@ export class RasterCustomElement {
 		});
 	}
 
-	_getSettings() {
-		const mapId = parseInt(this._mySettingsService.getSettings(this.model.name), 10);
+	_getMySettings() {
+		const mapId = parseInt(this._mySettingsService.getMySettings(this.model.name), 10);
 		this.selectedMap = this.maps[mapId];
-		this.size = parseInt(this._mySettingsService.getSettings(this.model.name + '-size'), 10);
-		this.angle = parseInt(this._mySettingsService.getSettings(this.model.name + '-angle'), 10);
-		this.slices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10);
-		this.interactive = this._mySettingsService.getSettings(this.model.name + '-interactive');
-		this.grayscale = this._mySettingsService.getSettings(this.model.name + '-grayscale');
+		this.size = parseInt(this._mySettingsService.getMySettings(this.model.name + '-size'), 10);
+		this.angle = parseInt(this._mySettingsService.getMySettings(this.model.name + '-angle'), 10);
+		this.slices = parseInt(this._mySettingsService.getMySettings(this.model.name + '-slices'), 10);
+		this.interactive = this._mySettingsService.getMySettings(this.model.name + '-interactive');
+		this.grayscale = this._mySettingsService.getMySettings(this.model.name + '-grayscale');
 	}
 
 	_saveAllSettings() {
-		this._mySettingsService.saveSettings(this.model.name, this.selectedMap.id);
-		this._mySettingsService.saveSettings(this.model.name + '-size', this.size);
-		this._mySettingsService.saveSettings(this.model.name + '-angle', this.angle);
-		this._mySettingsService.saveSettings(this.model.name + '-slices', this.slices);
-		this._mySettingsService.saveSettings(this.model.name + '-interactive', false);
-		this._mySettingsService.saveSettings(this.model.name + '-grayscale', this.grayscale);
+		this._mySettingsService.saveMySettings(this.model.name, this.selectedMap.id);
+		this._mySettingsService.saveMySettings(this.model.name + '-size', this.size);
+		this._mySettingsService.saveMySettings(this.model.name + '-angle', this.angle);
+		this._mySettingsService.saveMySettings(this.model.name + '-slices', this.slices);
+		this._mySettingsService.saveMySettings(this.model.name + '-interactive', false);
+		this._mySettingsService.saveMySettings(this.model.name + '-grayscale', this.grayscale);
 	}
 
 	mapChanged(map) {
 		this.selectedMap = map;
 		this.selectedFile = undefined;
-		this._mySettingsService.saveSettings(this.model.name, map.id);
+		this._mySettingsService.saveMySettings(this.model.name, map.id);
 	}
 
 	fileChanged(event) {
