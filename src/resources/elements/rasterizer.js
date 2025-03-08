@@ -21,12 +21,8 @@ export class RasterizerCustomElement {
 				id: 1,
 				name: 'raster'
 			}
-			// ,
-			// {
-			// 	id: 2,
-			// 	name: 'raster2'
-			// }
 		]
+		this._getSettingsFromUrl();
 	}
 
 	attached() {
@@ -90,6 +86,20 @@ export class RasterizerCustomElement {
 		const size = parseInt(newSize, 10);
 		this.sharpenEdges = size > 20;
 		this.contrast = 2 * size;
+	}
+
+	_getSettingsFromUrl() {
+		// check if url has settings parameter; use these if present
+		let urlParam = new URLSearchParams(window.location.hash ? window.location.hash.split('?')[1] : window.location.search);
+
+		if (urlParam.has('settings')) {
+			const settingsParam = urlParam.get('settings');
+			const settings = JSON.parse(decodeURIComponent(settingsParam));
+			console.log(settings);
+			for (const setting in settings) {
+				this._mySettingsService.saveMySettings(setting, settings[setting]);
+			}
+		}
 	}
 
 }
