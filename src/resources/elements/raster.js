@@ -82,13 +82,7 @@ export class RasterCustomElement {
 		if (typeof value !== 'boolean') {
 			value = parseInt(value, 10);
 		}
-		if (setting === 'interactive') {
-			if (!this.value) {
-				this.size = 100;
-				this.angle = 0;
-			}
-		}
-		this._mySettingsService.saveSettings(this.model.name + '-' + setting, value);
+		this._mySettingsService.saveMySettings(this.model.name + '-' + setting, value);
 	}
 
 	mouseXChanged(value) {
