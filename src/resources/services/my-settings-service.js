@@ -6,13 +6,9 @@ export class MySettingsService {
 	constructor() {
 		this._loadSettings();
 	}
+
 	saveMySettings(setting, value) {
-		if (typeof setting === 'object') {
-			for (const key in setting) {
-				this._settings[key] = setting[key];
-			}
-		}
-		else this._settings[setting] = value;
+		this._settings[setting] = value;
 		localStorage.setItem(this._settingsName, JSON.stringify(this._settings));
 	}
 
@@ -24,18 +20,23 @@ export class MySettingsService {
 	_defaultSettings() {
 		return {
 			"version": this._version,
-			"map": 0,
-			"map-size": 3,
-			"map-angle": 45,
-			"map-slices": 69,
-			"map-interactive": false,
-			"map-grayscale": false,
-			"raster": 0,
-			"raster-size": 3,
-			"raster-angle": 24,
-			"raster-slices": 69,
-			"raster-interactive": false,
-			"raster-grayscale": false
+			"sheets": [{
+				"id": 0,
+				"raster": 0,
+				"size": 3,
+				"angle": 45,
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false
+			}, {
+				"id": 1,
+				"raster": 0,
+				"size": 3,
+				"angle": 24,
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false
+			}]
 		}
 	}
 

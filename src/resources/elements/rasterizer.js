@@ -15,14 +15,15 @@ export class RasterizerCustomElement {
 		this.sheets = [
 			{
 				id: 0,
-				name: 'map'
 			},
 			{
 				id: 1,
-				name: 'raster'
 			}
 		]
 		this._getSettingsFromUrl();
+		this._getMySettings();
+		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveSettings());
+		// this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
 	}
 
 	attached() {
@@ -32,8 +33,6 @@ export class RasterizerCustomElement {
 		document.addEventListener('keyup', event => {
 			this._constrain = false;
 		});
-		this.mouseX = parseInt(this._mySettingsService.getMySettings('raster-mouseX'), 10);
-		this.mouseY = parseInt(this._mySettingsService.getMySettings('raster-mouseY'), 10);
 	}
 
 	detached() {
@@ -46,17 +45,15 @@ export class RasterizerCustomElement {
 		setTimeout(_ => this._constrain = false);
 	}
 
-	lockRasters(event) {
+	lockRasters() {
 		this._eventAggregator.publish('show-share-control', !this._rastersLocked);
 		if (this._isTouch) return;
 		this._rastersLocked = !this._rastersLocked;
-		this._eventAggregator.publish('save-settings', {
-			'mouseX': this.mouseX,
-			'mouseY': this.mouseY
-		});
+		this._rastersLocked && this._saveSettings();
 	}
 
 	mouseMoved(event) {
+
 		if (this._rastersLocked) return;
 		if (this._constrain) {
 			if (Math.abs(event.movementX) > Math.abs(event.movementY))
@@ -67,6 +64,16 @@ export class RasterizerCustomElement {
 			this.mouseX = event.clientX;
 			this.mouseY = event.clientY;
 		}
+
+		clearTimeout(this.mouseMoveEndTimer);
+		this.mouseMoveEndTimer = setTimeout(_ => {
+			this.sheets.forEach(sheet => {
+				if (!sheet.interactive) return;
+				sheet.mouseX = this.mouseX;
+				sheet.mouseY = this.mouseY;
+				this._saveSettings();
+			});
+		}, 500); // Pas deze waarde aan naar wens
 	}
 
 	touchMoved(event) {
@@ -88,6 +95,17 @@ export class RasterizerCustomElement {
 		this.contrast = 2 * size;
 	}
 
+	// _setup(settings) {
+	// 	for (const setting in settings) {
+	// 		if (setting.startsWith(this.model.name)) {
+	// 			this.model[setting.split('-')[1] || setting] = settings[setting];
+	// 		}
+	// 	}
+	// 	setTimeout(() => {
+	// 		this.selectedMap = this.maps.find(map => map.id === this.model[this.model.name]);
+	// 	});
+	// }
+
 	_getSettingsFromUrl() {
 		// check if url has settings parameter; use these if present
 		let urlParam = new URLSearchParams(window.location.hash ? window.location.hash.split('?')[1] : window.location.search);
@@ -95,11 +113,24 @@ export class RasterizerCustomElement {
 		if (urlParam.has('settings')) {
 			const settingsParam = urlParam.get('settings');
 			const settings = JSON.parse(decodeURIComponent(settingsParam));
-			console.log(settings);
-			for (const setting in settings) {
-				this._mySettingsService.saveMySettings(setting, settings[setting]);
-			}
+			this._mySettingsService.saveMySettings(settings);
+			this.sheets = settings.sheets;
+			return true;
 		}
+
+		return false;
+	}
+
+	_getMySettings() {
+		const sheets = this._mySettingsService.getMySettings('sheets');
+		sheets.forEach(sheet => {
+			this.sheets[sheet.id] = sheet;
+		});
+	}
+
+	_saveSettings(settings = undefined, value) {
+		this._mySettingsService.saveMySettings('sheets', this.sheets);
+		if (settings) this._mySettingsService.saveMySettings(settings, value);
 	}
 
 }

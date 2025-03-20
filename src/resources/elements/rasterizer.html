@@ -1,14 +1,12 @@
-<template class="${rasterInteractive ? 'raster--interactive' : ''}
-				${mapInteractive ? 'map--interactive' : ''}
-				${sharpenEdges ? 'sharpened' : ''}"
+<template class="${sharpenEdges ? 'sharpened' : ''}"
 		  style="--contrast: ${contrast}; 
 				--mouseX: ${mouseX}px;
 				--mouseY: ${mouseY}px;
 				--x: ${mouseX};
 				--y: ${mouseY};"
-		  touchmove.trigger="touchMoved($event)"
-		  mousemove.trigger="mouseMoved($event)"
-		  click.delegate="lockRasters($event)">
+		  touchmove.delegate="touchMoved($event)"
+		  mousemove.delegate="mouseMoved($event)"
+		  click.delegate="lockRasters()">
 	<require from="./rasterizer.css"></require>
 	<require from="./raster"></require>
 
