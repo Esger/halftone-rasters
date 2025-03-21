@@ -1,0 +1,11 @@
+<template>
+	<require from="./share-control.css"></require>
+	<div if.bind="visible"
+		 class="shareControl">
+		<button click.trigger="copyUrl()"
+			 disabled.bind="copied">
+			 ${copied ? 'Copied!' : 'Copy image url'}
+		 </button>
+		<p class="clickHint">Click image to unlock</p>
+	</div>
+</template>

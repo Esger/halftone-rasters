@@ -1,9 +1,8 @@
 controls {
+	font            : inherit;
 	position        : absolute;
 	top             : 0;
 	right           : 0;
-	font-size       : 1.4rem;
-	font-family     : monospace;
 	isolation       : isolate;
 	width           : fit-content;
 	height          : fit-content;
@@ -147,11 +146,15 @@ controls {
 		font-size  : 1rem;
 		line-height: 1.4rem;
 		margin     : 1rem;
-		max-width  : 40ch;
+		max-width  : 50ch;
 
 		a {
 			color          : inherit;
 			text-decoration: wavy underline;
+
+			span {
+				padding-right: 4px;
+			}
 		}
 	}
 }
