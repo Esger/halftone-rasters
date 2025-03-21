@@ -12,6 +12,7 @@ export class RasterizerCustomElement {
 		this._constrain = false;
 		this._rastersLocked = false;
 		this._isTouch = sessionStorage.getItem('touch-device') === 'true';
+
 		this.sheets = [
 			{
 				id: 0,
@@ -20,8 +21,11 @@ export class RasterizerCustomElement {
 				id: 1,
 			}
 		]
-		this._getSettingsFromUrl();
-		this._getMySettings();
+		this.sheets = this._getSettingsFromUrl();
+		console.table('from url', this.sheets);
+		if (!this.sheets) this.sheets = this._getMySettings();
+		console.table('from url', this.sheets);
+
 		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveSettings());
 		// this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
 	}
@@ -109,23 +113,18 @@ export class RasterizerCustomElement {
 	_getSettingsFromUrl() {
 		// check if url has settings parameter; use these if present
 		let urlParam = new URLSearchParams(window.location.hash ? window.location.hash.split('?')[1] : window.location.search);
+		if (!urlParam.has('settings'))
+			return false;
 
-		if (urlParam.has('settings')) {
-			const settingsParam = urlParam.get('settings');
-			const settings = JSON.parse(decodeURIComponent(settingsParam));
-			this._mySettingsService.saveMySettings(settings);
-			this.sheets = settings.sheets;
-			return true;
-		}
-
-		return false;
+		const settingsParam = urlParam.get('settings');
+		const settings = JSON.parse(decodeURIComponent(settingsParam));
+		this._mySettingsService.saveMySettings(settings);
+		return settings.sheets;
 	}
 
 	_getMySettings() {
 		const sheets = this._mySettingsService.getMySettings('sheets');
-		sheets.forEach(sheet => {
-			this.sheets[sheet.id] = sheet;
-		});
+		return sheets;
 	}
 
 	_saveSettings(settings = undefined, value) {

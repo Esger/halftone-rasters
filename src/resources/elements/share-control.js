@@ -20,11 +20,24 @@ export class ShareControl {
 		this._showSubscription.dispose();
 	}
 
+	// async setClipboardText(text) {
+	// 	try {
+	// 		// Clear the clipboard first
+	// 		await navigator.clipboard.writeText('');
+	// 		// Then write the intended text
+	// 		await navigator.clipboard.writeText(text);
+	// 		// console.log('Text set to clipboard successfully');
+	// 	} catch (err) {
+	// 		console.error('Failed to set clipboard content: ', err);
+	// 	}
+	// }
+
 	copyUrl() {
 		this.copied = true;
 		setTimeout(_ => this.copied = false, 5000);
 		const settings = this._mySettingsService.getMySettings();
-		navigator.clipboard.writeText(window.location.href + '?settings=' + encodeURIComponent(JSON.stringify(settings)));
+		const toClipboard = window.location.href.split('?')[0] + '?settings=' + encodeURIComponent(JSON.stringify(settings));
+		navigator.clipboard.writeText(toClipboard);
 	}
 
 	_toggle(show) {

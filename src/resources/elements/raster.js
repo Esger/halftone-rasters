@@ -33,7 +33,6 @@ export class RasterCustomElement {
 	attached() {
 		this.selectedMap = this.maps.find(map => map.id === this.model.raster);
 		console.log(this.model);
-		console.log(this.mouseX, this.mouseY);
 	}
 
 	mapChanged() {
