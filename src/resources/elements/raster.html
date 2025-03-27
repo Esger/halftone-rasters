@@ -9,88 +9,96 @@
 	<require from="./raster.css"></require>
 	<require from="../value-converters/y-to-angle"></require>
 
-	<section portal=".controls">
-		<fieldset>
-			<let setting-name.bind="'map-' + model.name"></let>
-			<dummy></dummy>
-			<label class="sectionHeader"
-					for.bind="settingName">
-					<span repeat.for="map of maps"
-							if.bind="map.id == selectedMap.id">${map.value}</span></label>
-			<select value.bind="selectedMap"
-					id.bind="settingName"
-					change.delegate="mapChanged()">
-				<option repeat.for="map of maps"
-						model.bind="map">${map.value}
-				</option>
-			</select>
-		</fieldset>
+	<template portal.bind="'.tabs'">
+		<input type="radio" name="tabs" id.one-time="'tab-' + model.id" checked>
+		<dt><label for="tab-${model.id}">${selectedMap.value}</label></dt>
+		<dd>
+			<section>
+				<fieldset>
+					<dummy></dummy>
+					<let setting-name.bind="'map-' + model.name"></let>
+					<label class="sectionHeader"
+							for.bind="settingName">
+							<span repeat.for="map of maps"
+									if.bind="map.id == selectedMap.id">${map.value}</span></label>
+					<select value.bind="selectedMap"
+							id.bind="settingName"
+							change.delegate="mapChanged()">
+						<option repeat.for="map of maps"
+								model.bind="map">${map.value}
+						</option>
+					</select>
+				</fieldset>
 
-		<fieldset if.bind="selectedMap.value == 'image'">
-			<let setting-name.bind="'file-' + model.name"></let>
-			<label for.bind="settingName">Image</label>
-			<input type="file"
-					id.bind="settingName"
-					change.delegate="fileChanged($event)"
-					accept="image/*"></label>
-			<label for.bind="settingName">${selectedFile || 'choose file'}</label>
-		</fieldset>
+				<fieldset if.bind="selectedMap.value == 'image'">
+					<let setting-name.bind="'file-' + model.name"></let>
+					<label for.bind="settingName">Image</label>
+					<input type="file"
+							id.bind="settingName"
+							change.delegate="fileChanged($event)"
+							accept="image/*"></label>
+					<label for.bind="settingName">${selectedFile || 'choose file'}</label>
+				</fieldset>
 
-		<fieldset if.bind="selectedMap.value == 'image'">
-			<let setting-name.bind="'grayscale-' + model.name"></let>
-			<label for.bind="settingName">Grayscale</label>
-			<input type="checkbox"
-					checked.bind="model.grayscale"
-					change.delegate="settingChanged()"
-					id.bind="settingName">
-		</fieldset>
+				<fieldset if.bind="selectedMap.value == 'image'">
+					<let setting-name.bind="'grayscale-' + model.name"></let>
+					<label for.bind="settingName">Grayscale</label>
+					<input type="checkbox"
+							checked.bind="model.grayscale"
+							change.delegate="settingChanged()"
+							id.bind="settingName">
+				</fieldset>
 
-		<fieldset>
-			<let setting-name.bind="'interactive-' + model.name"></let>
-			<label for.bind="settingName">Interactive</label>
-			<input type="checkbox"
-					checked.bind="model.interactive"
-					id.bind="settingName">
-		</fieldset>
+				<fieldset>
+					<let setting-name.bind="'interactive-' + model.name"></let>
+					<label for.bind="settingName">Interactive</label>
+					<input type="checkbox"
+							checked.bind="model.interactive"
+							id.bind="settingName">
+				</fieldset>
 
-		<fieldset if.bind="!['conical'].includes(selectedMap.value.toLowerCase())">
-			<let setting-name.bind="'size-' + model.name"></let>
-			<label for.bind="settingName">Size: ${model.size & throttle}%</label>
-			<input type="range"
-					id.bind="settingName"
-					autofocus
-					step=".1"
-					min=".5"
-					max="100"
-					value.bind="model.size"
-					change.delegate="settingChanged()">
-		</fieldset>
+				<fieldset if.bind="!['conical'].includes(selectedMap.value.toLowerCase())">
+					<let setting-name.bind="'size-' + model.name"></let>
+					<label for.bind="settingName">Size: ${model.size & throttle}%</label>
+					<input type="range"
+							id.bind="settingName"
+							autofocus
+							step=".1"
+							min=".5"
+							max="100"
+							value.bind="model.size"
+							change.delegate="settingChanged()">
+				</fieldset>
 
-		<fieldset if.bind="selectedMap.value == 'conical'">
-			<let setting-name.bind="'slices-' + model.name"></let>
-			<label for.bind="settingName">Slices: ${model.slices & throttle}</label>
-			<input type="range"
-					step="1"
-					min="1"
-					max="100"
-					value.bind="model.slices"
-					id.bind="settingName"
-					input.delegate="settingChanged()">
-		</fieldset>
+				<fieldset if.bind="selectedMap.value == 'conical'">
+					<let setting-name.bind="'slices-' + model.name"></let>
+					<label for.bind="settingName">Slices: ${model.slices & throttle}</label>
+					<input type="range"
+							step="1"
+							min="1"
+							max="100"
+							value.bind="model.slices"
+							id.bind="settingName"
+							input.delegate="settingChanged()">
+				</fieldset>
 
-		<fieldset if.bind="['lined','dotted','image'].includes(selectedMap.value.toLowerCase())"
-				  data-value="${selectedMap.value.toLowerCase()}">
-			<let setting-name.bind="'angle-' + model.name"></let>
-			<label for.bind="settingName">Angle: ${model.angle & throttle}°</label>
-			<input type="range"
-					step=".1"
-					min="0"
-					max="90"
-					value.bind="model.angle"
-					id.bind="settingName"
-					change.delegate="settingChanged()">
-		</fieldset>
+				<fieldset if.bind="['lined','dotted','image'].includes(selectedMap.value.toLowerCase())"
+						  data-value="${selectedMap.value.toLowerCase()}">
+					<let setting-name.bind="'angle-' + model.name"></let>
+					<label for.bind="settingName">Angle: ${model.angle & throttle}°</label>
+					<input type="range"
+							step=".1"
+							min="0"
+							max="90"
+							value.bind="model.angle"
+							id.bind="settingName"
+							change.delegate="settingChanged()">
+				</fieldset>
 
-	</section>
+			</section>
+
+		</dd>
+
+	</template>
 
 </template>
