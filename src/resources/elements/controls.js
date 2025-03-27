@@ -19,77 +19,122 @@ export class Controls {
 	}
 
 	showMoire() {
-		const settings = [{
-			"map": 0,
-			"map-size": 2,
-			"map-angle": 33,
-			"map-slices": 69,
-			"map-interactive": false,
-			"map-grayscale": false,
-			"raster": 0,
-			"raster-size": 2,
-			"raster-angle": 30,
-			"raster-slices": 69,
-			"raster-interactive": false,
-			"raster-grayscale": false
-		}, {
-			"map": 1,
-			"map-size": 4,
-			"map-angle": 50,
-			"map-slices": 69,
-			"map-interactive": false,
-			"map-grayscale": false,
-			"raster": 1,
-			"raster-size": 4,
-			"raster-angle": 56,
-			"raster-slices": 69,
-			"raster-interactive": true,
-			"raster-grayscale": false
-		}, {
-			"map": 2,
-			"map-size": 2,
-			"map-angle": 50,
-			"map-slices": 69,
-			"map-interactive": false,
-			"map-grayscale": false,
-			"raster": 2,
-			"raster-size": 2,
-			"raster-angle": 56,
-			"raster-slices": 69,
-			"raster-interactive": true,
-			"raster-grayscale": false
-		}, {
-			"map": 3,
-			"map-size": 6,
-			"map-angle": 45,
-			"map-slices": 69,
-			"map-interactive": true,
-			"map-grayscale": false,
-			"map-mouseX": 402,
-			"map-mouseY": 868,
-			"raster": 3,
-			"raster-size": 10,
-			"raster-angle": 45,
-			"raster-slices": 52,
-			"raster-interactive": false,
-			"raster-grayscale": false,
-			"raster-mouseX": 402,
-			"raster-mouseY": 868,
-			"interactive": false,
-		}, {
-			"map": 4,
-			"map-size": 32,
-			"map-angle": 50,
-			"map-slices": 17,
-			"map-interactive": true,
-			"map-grayscale": false,
-			"raster": 3,
-			"raster-size": 2,
-			"raster-angle": 56,
-			"raster-slices": 69,
-			"raster-interactive": false,
-			"raster-grayscale": false
-		}];
+		const settings = [[
+			{ // dotted
+				"id": 0,
+				"raster": 0,
+				"size": "3",
+				"angle": "0",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 1258,
+				"mouseY": 129
+			},
+			{
+				"id": 1,
+				"raster": 0,
+				"size": "3",
+				"angle": "22.6",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 1258,
+				"mouseY": 129
+			}
+		], [
+			{ // lined
+				"id": 0,
+				"raster": 1,
+				"size": "3",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 1,
+				"size": "3",
+				"angle": "49",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
+		], [
+			{ // radial
+				"id": 0,
+				"raster": 2,
+				"size": "0.9",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 2,
+				"size": "0.5",
+				"angle": "49",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
+		], [
+			{ // conical
+				"id": 0,
+				"raster": 3,
+				"size": "0.9",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 3,
+				"size": "0.5",
+				"angle": "49",
+				"slices": "65",
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
+		], [
+			{ // image
+				"id": 0,
+				"raster": 4,
+				"size": "2",
+				"angle": "38",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 4,
+				"size": "2",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
+		]];
 		const randomIndex = Math.floor(Math.random() * settings.length);
 		this._eventAggregator.publish('show-setting', settings[randomIndex]);
 	}
