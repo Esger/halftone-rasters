@@ -239,13 +239,19 @@ dl.tabs {
 				display: block;
 			}
 		}
+
+		&:not(:checked)+dt {
+			border: 1px solid transparent;
+
+			label {
+				cursor: pointer;
+			}
+		}
 	}
 
 	dt {
 		position     : relative;
-		padding      : 10px;
 		border-radius: 10px 10px 0 0;
-		cursor       : pointer;
 		translate    : 0 1px;
 
 		&::before,
@@ -273,7 +279,9 @@ dl.tabs {
 		}
 
 		label {
-			color: white;
+			display: block;
+			padding: 10px;
+			color  : white;
 		}
 	}
 
