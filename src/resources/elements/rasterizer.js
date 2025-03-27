@@ -21,17 +21,18 @@ export class RasterizerCustomElement {
 				id: 1,
 			}
 		]
-		this.sheets = this._getSettingsFromUrl();
-		if (!this.sheets)
-			this.sheets = this._getMySettings();
+
+		let settings = this._getSettingsFromUrl();
+		if (!settings)
+			settings = this._getMySettings();
 		else
-			this._saveSettings(this.sheets);
-		console.table('settings', this.sheets);
-		this.mouseX = this.sheets[0].mouseX;
-		this.mouseY = this.sheets[0].mouseY;
+			this._saveSettings(settings);
+		console.table('settings', settings);
+
+		this._setup(settings);
 
 		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveSettings());
-		// this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
+		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
 	}
 
 	attached() {
@@ -103,16 +104,11 @@ export class RasterizerCustomElement {
 		this.contrast = 2 * size;
 	}
 
-	// _setup(settings) {
-	// 	for (const setting in settings) {
-	// 		if (setting.startsWith(this.model.name)) {
-	// 			this.model[setting.split('-')[1] || setting] = settings[setting];
-	// 		}
-	// 	}
-	// 	setTimeout(() => {
-	// 		this.selectedMap = this.maps.find(map => map.id === this.model[this.model.name]);
-	// 	});
-	// }
+	_setup(settings) {
+		this.sheets = settings;
+		this.mouseX = settings[0].mouseX;
+		this.mouseY = settings[0].mouseY;
+	}
 
 	_getSettingsFromUrl() {
 		// check if url has settings parameter; use these if present

@@ -19,79 +19,33 @@ export class Controls {
 	}
 
 	showMoire() {
-		const settings = [{
-			"map": 0,
-			"map-size": 2,
-			"map-angle": 33,
-			"map-slices": 69,
-			"map-interactive": false,
-			"map-grayscale": false,
-			"raster": 0,
-			"raster-size": 2,
-			"raster-angle": 30,
-			"raster-slices": 69,
-			"raster-interactive": false,
-			"raster-grayscale": false
-		}, {
-			"map": 1,
-			"map-size": 4,
-			"map-angle": 50,
-			"map-slices": 69,
-			"map-interactive": false,
-			"map-grayscale": false,
-			"raster": 1,
-			"raster-size": 4,
-			"raster-angle": 56,
-			"raster-slices": 69,
-			"raster-interactive": true,
-			"raster-grayscale": false
-		}, {
-			"map": 2,
-			"map-size": 2,
-			"map-angle": 50,
-			"map-slices": 69,
-			"map-interactive": false,
-			"map-grayscale": false,
-			"raster": 2,
-			"raster-size": 2,
-			"raster-angle": 56,
-			"raster-slices": 69,
-			"raster-interactive": true,
-			"raster-grayscale": false
-		}, {
-			"map": 3,
-			"map-size": 6,
-			"map-angle": 45,
-			"map-slices": 69,
-			"map-interactive": true,
-			"map-grayscale": false,
-			"map-mouseX": 402,
-			"map-mouseY": 868,
-			"raster": 3,
-			"raster-size": 10,
-			"raster-angle": 45,
-			"raster-slices": 52,
-			"raster-interactive": false,
-			"raster-grayscale": false,
-			"raster-mouseX": 402,
-			"raster-mouseY": 868,
-			"interactive": false,
-		}, {
-			"map": 4,
-			"map-size": 32,
-			"map-angle": 50,
-			"map-slices": 17,
-			"map-interactive": true,
-			"map-grayscale": false,
-			"raster": 3,
-			"raster-size": 2,
-			"raster-angle": 56,
-			"raster-slices": 69,
-			"raster-interactive": false,
-			"raster-grayscale": false
-		}];
+		const settings = [[
+			{
+				"id": 0,
+				"raster": 0,
+				"size": "3",
+				"angle": "0",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 1258,
+				"mouseY": 129
+			},
+			{
+				"id": 1,
+				"raster": 0,
+				"size": "3",
+				"angle": "22.6",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 1258,
+				"mouseY": 129
+			}
+		]];
 		const randomIndex = Math.floor(Math.random() * settings.length);
-		this._eventAggregator.publish('show-setting', settings[randomIndex]);
+		// this._eventAggregator.publish('show-setting', settings[randomIndex]);
+		this._eventAggregator.publish('show-setting', settings[0]);
 	}
 
 }
