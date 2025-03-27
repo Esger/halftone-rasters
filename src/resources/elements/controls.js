@@ -20,7 +20,7 @@ export class Controls {
 
 	showMoire() {
 		const settings = [[
-			{
+			{ // dotted
 				"id": 0,
 				"raster": 0,
 				"size": "3",
@@ -42,10 +42,101 @@ export class Controls {
 				"mouseX": 1258,
 				"mouseY": 129
 			}
+		], [
+			{ // lined
+				"id": 0,
+				"raster": 1,
+				"size": "3",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 1,
+				"size": "3",
+				"angle": "49",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
+		], [
+			{ // radial
+				"id": 0,
+				"raster": 2,
+				"size": "0.9",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 2,
+				"size": "0.5",
+				"angle": "49",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
+		], [
+			{ // conical
+				"id": 0,
+				"raster": 3,
+				"size": "0.9",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 3,
+				"size": "0.5",
+				"angle": "49",
+				"slices": "65",
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
+		], [
+			{ // image
+				"id": 0,
+				"raster": 4,
+				"size": "2",
+				"angle": "38",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 739,
+				"mouseY": 94
+			},
+			{
+				"id": 1,
+				"raster": 4,
+				"size": "2",
+				"angle": "45",
+				"slices": 69,
+				"grayscale": false,
+				"interactive": false,
+				"mouseX": 730,
+				"mouseY": 402
+			}
 		]];
 		const randomIndex = Math.floor(Math.random() * settings.length);
-		// this._eventAggregator.publish('show-setting', settings[randomIndex]);
-		this._eventAggregator.publish('show-setting', settings[0]);
+		this._eventAggregator.publish('show-setting', settings[randomIndex]);
 	}
 
 }
