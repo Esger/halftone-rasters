@@ -6,10 +6,7 @@ export class App {
 	}
 
 	_determineTouchDevice() {
-		if ('ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0)
-			this._setIsTouchDevice(true);
-		else
-			this._setIsTouchDevice(false);
+		this._setIsTouchDevice('ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0);
 		$('body').one('touchstart', _ => this._setIsTouchDevice(true))
 	}
 
