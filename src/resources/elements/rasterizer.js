@@ -22,9 +22,13 @@ export class RasterizerCustomElement {
 			}
 		]
 		this.sheets = this._getSettingsFromUrl();
-		console.table('from url', this.sheets);
-		if (!this.sheets) this.sheets = this._getMySettings();
-		console.table('from url', this.sheets);
+		if (!this.sheets)
+			this.sheets = this._getMySettings();
+		else
+			this._saveSettings(this.sheets);
+		console.table('settings', this.sheets);
+		this.mouseX = this.sheets[0].mouseX;
+		this.mouseY = this.sheets[0].mouseY;
 
 		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveSettings());
 		// this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
