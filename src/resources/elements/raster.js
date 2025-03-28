@@ -1,10 +1,11 @@
-import { bindable, inject } from 'aurelia-framework';
+import { inject, bindable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { MySettingsService } from '../services/my-settings-service';
 
 @inject(EventAggregator, MySettingsService)
 
 export class RasterCustomElement {
+	@bindable count;
 	@bindable model;
 	@bindable mouseX;
 	@bindable mouseY;
@@ -22,74 +23,63 @@ export class RasterCustomElement {
 		this._mySettingsService = mySettingsService;
 	}
 
-	attached() {
-		this._getSettings();
-		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => {
-			this._setup(settings);
-		})
-	}
-
-	detached() {
-		this._showSettingSubscription.dispose();
-	}
-
-	_setup(settings) {
-		for (const setting in settings) {
-			if (setting.startsWith(this.model.name)) {
-				this.model[setting.split('-')[1] || setting] = settings[setting];
-			}
-		}
+	bind() {
+		const interactive = this.model.interactive;
+		this.model.interactive = undefined;
 		setTimeout(() => {
-			this.selectedMap = this.maps.find(map => map.id === this.model[this.model.name]);
-			this.size = this.model.size;
-			this.angle = this.model.angle;
-			this.slices = this.model.slices;
-			this.grayscale = this.model.grayscale;
-		});
+			this.model.interactive = interactive;
+		}, 500);
 	}
 
-	_getSettings() {
-		const mapId = parseInt(this._mySettingsService.getSettings(this.model.name), 10);
-		this.selectedMap = this.maps[mapId];
-		this.size = parseInt(this._mySettingsService.getSettings(this.model.name + '-size'), 10);
-		this.angle = parseInt(this._mySettingsService.getSettings(this.model.name + '-angle'), 10);
-		this.slices = parseInt(this._mySettingsService.getSettings(this.model.name + '-slices'), 10);
-		this.interactive = this._mySettingsService.getSettings(this.model.name + '-interactive');
-		this.grayscale = this._mySettingsService.getSettings(this.model.name + '-grayscale');
+	attached() {
+		this.selectedMap = this.maps.find(map => map.id === this.model.raster);
+		console.log(this.model);
 	}
 
-	mapChanged(map) {
-		this.selectedMap = map;
-		this.selectedFile = undefined;
-		this._mySettingsService.saveSettings(this.model.name, map.id);
+	countChanged() {
+		const $checkbox = $('#tab-' + this.model.id);
+		$checkbox.prop('checked', true);
+	}
+
+	mapChanged() {
+		this.model.raster = this.selectedMap.id;
+		this.model.selectedFile = undefined;
+		this._eventAggregator.publish('save-settings');
 	}
 
 	fileChanged(event) {
-		this.fileUrl = URL.createObjectURL(event.target.files[0]);
-		this.selectedFile = event.target.files[0].name;
+		this.model.fileUrl = URL.createObjectURL(event.target.files[0]);
+		this.model.selectedFile = event.target.files[0].name;
 	}
 
-	settingChanged(setting, value) {
-		if (typeof value !== 'boolean') {
-			value = parseInt(value, 10);
-		}
-		if (setting === 'interactive') {
-			if (!this.value) {
-				this.size = 100;
-				this.angle = 0;
-			}
-		}
-		this._mySettingsService.saveSettings(this.model.name + '-' + setting, value);
+	settingChanged() {
+		this._eventAggregator.publish('save-settings');
 	}
 
-	mouseXChanged(value) {
-		if (!this.interactive) return;
-		if (['radial', 'conical'].includes(this.selectedMap.value.toLowerCase())) return;
-		this.size = Math.round(10 * value / window.innerWidth * 100) / 10;
+	mouseXChanged(newValue, oldValue) {
+		if (!this.model.interactive) return;
+		this.model.id % 2 === 0 ? this._setAngle(newValue) : this._setSize(newValue);
 	}
 
-	mouseYChanged(value) {
-		if (!this.interactive) return;
-		this.angle = Math.round(10 * value / window.innerHeight * 90) / 10;
+	mouseYChanged(value, oldValue) {
+		if (!this.model.interactive) return;
+		this.model.id % 2 === 1 ? this._setAngle(value) : this._setSize(value);
+	}
+
+	remove() {
+		this._eventAggregator.publish('remove-raster', this.model.id);
+	}
+
+	duplicate() {
+		this._eventAggregator.publish('add-raster', this.model.id);
+	}
+
+	_setSize(value) {
+		this.model.size = Math.round(10 * value / window.innerWidth * 100) / 10;
+	}
+
+	_setAngle(value) {
+		if (['radial', 'conical'].includes(this.selectedMap?.value.toLowerCase())) return;
+		this.model.angle = Math.round(10 * value / window.innerHeight * 90) / 10;
 	}
 }

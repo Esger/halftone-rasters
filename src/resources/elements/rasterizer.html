@@ -1,18 +1,16 @@
-<template class="${rasterInteractive ? 'raster--interactive' : ''}
-				${mapInteractive ? 'map--interactive' : ''}
-				${sharpenEdges ? 'sharpened' : ''}"
+<template class="${sharpenEdges ? 'sharpened' : ''}"
 		  style="--contrast: ${contrast}; 
 				--mouseX: ${mouseX}px;
 				--mouseY: ${mouseY}px;
 				--x: ${mouseX};
 				--y: ${mouseY};"
-		  touchmove.trigger="touchMoved($event)"
-		  mousemove.trigger="mouseMoved($event)"
-		  data-map-slices.bind="slices">
+		  touchmove.delegate="touchMoved($event)"
+		  click.delegate="lockRasters()">
 	<require from="./rasterizer.css"></require>
 	<require from="./raster"></require>
 
 	<raster repeat.for="sheet of sheets"
+			count.bind="sheets.length"
 			model.bind="sheet"
 			mouse-x.bind="mouseX"
 			mouse-y.bind="mouseY"></raster>
