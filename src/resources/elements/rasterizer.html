@@ -10,6 +10,7 @@
 	<require from="./raster"></require>
 
 	<raster repeat.for="sheet of sheets"
+			count.bind="sheets.length"
 			model.bind="sheet"
 			mouse-x.bind="mouseX"
 			mouse-y.bind="mouseY"></raster>
