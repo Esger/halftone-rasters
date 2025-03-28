@@ -9,6 +9,7 @@ raster {
 	margin          : -50vh -50vw;
 	mix-blend-mode  : multiply;
 	background-size : var(--size, 100%);
+	opacity         : var(--opacity, 1);
 
 	&.grayscale {
 		filter: grayscale(1);

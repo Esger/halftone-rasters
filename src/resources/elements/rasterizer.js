@@ -4,6 +4,8 @@ import { MySettingsService } from '../services/my-settings-service';
 
 @inject(Element, EventAggregator, MySettingsService)
 export class RasterizerCustomElement {
+	mouseX = 0;
+	mouseY = 0;
 
 	constructor(element, eventAggregator, mySettingsService) {
 		this._element = element;
@@ -34,6 +36,8 @@ export class RasterizerCustomElement {
 		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveSettings());
 		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
 		this._mouseMovedSubscription = this._eventAggregator.subscribe('mouse-moved', event => this._mouseMoved(event));
+		this._removeSubscriptions = this._eventAggregator.subscribe('remove-raster', id => this._removeSheet(id));
+		this._duplicateSubscriptions = this._eventAggregator.subscribe('add-raster', _ => this._addSheet());
 	}
 
 	attached() {
@@ -49,8 +53,21 @@ export class RasterizerCustomElement {
 		this._saveSettingsSubscription.dispose();
 		this._showSettingSubscription.dispose();
 		this._mouseMovedSubscription.dispose();
+		this._removeSubscriptions.dispose();
+		this._duplicateSubscriptions.dispose();
 		document.removeEventListener('keydown');
 		document.removeEventListener('keyup');
+	}
+
+	_removeSheet(id) {
+		this.sheets = this.sheets.filter(sheet => sheet.id !== id);
+	}
+
+	_addSheet() {
+		const newSheet = structuredClone(this.sheets[0]);
+		newSheet.id = this.sheets.length;
+		newSheet.interactive = !newSheet.interactive;
+		this.sheets.push(newSheet);
 	}
 
 	keyPressed(event) {

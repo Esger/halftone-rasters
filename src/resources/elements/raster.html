@@ -5,13 +5,22 @@
 				--angle: ${model.angle}deg;
 		  		--image: url(${fileUrl});
 				--sliceAngle: ${360 / model.slices}deg;
-				--halfSliceAngle: ${180 / model.slices}deg;">
+				--halfSliceAngle: ${180 / model.slices}deg;
+				--opacity: ${count > 2 ? 0.85 : 1};">
 	<require from="./raster.css"></require>
 	<require from="../value-converters/y-to-angle"></require>
 
 	<template portal.bind="'.tabs'">
-		<input type="radio" name="tabs" id.one-time="'tab-' + model.id" checked>
-		<dt><label for="tab-${model.id}">${selectedMap.value}</label></dt>
+		<input type="radio"
+				name="tabs"
+				id.one-time="'tab-' + model.id"
+				checked>
+		<dt>
+			<label for="tab-${model.id}">${selectedMap.value}</label>
+			<button if.bind="count > 1"
+					class="remove"
+					click.delegate="remove()">&times;</button>
+		</dt>
 		<dd>
 			<section>
 				<fieldset>
@@ -98,7 +107,10 @@
 			</section>
 
 		</dd>
-
+		<dt if.bind="count < 3"
+			class="duplicate">
+			<button click.delegate="duplicate()">+</button>
+		</dt>
 	</template>
 
 </template>

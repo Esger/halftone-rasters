@@ -115,7 +115,6 @@ controls {
 		font            : inherit;
 		line-height     : 0;
 		padding         : .5rem .9rem 0 .9rem;
-		height          : 3rem;
 		border-radius   : 10px;
 		max-width       : 10rem;
 		background-color: transparent;
@@ -123,7 +122,6 @@ controls {
 		border          : 1px solid;
 		cursor          : pointer;
 		white-space     : nowrap;
-		translate       : 0 1rem;
 	}
 
 	/* Hide the default file input button and hint */
@@ -251,8 +249,20 @@ dl.tabs {
 
 	dt {
 		position     : relative;
+		display      : flex;
 		border-radius: 10px 10px 0 0;
 		translate    : 0 1px;
+
+
+		&.duplicate {
+			&:last-child {
+				margin-left: 20px;
+			}
+
+			&:not(:last-child) {
+				display: none;
+			}
+		}
 
 		&::before,
 		&::after {
@@ -283,6 +293,13 @@ dl.tabs {
 			padding: 10px;
 			color  : white;
 		}
+
+		button {
+			align-items: center;
+			border     : none;
+			margin     : 0;
+			padding    : 0 20px 0 10px;
+		}
 	}
 
 	dd {
@@ -290,6 +307,11 @@ dl.tabs {
 		margin : 0;
 		display: none;
 		order  : 1;
+
+		label,
+		dummy {
+			min-width: 200px;
+		}
 	}
 
 }

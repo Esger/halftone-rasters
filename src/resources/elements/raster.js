@@ -5,6 +5,7 @@ import { MySettingsService } from '../services/my-settings-service';
 @inject(EventAggregator, MySettingsService)
 
 export class RasterCustomElement {
+	@bindable count;
 	@bindable model;
 	@bindable mouseX;
 	@bindable mouseY;
@@ -35,6 +36,11 @@ export class RasterCustomElement {
 		console.log(this.model);
 	}
 
+	countChanged() {
+		const $checkbox = $('#tab-' + this.model.id);
+		$checkbox.prop('checked', true);
+	}
+
 	mapChanged() {
 		this.model.raster = this.selectedMap.id;
 		this.model.selectedFile = undefined;
@@ -58,6 +64,14 @@ export class RasterCustomElement {
 	mouseYChanged(value, oldValue) {
 		if (!this.model.interactive) return;
 		this.model.id % 2 === 1 ? this._setAngle(value) : this._setSize(value);
+	}
+
+	remove() {
+		this._eventAggregator.publish('remove-raster', this.model.id);
+	}
+
+	duplicate() {
+		this._eventAggregator.publish('add-raster', this.model.id);
 	}
 
 	_setSize(value) {
