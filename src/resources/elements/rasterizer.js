@@ -33,6 +33,7 @@ export class RasterizerCustomElement {
 
 		this._saveSettingsSubscription = this._eventAggregator.subscribe('save-settings', _ => this._saveSettings());
 		this._showSettingSubscription = this._eventAggregator.subscribe('show-setting', settings => this._setup(settings));
+		this._mouseMovedSubscription = this._eventAggregator.subscribe('mouse-moved', event => this._mouseMoved(event));
 	}
 
 	attached() {
@@ -45,6 +46,9 @@ export class RasterizerCustomElement {
 	}
 
 	detached() {
+		this._saveSettingsSubscription.dispose();
+		this._showSettingSubscription.dispose();
+		this._mouseMovedSubscription.dispose();
 		document.removeEventListener('keydown');
 		document.removeEventListener('keyup');
 	}
@@ -61,7 +65,7 @@ export class RasterizerCustomElement {
 		this._rastersLocked && this._saveSettings();
 	}
 
-	mouseMoved(event) {
+	_mouseMoved(event) {
 
 		if (this._rastersLocked) return;
 		if (this._constrain) {
