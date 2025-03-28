@@ -5,7 +5,8 @@
 				--angle: ${model.angle}deg;
 		  		--image: url(${fileUrl});
 				--sliceAngle: ${360 / model.slices}deg;
-				--halfSliceAngle: ${180 / model.slices}deg;">
+				--halfSliceAngle: ${180 / model.slices}deg;
+				--opacity: ${count > 2 ? 0.85 : 1};">
 	<require from="./raster.css"></require>
 	<require from="../value-converters/y-to-angle"></require>
 
